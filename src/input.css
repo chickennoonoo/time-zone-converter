@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #0d0e15;
+            color: #f5f2fd;
+            font-family: 'Manrope', sans-serif;
+            overflow-x: hidden;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .time-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            background: #9aa8ff;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(154, 168, 255, 0.4);
+            border: 4px solid #0d0e15;
+        }
+        .time-slider::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            background: #9aa8ff;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(154, 168, 255, 0.4);
+            border: 4px solid #0d0e15;
+        }
+
+        .editorial-gradient {
+            background: linear-gradient(135deg, #9aa8ff 0%, #8c9bf3 100%);
+        }
+
+        .glass-panel {
+            background: rgba(43, 43, 55, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
