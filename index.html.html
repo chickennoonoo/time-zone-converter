@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Chronos | Celestial Chronometer</title>
+<meta name="description" content="Chronos — convert any time between world timezones instantly. Set a source time (like a UTC event), see it converted across all your saved locations."/>
+<meta name="theme-color" content="#0d0e15"/>
+<meta property="og:title" content="Chronos | Timezone Converter"/>
+<meta property="og:description" content="Convert any time between world timezones instantly."/>
+<meta property="og:type" content="website"/>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%230d0e15' stroke='%239aa8ff' stroke-width='6'/%3E%3Cline x1='50' y1='50' x2='50' y2='25' stroke='%239aa8ff' stroke-width='6' stroke-linecap='round'/%3E%3Cline x1='50' y1='50' x2='68' y2='60' stroke='%239aa8ff' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed-variant": "#454e7a",
+                        "secondary-fixed-dim": "#b8c1f4",
+                        "on-background": "#f5f2fd",
+                        "tertiary-container": "#ff95e3",
+                        "primary-fixed": "#96a5ff",
+                        "primary-container": "#8c9bf3",
+                        "outline-variant": "#474750",
+                        "outline": "#75747e",
+                        "surface-container": "#191922",
+                        "on-surface": "#f5f2fd",
+                        "on-tertiary-container": "#650d58",
+                        "surface-container-highest": "#252530",
+                        "surface-tint": "#9aa8ff",
+                        "error": "#ff6e84",
+                        "tertiary": "#ffade6",
+                        "inverse-on-surface": "#55545d",
+                        "secondary-fixed": "#c7cfff",
+                        "tertiary-fixed": "#ff95e3",
+                        "error-container": "#a70138",
+                        "surface-container-lowest": "#000000",
+                        "on-primary-container": "#00156d",
+                        "surface-dim": "#0d0e15",
+                        "on-surface-variant": "#acaab4",
+                        "on-primary-fixed": "#00083f",
+                        "surface": "#0d0e15",
+                        "on-tertiary-fixed-variant": "#701961",
+                        "on-tertiary-fixed": "#430039",
+                        "surface-variant": "#252530",
+                        "on-tertiary": "#711a62",
+                        "on-error-container": "#ffb2b9",
+                        "surface-container-high": "#1e1f29",
+                        "inverse-primary": "#4958ac",
+                        "on-secondary": "#38416c",
+                        "inverse-surface": "#fbf8ff",
+                        "on-secondary-fixed": "#28315c",
+                        "on-primary-fixed-variant": "#1b2c7f",
+                        "surface-container-low": "#12131b",
+                        "background": "#0d0e15",
+                        "secondary-dim": "#b3bcef",
+                        "secondary": "#c0c9fd",
+                        "primary": "#9aa8ff",
+                        "error-dim": "#d73357",
+                        "primary-fixed-dim": "#8998f0",
+                        "surface-bright": "#2b2b37",
+                        "tertiary-dim": "#f088d4",
+                        "primary-dim": "#8998f0",
+                        "on-secondary-container": "#c6ceff",
+                        "tertiary-fixed-dim": "#f088d4",
+                        "secondary-container": "#3b4470",
+                        "on-error": "#490013",
+                        "on-primary": "#122479"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "display": ["Space Grotesk"],
+                        "body": ["Manrope"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #0d0e15;
+            color: #f5f2fd;
+            font-family: 'Manrope', sans-serif;
+            overflow-x: hidden;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .time-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            background: #9aa8ff;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(154, 168, 255, 0.4);
+            border: 4px solid #0d0e15;
+        }
+        .time-slider::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            background: #9aa8ff;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(154, 168, 255, 0.4);
+            border: 4px solid #0d0e15;
+        }
+
+        .editorial-gradient {
+            background: linear-gradient(135deg, #9aa8ff 0%, #8c9bf3 100%);
+        }
+
+        .glass-panel {
+            background: rgba(43, 43, 55, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<noscript>
+<div style="padding:24px;text-align:center;font-family:sans-serif;">Chronos needs JavaScript enabled to convert timezones. Please enable it and reload the page.</div>
+</noscript>
+<!-- TopAppBar -->
+<header class="bg-[#12131b] docked full-width top-0 z-50 fixed w-full">
+<div class="flex items-center justify-between px-6 py-4 w-full">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#9aa8ff] text-2xl">public</span>
+<h1 class="font-['Space_Grotesk'] font-bold text-2xl tracking-tight text-[#9aa8ff]">Chronos</h1>
+</div>
+<nav class="hidden md:flex items-center space-x-8">
+<a class="text-[#9aa8ff] font-['Manrope'] font-semibold transition-colors" href="#">Converter</a>
+<a class="text-[#f5f2fd]/60 font-['Manrope'] font-medium hover:bg-[#1e1f29] transition-colors px-3 py-1 rounded-lg" href="#">World Clock</a>
+<a class="text-[#f5f2fd]/60 font-['Manrope'] font-medium hover:bg-[#1e1f29] transition-colors px-3 py-1 rounded-lg" href="#">Zones</a>
+</nav>
+<div class="flex items-center gap-4">
+<div id="formatToggle" class="flex items-center gap-1 bg-surface-container-high rounded-full p-1 cursor-pointer select-none" role="button" tabindex="0" title="Toggle 12h / 24h time format" aria-label="Toggle 12 hour or 24 hour time format">
+<span id="formatToggle24" class="text-[10px] font-label font-bold px-2 py-1 rounded-full bg-primary text-on-primary transition-colors">24H</span>
+<span id="formatToggle12" class="text-[10px] font-label font-bold px-2 py-1 rounded-full text-outline transition-colors">12H</span>
+</div>
+<button class="material-symbols-outlined text-[#f5f2fd]/60 hover:bg-[#1e1f29] p-2 rounded-full transition-colors">search</button>
+<button class="material-symbols-outlined text-[#f5f2fd]/60 hover:bg-[#1e1f29] p-2 rounded-full transition-colors">settings</button>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-32 px-6 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Hero: Main Origin Section -->
+<section class="lg:col-span-8 flex flex-col gap-6">
+<div class="bg-surface-container-low rounded-xl p-8 lg:p-12 relative overflow-hidden group">
+<div class="absolute inset-0 opacity-10 pointer-events-none"></div>
+<div class="relative z-10">
+<div class="flex justify-between items-start mb-8">
+<div id="origin-selector" class="cursor-pointer group/origin" role="button" tabindex="0" aria-label="Change source timezone">
+<span class="font-label text-tertiary text-xs tracking-[0.2em] uppercase mb-2 block">Primary Origin <span class="material-symbols-outlined text-[12px] align-middle opacity-0 group-hover/origin:opacity-100 transition-opacity">edit</span></span>
+<h2 class="font-display text-4xl font-bold tracking-tight" id="origin-title">London, UK</h2>
+<p class="font-body text-on-surface-variant text-sm mt-1" id="origin-subtitle">British Summer Time (GMT+1)</p>
+</div>
+<div class="text-right">
+<span class="font-label text-on-surface-variant text-xs tracking-widest uppercase block mb-1">Date</span>
+<p class="font-body text-on-surface font-medium" id="origin-date">—</p>
+</div>
+</div>
+<div class="flex flex-col items-center justify-center py-12">
+<div class="font-display text-[8rem] md:text-[10rem] font-bold leading-none tracking-tighter text-primary" id="main-time-display">
+                            14:00
+                        </div>
+</div>
+<!-- 24-Hour Slider -->
+<div class="mt-8">
+<div class="flex justify-between font-label text-[10px] text-outline mb-4 px-1">
+<span>00:00</span>
+<span>04:00</span>
+<span>08:00</span>
+<span>12:00</span>
+<span>16:00</span>
+<span>20:00</span>
+<span>23:59</span>
+</div>
+<input aria-label="Origin time of day" class="time-slider w-full h-1 bg-surface-variant rounded-full appearance-none outline-none" id="global-time-slider" max="1439" min="0" type="range" value="840"/>
+</div>
+<div class="flex justify-center mt-10">
+<button class="js-add-destination editorial-gradient text-on-primary font-body font-bold px-8 py-3 rounded-full flex items-center gap-2 transition-transform active:scale-95 shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined">add_location</span>
+                            Add Destination
+                        </button>
+</div>
+</div>
+</div>
+<!-- Contextual Insight -->
+<div class="bg-surface-container rounded-xl p-6 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-tertiary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary">info</span>
+</div>
+<div>
+<p class="font-body text-sm font-medium" id="insight-text">—</p>
+<p class="font-label text-[11px] text-outline" id="insight-sub">—</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Sidebar / Grid: Destinations -->
+<aside class="lg:col-span-4 flex flex-col gap-4">
+<h3 class="font-display text-xl font-bold px-2 flex items-center justify-between">
+<span>Destinations</span>
+</h3>
+<div id="destinations-list" class="flex flex-col gap-4"></div>
+<!-- Add Location Placeholder Card -->
+<div class="js-add-destination border-2 border-dashed border-outline-variant rounded-xl p-6 flex flex-col items-center justify-center gap-2 text-outline hover:text-on-surface hover:border-primary transition-all cursor-pointer group">
+<span class="material-symbols-outlined text-3xl group-hover:scale-110 transition-transform">add_circle</span>
+<span class="font-label text-xs uppercase tracking-widest font-bold">New Connection</span>
+</div>
+</aside>
+</main>
+
+<!-- Search Modal (add destination / change origin) -->
+<div id="tzModal" class="hidden fixed inset-0 z-[60] flex items-start justify-center pt-24 bg-black/60 backdrop-blur-sm px-4">
+<div class="bg-surface-container-high rounded-xl w-full max-w-md p-4 max-h-[70vh] flex flex-col">
+<div class="flex items-center justify-between mb-3">
+<h3 id="tzModalTitle" class="font-display text-lg font-bold">Add destination</h3>
+<button id="tzModalClose" class="material-symbols-outlined text-outline hover:text-on-surface">close</button>
+</div>
+<input id="tzSearchInput" type="text" placeholder="Search city or country…" aria-label="Search for a city or country" class="bg-surface-variant rounded-lg px-4 py-2 text-sm outline-none mb-3 focus:ring-2 focus:ring-primary text-on-surface"/>
+<div id="tzSearchResults" class="overflow-y-auto flex-1 flex flex-col gap-1 hide-scrollbar"></div>
+</div>
+</div>
+
+<!-- Bottom Navigation (Mobile/Tablet Hybrid) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-2 bg-[#12131b]/80 backdrop-blur-xl shadow-[0_-8px_24px_rgba(0,0,0,0.4)]">
+<button class="flex flex-col items-center justify-center text-[#9aa8ff] bg-[#9aa8ff]/10 rounded-xl px-4 py-2">
+<span class="material-symbols-outlined">schedule_send</span>
+<span class="font-['Manrope'] text-[11px] font-medium tracking-wide uppercase mt-1">Converter</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#f5f2fd]/40 px-4 py-2 hover:text-[#f5f2fd] transition-all">
+<span class="material-symbols-outlined">language</span>
+<span class="font-['Manrope'] text-[11px] font-medium tracking-wide uppercase mt-1">World Clock</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#f5f2fd]/40 px-4 py-2 hover:text-[#f5f2fd] transition-all">
+<span class="material-symbols-outlined">search_insights</span>
+<span class="font-['Manrope'] text-[11px] font-medium tracking-wide uppercase mt-1">Zones</span>
+</button>
+</nav>
+
+<script>
+/* Chronos — Timezone Dataset
+ * Each country maps to one or more IANA zones. Multi-zone countries list
+ * each zone with a human label. Coverage: ~155 countries/territories.
+ */
+
+const CHRONOS_COUNTRIES = [
+  { code: "AD", name: "Andorra", zones: [{ id: "Europe/Andorra", label: "Andorra la Vella" }] },
+  { code: "AE", name: "United Arab Emirates", zones: [{ id: "Asia/Dubai", label: "Dubai / Abu Dhabi" }] },
+  { code: "AF", name: "Afghanistan", zones: [{ id: "Asia/Kabul", label: "Kabul" }] },
+  { code: "AG", name: "Antigua and Barbuda", zones: [{ id: "America/Antigua", label: "St. John's" }] },
+  { code: "AL", name: "Albania", zones: [{ id: "Europe/Tirane", label: "Tirana" }] },
+  { code: "AM", name: "Armenia", zones: [{ id: "Asia/Yerevan", label: "Yerevan" }] },
+  { code: "AO", name: "Angola", zones: [{ id: "Africa/Luanda", label: "Luanda" }] },
+  { code: "AR", name: "Argentina", zones: [{ id: "America/Argentina/Buenos_Aires", label: "Buenos Aires" }] },
+  { code: "AT", name: "Austria", zones: [{ id: "Europe/Vienna", label: "Vienna" }] },
+  { code: "AU", name: "Australia", zones: [
+    { id: "Australia/Sydney", label: "Sydney / Melbourne / Canberra" },
+    { id: "Australia/Brisbane", label: "Brisbane" },
+    { id: "Australia/Adelaide", label: "Adelaide" },
+    { id: "Australia/Darwin", label: "Darwin" },
+    { id: "Australia/Perth", label: "Perth" },
+  ]},
+  { code: "AZ", name: "Azerbaijan", zones: [{ id: "Asia/Baku", label: "Baku" }] },
+  { code: "BA", name: "Bosnia and Herzegovina", zones: [{ id: "Europe/Sarajevo", label: "Sarajevo" }] },
+  { code: "BB", name: "Barbados", zones: [{ id: "America/Barbados", label: "Bridgetown" }] },
+  { code: "BD", name: "Bangladesh", zones: [{ id: "Asia/Dhaka", label: "Dhaka" }] },
+  { code: "BE", name: "Belgium", zones: [{ id: "Europe/Brussels", label: "Brussels" }] },
+  { code: "BF", name: "Burkina Faso", zones: [{ id: "Africa/Ouagadougou", label: "Ouagadougou" }] },
+  { code: "BG", name: "Bulgaria", zones: [{ id: "Europe/Sofia", label: "Sofia" }] },
+  { code: "BH", name: "Bahrain", zones: [{ id: "Asia/Bahrain", label: "Manama" }] },
+  { code: "BI", name: "Burundi", zones: [{ id: "Africa/Bujumbura", label: "Bujumbura" }] },
+  { code: "BJ", name: "Benin", zones: [{ id: "Africa/Porto-Novo", label: "Porto-Novo" }] },
+  { code: "BN", name: "Brunei", zones: [{ id: "Asia/Brunei", label: "Bandar Seri Begawan" }] },
+  { code: "BO", name: "Bolivia", zones: [{ id: "America/La_Paz", label: "La Paz" }] },
+  { code: "BR", name: "Brazil", zones: [
+    { id: "America/Sao_Paulo", label: "São Paulo / Rio de Janeiro / Brasília" },
+    { id: "America/Manaus", label: "Manaus" },
+    { id: "America/Rio_Branco", label: "Rio Branco" },
+  ]},
+  { code: "BS", name: "Bahamas", zones: [{ id: "America/Nassau", label: "Nassau" }] },
+  { code: "BT", name: "Bhutan", zones: [{ id: "Asia/Thimphu", label: "Thimphu" }] },
+  { code: "BW", name: "Botswana", zones: [{ id: "Africa/Gaborone", label: "Gaborone" }] },
+  { code: "BY", name: "Belarus", zones: [{ id: "Europe/Minsk", label: "Minsk" }] },
+  { code: "BZ", name: "Belize", zones: [{ id: "America/Belize", label: "Belize City" }] },
+  { code: "CA", name: "Canada", zones: [
+    { id: "America/St_Johns", label: "Newfoundland" },
+    { id: "America/Halifax", label: "Atlantic (Halifax)" },
+    { id: "America/Toronto", label: "Eastern (Toronto / Ottawa)" },
+    { id: "America/Winnipeg", label: "Central (Winnipeg)" },
+    { id: "America/Edmonton", label: "Mountain (Edmonton / Calgary)" },
+    { id: "America/Vancouver", label: "Pacific (Vancouver)" },
+  ]},
+  { code: "CD", name: "DR Congo", zones: [
+    { id: "Africa/Kinshasa", label: "Kinshasa (West)" },
+    { id: "Africa/Lubumbashi", label: "Lubumbashi (East)" },
+  ]},
+  { code: "CF", name: "Central African Republic", zones: [{ id: "Africa/Bangui", label: "Bangui" }] },
+  { code: "CG", name: "Congo Republic", zones: [{ id: "Africa/Brazzaville", label: "Brazzaville" }] },
+  { code: "CH", name: "Switzerland", zones: [{ id: "Europe/Zurich", label: "Zurich" }] },
+  { code: "CI", name: "Ivory Coast", zones: [{ id: "Africa/Abidjan", label: "Abidjan" }] },
+  { code: "CL", name: "Chile", zones: [
+    { id: "America/Santiago", label: "Santiago" },
+    { id: "Pacific/Easter", label: "Easter Island" },
+  ]},
+  { code: "CM", name: "Cameroon", zones: [{ id: "Africa/Douala", label: "Douala" }] },
+  { code: "CN", name: "China", zones: [{ id: "Asia/Shanghai", label: "Beijing / Shanghai" }] },
+  { code: "CO", name: "Colombia", zones: [{ id: "America/Bogota", label: "Bogotá" }] },
+  { code: "CR", name: "Costa Rica", zones: [{ id: "America/Costa_Rica", label: "San José" }] },
+  { code: "CU", name: "Cuba", zones: [{ id: "America/Havana", label: "Havana" }] },
+  { code: "CV", name: "Cape Verde", zones: [{ id: "Atlantic/Cape_Verde", label: "Praia" }] },
+  { code: "CY", name: "Cyprus", zones: [{ id: "Asia/Nicosia", label: "Nicosia" }] },
+  { code: "CZ", name: "Czechia", zones: [{ id: "Europe/Prague", label: "Prague" }] },
+  { code: "DE", name: "Germany", zones: [{ id: "Europe/Berlin", label: "Berlin" }] },
+  { code: "DJ", name: "Djibouti", zones: [{ id: "Africa/Djibouti", label: "Djibouti City" }] },
+  { code: "DK", name: "Denmark", zones: [{ id: "Europe/Copenhagen", label: "Copenhagen" }] },
+  { code: "DM", name: "Dominica", zones: [{ id: "America/Dominica", label: "Roseau" }] },
+  { code: "DO", name: "Dominican Republic", zones: [{ id: "America/Santo_Domingo", label: "Santo Domingo" }] },
+  { code: "DZ", name: "Algeria", zones: [{ id: "Africa/Algiers", label: "Algiers" }] },
+  { code: "EC", name: "Ecuador", zones: [
+    { id: "America/Guayaquil", label: "Guayaquil / Quito" },
+    { id: "Pacific/Galapagos", label: "Galápagos" },
+  ]},
+  { code: "EE", name: "Estonia", zones: [{ id: "Europe/Tallinn", label: "Tallinn" }] },
+  { code: "EG", name: "Egypt", zones: [{ id: "Africa/Cairo", label: "Cairo" }] },
+  { code: "ER", name: "Eritrea", zones: [{ id: "Africa/Asmara", label: "Asmara" }] },
+  { code: "ES", name: "Spain", zones: [
+    { id: "Europe/Madrid", label: "Madrid (mainland)" },
+    { id: "Atlantic/Canary", label: "Canary Islands" },
+  ]},
+  { code: "ET", name: "Ethiopia", zones: [{ id: "Africa/Addis_Ababa", label: "Addis Ababa" }] },
+  { code: "FI", name: "Finland", zones: [{ id: "Europe/Helsinki", label: "Helsinki" }] },
+  { code: "FJ", name: "Fiji", zones: [{ id: "Pacific/Fiji", label: "Suva" }] },
+  { code: "FM", name: "Micronesia", zones: [
+    { id: "Pacific/Chuuk", label: "Chuuk" },
+    { id: "Pacific/Pohnpei", label: "Pohnpei" },
+  ]},
+  { code: "FR", name: "France", zones: [
+    { id: "Europe/Paris", label: "Paris (mainland)" },
+    { id: "Indian/Reunion", label: "Réunion" },
+    { id: "America/Guadeloupe", label: "Guadeloupe" },
+  ]},
+  { code: "GA", name: "Gabon", zones: [{ id: "Africa/Libreville", label: "Libreville" }] },
+  { code: "GB", name: "United Kingdom", zones: [{ id: "Europe/London", label: "London" }] },
+  { code: "GD", name: "Grenada", zones: [{ id: "America/Grenada", label: "St. George's" }] },
+  { code: "GE", name: "Georgia", zones: [{ id: "Asia/Tbilisi", label: "Tbilisi" }] },
+  { code: "GH", name: "Ghana", zones: [{ id: "Africa/Accra", label: "Accra" }] },
+  { code: "GM", name: "Gambia", zones: [{ id: "Africa/Banjul", label: "Banjul" }] },
+  { code: "GN", name: "Guinea", zones: [{ id: "Africa/Conakry", label: "Conakry" }] },
+  { code: "GQ", name: "Equatorial Guinea", zones: [{ id: "Africa/Malabo", label: "Malabo" }] },
+  { code: "GR", name: "Greece", zones: [{ id: "Europe/Athens", label: "Athens" }] },
+  { code: "GT", name: "Guatemala", zones: [{ id: "America/Guatemala", label: "Guatemala City" }] },
+  { code: "GW", name: "Guinea-Bissau", zones: [{ id: "Africa/Bissau", label: "Bissau" }] },
+  { code: "GY", name: "Guyana", zones: [{ id: "America/Guyana", label: "Georgetown" }] },
+  { code: "HK", name: "Hong Kong", zones: [{ id: "Asia/Hong_Kong", label: "Hong Kong" }] },
+  { code: "HN", name: "Honduras", zones: [{ id: "America/Tegucigalpa", label: "Tegucigalpa" }] },
+  { code: "HR", name: "Croatia", zones: [{ id: "Europe/Zagreb", label: "Zagreb" }] },
+  { code: "HT", name: "Haiti", zones: [{ id: "America/Port-au-Prince", label: "Port-au-Prince" }] },
+  { code: "HU", name: "Hungary", zones: [{ id: "Europe/Budapest", label: "Budapest" }] },
+  { code: "ID", name: "Indonesia", zones: [
+    { id: "Asia/Jakarta", label: "Jakarta (Western)" },
+    { id: "Asia/Makassar", label: "Makassar (Central)" },
+    { id: "Asia/Jayapura", label: "Jayapura (Eastern)" },
+  ]},
+  { code: "IE", name: "Ireland", zones: [{ id: "Europe/Dublin", label: "Dublin" }] },
+  { code: "IL", name: "Israel", zones: [{ id: "Asia/Jerusalem", label: "Jerusalem" }] },
+  { code: "IN", name: "India", zones: [{ id: "Asia/Kolkata", label: "New Delhi / Mumbai / Kolkata" }] },
+  { code: "IQ", name: "Iraq", zones: [{ id: "Asia/Baghdad", label: "Baghdad" }] },
+  { code: "IR", name: "Iran", zones: [{ id: "Asia/Tehran", label: "Tehran" }] },
+  { code: "IS", name: "Iceland", zones: [{ id: "Atlantic/Reykjavik", label: "Reykjavik" }] },
+  { code: "IT", name: "Italy", zones: [{ id: "Europe/Rome", label: "Rome" }] },
+  { code: "JM", name: "Jamaica", zones: [{ id: "America/Jamaica", label: "Kingston" }] },
+  { code: "JO", name: "Jordan", zones: [{ id: "Asia/Amman", label: "Amman" }] },
+  { code: "JP", name: "Japan", zones: [{ id: "Asia/Tokyo", label: "Tokyo" }] },
+  { code: "KE", name: "Kenya", zones: [{ id: "Africa/Nairobi", label: "Nairobi" }] },
+  { code: "KG", name: "Kyrgyzstan", zones: [{ id: "Asia/Bishkek", label: "Bishkek" }] },
+  { code: "KH", name: "Cambodia", zones: [{ id: "Asia/Phnom_Penh", label: "Phnom Penh" }] },
+  { code: "KI", name: "Kiribati", zones: [
+    { id: "Pacific/Tarawa", label: "Tarawa" },
+    { id: "Pacific/Kiritimati", label: "Kiritimati" },
+  ]},
+  { code: "KM", name: "Comoros", zones: [{ id: "Indian/Comoro", label: "Moroni" }] },
+  { code: "KN", name: "Saint Kitts and Nevis", zones: [{ id: "America/St_Kitts", label: "Basseterre" }] },
+  { code: "KP", name: "North Korea", zones: [{ id: "Asia/Pyongyang", label: "Pyongyang" }] },
+  { code: "KR", name: "South Korea", zones: [{ id: "Asia/Seoul", label: "Seoul" }] },
+  { code: "KW", name: "Kuwait", zones: [{ id: "Asia/Kuwait", label: "Kuwait City" }] },
+  { code: "KZ", name: "Kazakhstan", zones: [
+    { id: "Asia/Almaty", label: "Almaty" },
+    { id: "Asia/Aqtobe", label: "Aqtobe" },
+  ]},
+  { code: "LA", name: "Laos", zones: [{ id: "Asia/Vientiane", label: "Vientiane" }] },
+  { code: "LB", name: "Lebanon", zones: [{ id: "Asia/Beirut", label: "Beirut" }] },
+  { code: "LC", name: "Saint Lucia", zones: [{ id: "America/St_Lucia", label: "Castries" }] },
+  { code: "LI", name: "Liechtenstein", zones: [{ id: "Europe/Vaduz", label: "Vaduz" }] },
+  { code: "LK", name: "Sri Lanka", zones: [{ id: "Asia/Colombo", label: "Colombo" }] },
+  { code: "LR", name: "Liberia", zones: [{ id: "Africa/Monrovia", label: "Monrovia" }] },
+  { code: "LS", name: "Lesotho", zones: [{ id: "Africa/Maseru", label: "Maseru" }] },
+  { code: "LT", name: "Lithuania", zones: [{ id: "Europe/Vilnius", label: "Vilnius" }] },
+  { code: "LU", name: "Luxembourg", zones: [{ id: "Europe/Luxembourg", label: "Luxembourg City" }] },
+  { code: "LV", name: "Latvia", zones: [{ id: "Europe/Riga", label: "Riga" }] },
+  { code: "LY", name: "Libya", zones: [{ id: "Africa/Tripoli", label: "Tripoli" }] },
+  { code: "MA", name: "Morocco", zones: [{ id: "Africa/Casablanca", label: "Casablanca" }] },
+  { code: "MC", name: "Monaco", zones: [{ id: "Europe/Monaco", label: "Monaco" }] },
+  { code: "MD", name: "Moldova", zones: [{ id: "Europe/Chisinau", label: "Chișinău" }] },
+  { code: "ME", name: "Montenegro", zones: [{ id: "Europe/Podgorica", label: "Podgorica" }] },
+  { code: "MG", name: "Madagascar", zones: [{ id: "Indian/Antananarivo", label: "Antananarivo" }] },
+  { code: "MH", name: "Marshall Islands", zones: [{ id: "Pacific/Majuro", label: "Majuro" }] },
+  { code: "MK", name: "North Macedonia", zones: [{ id: "Europe/Skopje", label: "Skopje" }] },
+  { code: "ML", name: "Mali", zones: [{ id: "Africa/Bamako", label: "Bamako" }] },
+  { code: "MM", name: "Myanmar", zones: [{ id: "Asia/Yangon", label: "Yangon" }] },
+  { code: "MN", name: "Mongolia", zones: [
+    { id: "Asia/Ulaanbaatar", label: "Ulaanbaatar" },
+    { id: "Asia/Hovd", label: "Hovd" },
+  ]},
+  { code: "MR", name: "Mauritania", zones: [{ id: "Africa/Nouakchott", label: "Nouakchott" }] },
+  { code: "MT", name: "Malta", zones: [{ id: "Europe/Malta", label: "Valletta" }] },
+  { code: "MU", name: "Mauritius", zones: [{ id: "Indian/Mauritius", label: "Port Louis" }] },
+  { code: "MV", name: "Maldives", zones: [{ id: "Indian/Maldives", label: "Malé" }] },
+  { code: "MW", name: "Malawi", zones: [{ id: "Africa/Blantyre", label: "Lilongwe" }] },
+  { code: "MX", name: "Mexico", zones: [
+    { id: "America/Mexico_City", label: "Mexico City (Central)" },
+    { id: "America/Tijuana", label: "Tijuana (Pacific)" },
+    { id: "America/Cancun", label: "Cancún (Eastern)" },
+  ]},
+  { code: "MY", name: "Malaysia", zones: [{ id: "Asia/Kuala_Lumpur", label: "Kuala Lumpur" }] },
+  { code: "MZ", name: "Mozambique", zones: [{ id: "Africa/Maputo", label: "Maputo" }] },
+  { code: "NA", name: "Namibia", zones: [{ id: "Africa/Windhoek", label: "Windhoek" }] },
+  { code: "NE", name: "Niger", zones: [{ id: "Africa/Niamey", label: "Niamey" }] },
+  { code: "NG", name: "Nigeria", zones: [{ id: "Africa/Lagos", label: "Lagos" }] },
+  { code: "NI", name: "Nicaragua", zones: [{ id: "America/Managua", label: "Managua" }] },
+  { code: "NL", name: "Netherlands", zones: [{ id: "Europe/Amsterdam", label: "Amsterdam" }] },
+  { code: "NO", name: "Norway", zones: [{ id: "Europe/Oslo", label: "Oslo" }] },
+  { code: "NP", name: "Nepal", zones: [{ id: "Asia/Kathmandu", label: "Kathmandu" }] },
+  { code: "NR", name: "Nauru", zones: [{ id: "Pacific/Nauru", label: "Yaren" }] },
+  { code: "NZ", name: "New Zealand", zones: [{ id: "Pacific/Auckland", label: "Auckland" }] },
+  { code: "OM", name: "Oman", zones: [{ id: "Asia/Muscat", label: "Muscat" }] },
+  { code: "PA", name: "Panama", zones: [{ id: "America/Panama", label: "Panama City" }] },
+  { code: "PE", name: "Peru", zones: [{ id: "America/Lima", label: "Lima" }] },
+  { code: "PG", name: "Papua New Guinea", zones: [{ id: "Pacific/Port_Moresby", label: "Port Moresby" }] },
+  { code: "PH", name: "Philippines", zones: [{ id: "Asia/Manila", label: "Manila" }] },
+  { code: "PK", name: "Pakistan", zones: [{ id: "Asia/Karachi", label: "Karachi / Islamabad" }] },
+  { code: "PL", name: "Poland", zones: [{ id: "Europe/Warsaw", label: "Warsaw" }] },
+  { code: "PS", name: "Palestine", zones: [{ id: "Asia/Gaza", label: "Gaza / Ramallah" }] },
+  { code: "PT", name: "Portugal", zones: [
+    { id: "Europe/Lisbon", label: "Lisbon (mainland)" },
+    { id: "Atlantic/Madeira", label: "Madeira" },
+    { id: "Atlantic/Azores", label: "Azores" },
+  ]},
+  { code: "PW", name: "Palau", zones: [{ id: "Pacific/Palau", label: "Ngerulmud" }] },
+  { code: "PY", name: "Paraguay", zones: [{ id: "America/Asuncion", label: "Asunción" }] },
+  { code: "QA", name: "Qatar", zones: [{ id: "Asia/Qatar", label: "Doha" }] },
+  { code: "RO", name: "Romania", zones: [{ id: "Europe/Bucharest", label: "Bucharest" }] },
+  { code: "RS", name: "Serbia", zones: [{ id: "Europe/Belgrade", label: "Belgrade" }] },
+  { code: "RU", name: "Russia", zones: [
+    { id: "Europe/Kaliningrad", label: "Kaliningrad" },
+    { id: "Europe/Moscow", label: "Moscow / St. Petersburg" },
+    { id: "Asia/Yekaterinburg", label: "Yekaterinburg" },
+    { id: "Asia/Omsk", label: "Omsk" },
+    { id: "Asia/Krasnoyarsk", label: "Krasnoyarsk" },
+    { id: "Asia/Irkutsk", label: "Irkutsk" },
+    { id: "Asia/Yakutsk", label: "Yakutsk" },
+    { id: "Asia/Vladivostok", label: "Vladivostok" },
+    { id: "Asia/Magadan", label: "Magadan" },
+    { id: "Asia/Kamchatka", label: "Kamchatka" },
+  ]},
+  { code: "RW", name: "Rwanda", zones: [{ id: "Africa/Kigali", label: "Kigali" }] },
+  { code: "SA", name: "Saudi Arabia", zones: [{ id: "Asia/Riyadh", label: "Riyadh" }] },
+  { code: "SB", name: "Solomon Islands", zones: [{ id: "Pacific/Guadalcanal", label: "Honiara" }] },
+  { code: "SC", name: "Seychelles", zones: [{ id: "Indian/Mahe", label: "Victoria" }] },
+  { code: "SD", name: "Sudan", zones: [{ id: "Africa/Khartoum", label: "Khartoum" }] },
+  { code: "SE", name: "Sweden", zones: [{ id: "Europe/Stockholm", label: "Stockholm" }] },
+  { code: "SG", name: "Singapore", zones: [{ id: "Asia/Singapore", label: "Singapore" }] },
+  { code: "SI", name: "Slovenia", zones: [{ id: "Europe/Ljubljana", label: "Ljubljana" }] },
+  { code: "SK", name: "Slovakia", zones: [{ id: "Europe/Bratislava", label: "Bratislava" }] },
+  { code: "SL", name: "Sierra Leone", zones: [{ id: "Africa/Freetown", label: "Freetown" }] },
+  { code: "SM", name: "San Marino", zones: [{ id: "Europe/San_Marino", label: "San Marino" }] },
+  { code: "SN", name: "Senegal", zones: [{ id: "Africa/Dakar", label: "Dakar" }] },
+  { code: "SO", name: "Somalia", zones: [{ id: "Africa/Mogadishu", label: "Mogadishu" }] },
+  { code: "SR", name: "Suriname", zones: [{ id: "America/Paramaribo", label: "Paramaribo" }] },
+  { code: "SS", name: "South Sudan", zones: [{ id: "Africa/Juba", label: "Juba" }] },
+  { code: "ST", name: "Sao Tome and Principe", zones: [{ id: "Africa/Sao_Tome", label: "São Tomé" }] },
+  { code: "SV", name: "El Salvador", zones: [{ id: "America/El_Salvador", label: "San Salvador" }] },
+  { code: "SY", name: "Syria", zones: [{ id: "Asia/Damascus", label: "Damascus" }] },
+  { code: "SZ", name: "Eswatini", zones: [{ id: "Africa/Mbabane", label: "Mbabane" }] },
+  { code: "TD", name: "Chad", zones: [{ id: "Africa/Ndjamena", label: "N'Djamena" }] },
+  { code: "TG", name: "Togo", zones: [{ id: "Africa/Lome", label: "Lomé" }] },
+  { code: "TH", name: "Thailand", zones: [{ id: "Asia/Bangkok", label: "Bangkok" }] },
+  { code: "TJ", name: "Tajikistan", zones: [{ id: "Asia/Dushanbe", label: "Dushanbe" }] },
+  { code: "TL", name: "Timor-Leste", zones: [{ id: "Asia/Dili", label: "Dili" }] },
+  { code: "TM", name: "Turkmenistan", zones: [{ id: "Asia/Ashgabat", label: "Ashgabat" }] },
+  { code: "TN", name: "Tunisia", zones: [{ id: "Africa/Tunis", label: "Tunis" }] },
+  { code: "TO", name: "Tonga", zones: [{ id: "Pacific/Tongatapu", label: "Nuku'alofa" }] },
+  { code: "TR", name: "Turkey", zones: [{ id: "Europe/Istanbul", label: "Istanbul" }] },
+  { code: "TT", name: "Trinidad and Tobago", zones: [{ id: "America/Port_of_Spain", label: "Port of Spain" }] },
+  { code: "TV", name: "Tuvalu", zones: [{ id: "Pacific/Funafuti", label: "Funafuti" }] },
+  { code: "TW", name: "Taiwan", zones: [{ id: "Asia/Taipei", label: "Taipei" }] },
+  { code: "TZ", name: "Tanzania", zones: [{ id: "Africa/Dar_es_Salaam", label: "Dar es Salaam" }] },
+  { code: "UA", name: "Ukraine", zones: [{ id: "Europe/Kyiv", label: "Kyiv" }] },
+  { code: "UG", name: "Uganda", zones: [{ id: "Africa/Kampala", label: "Kampala" }] },
+  { code: "US", name: "United States", zones: [
+    { id: "America/New_York", label: "Eastern (New York)" },
+    { id: "America/Chicago", label: "Central (Chicago)" },
+    { id: "America/Denver", label: "Mountain (Denver)" },
+    { id: "America/Phoenix", label: "Arizona (no DST)" },
+    { id: "America/Los_Angeles", label: "Pacific (Los Angeles)" },
+    { id: "America/Anchorage", label: "Alaska" },
+    { id: "Pacific/Honolulu", label: "Hawaii" },
+  ]},
+  { code: "UY", name: "Uruguay", zones: [{ id: "America/Montevideo", label: "Montevideo" }] },
+  { code: "UZ", name: "Uzbekistan", zones: [{ id: "Asia/Tashkent", label: "Tashkent" }] },
+  { code: "VA", name: "Vatican City", zones: [{ id: "Europe/Vatican", label: "Vatican City" }] },
+  { code: "VC", name: "Saint Vincent and the Grenadines", zones: [{ id: "America/St_Vincent", label: "Kingstown" }] },
+  { code: "VE", name: "Venezuela", zones: [{ id: "America/Caracas", label: "Caracas" }] },
+  { code: "VN", name: "Vietnam", zones: [{ id: "Asia/Ho_Chi_Minh", label: "Ho Chi Minh City" }] },
+  { code: "VU", name: "Vanuatu", zones: [{ id: "Pacific/Efate", label: "Port Vila" }] },
+  { code: "WS", name: "Samoa", zones: [{ id: "Pacific/Apia", label: "Apia" }] },
+  { code: "YE", name: "Yemen", zones: [{ id: "Asia/Aden", label: "Sana'a" }] },
+  { code: "ZA", name: "South Africa", zones: [{ id: "Africa/Johannesburg", label: "Johannesburg" }] },
+  { code: "ZM", name: "Zambia", zones: [{ id: "Africa/Lusaka", label: "Lusaka" }] },
+  { code: "ZW", name: "Zimbabwe", zones: [{ id: "Africa/Harare", label: "Harare" }] },
+];
+
+const CHRONOS_UTC = { id: "UTC", label: "UTC" };
+
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = { CHRONOS_COUNTRIES, CHRONOS_UTC };
+}
+
+
+/* Chronos — App Logic
+ * Load order: chronos-timezones.js, then this file.
+ * Reuses the same Intl-based conversion math from the dropdown demo,
+ * but drives the slider + destination-card UI Stitch generated instead.
+ */
+
+/* ---------------- Core conversion math (unchanged) ---------------- */
+
+function getTimeZoneOffsetMinutes(date, timeZone) {
+  const dtf = new Intl.DateTimeFormat("en-US", {
+    timeZone, hourCycle: "h23",
+    year: "numeric", month: "2-digit", day: "2-digit",
+    hour: "2-digit", minute: "2-digit", second: "2-digit",
+  });
+  const parts = dtf.formatToParts(date).reduce((acc, p) => {
+    if (p.type !== "literal") acc[p.type] = p.value;
+    return acc;
+  }, {});
+  const asUTC = Date.UTC(parts.year, parts.month - 1, parts.day, parts.hour, parts.minute, parts.second);
+  return (asUTC - date.getTime()) / 60000;
+}
+
+function zonedWallTimeToUtc(dateStr, timeStr, fromZone) {
+  const [y, m, d] = dateStr.split("-").map(Number);
+  const [hh, mm] = timeStr.split(":").map(Number);
+  const guessUtcMs = Date.UTC(y, m - 1, d, hh, mm, 0);
+  const offsetMin = getTimeZoneOffsetMinutes(new Date(guessUtcMs), fromZone);
+  return new Date(guessUtcMs - offsetMin * 60000);
+}
+
+function formatOffset(utcDate, timeZone) {
+  const minutes = getTimeZoneOffsetMinutes(utcDate, timeZone);
+  const sign = minutes >= 0 ? "+" : "-";
+  const abs = Math.abs(minutes);
+  const hh = String(Math.floor(abs / 60)).padStart(2, "0");
+  const mm = String(abs % 60).padStart(2, "0");
+  return mm === "00" ? `GMT${sign}${parseInt(hh, 10)}` : `GMT${sign}${hh}:${mm}`;
+}
+
+function relativeOffsetLabel(utcDate, fromZone, toZone) {
+  const diffMin = getTimeZoneOffsetMinutes(utcDate, toZone) - getTimeZoneOffsetMinutes(utcDate, fromZone);
+  const sign = diffMin >= 0 ? "+" : "-";
+  const abs = Math.abs(diffMin);
+  const hh = Math.floor(abs / 60);
+  const mm = abs % 60;
+  return mm === 0 ? `${sign}${hh}h` : `${sign}${hh}h${mm}m`;
+}
+
+function dayDifference(utcInstant, fromZone, toZone) {
+  const fromDateStr = new Intl.DateTimeFormat("en-CA", { timeZone: fromZone }).format(utcInstant);
+  const toDateStr = new Intl.DateTimeFormat("en-CA", { timeZone: toZone }).format(utcInstant);
+  const fromDate = new Date(fromDateStr + "T00:00:00Z");
+  const toDate = new Date(toDateStr + "T00:00:00Z");
+  return Math.round((toDate - fromDate) / 86400000);
+}
+
+function getZoneName(utcDate, zoneId, style) {
+  const parts = new Intl.DateTimeFormat("en-US", { timeZone: zoneId, timeZoneName: style }).formatToParts(utcDate);
+  const tzPart = parts.find((p) => p.type === "timeZoneName");
+  return tzPart ? tzPart.value : zoneId;
+}
+
+function formatHM(utcDate, zoneId, use12) {
+  return new Intl.DateTimeFormat(use12 ? "en-US" : "en-GB", {
+    timeZone: zoneId,
+    hour: use12 ? "numeric" : "2-digit",
+    minute: "2-digit",
+    hour12: !!use12,
+  }).format(utcDate);
+}
+
+function detectUserTimeZone() {
+  try { return Intl.DateTimeFormat().resolvedOptions().timeZone; } catch { return "UTC"; }
+}
+
+/* ---------------- Timezone directory (search) ---------------- */
+
+function buildZoneDirectory() {
+  const list = [];
+  CHRONOS_COUNTRIES.forEach((country) => {
+    country.zones.forEach((zone) => {
+      list.push({
+        id: zone.id,
+        cityLabel: zone.label,
+        countryName: country.name,
+        searchText: `${zone.label} ${country.name}`.toLowerCase(),
+      });
+    });
+  });
+  list.push({ id: "UTC", cityLabel: "UTC", countryName: "Coordinated Universal Time", searchText: "utc" });
+  return list;
+}
+
+function findZoneEntry(directory, zoneId) {
+  return directory.find((z) => z.id === zoneId);
+}
+
+/* ---------------- App state ---------------- */
+
+const ZONE_DIRECTORY = buildZoneDirectory();
+
+// A sensible default spread of major zones — shown out of the box so the
+// app is useful before the visitor adds anything themselves.
+const MAJOR_ZONES = [
+  "UTC",
+  "America/New_York",
+  "America/Chicago",
+  "America/Denver",
+  "America/Los_Angeles",
+  "Europe/London",
+  "Europe/Paris",
+  "Asia/Dubai",
+  "Asia/Kolkata",
+  "Asia/Shanghai",
+  "Asia/Tokyo",
+  "Australia/Sydney",
+];
+
+const state = {
+  // Origin defaults to UTC — the zone event times are usually announced in
+  // ("5pm UTC"). Your own local zone goes in destinations instead, so the
+  // natural flow is: set origin/slider to the source time, read your zone's
+  // card for the converted local time.
+  originZoneId: "UTC",
+  destinations: [],
+  sliderMinutes: 0,
+  use12Hour: false,
+};
+
+(() => {
+  const detected = detectUserTimeZone();
+  const detectedIsKnown = !!findZoneEntry(ZONE_DIRECTORY, detected);
+  const seed = detectedIsKnown && detected !== "UTC" ? [detected] : [];
+  const rest = MAJOR_ZONES.filter((z) => z !== "UTC" && !seed.includes(z));
+  state.destinations = [...seed, ...rest];
+
+  // Initialize the slider to "now", expressed as wall-clock time in whatever
+  // the origin zone actually is (works correctly regardless of which zone
+  // that ends up being).
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: state.originZoneId, hourCycle: "h23", hour: "2-digit", minute: "2-digit",
+  }).formatToParts(new Date()).reduce((acc, p) => { acc[p.type] = p.value; return acc; }, {});
+  state.sliderMinutes = parseInt(parts.hour, 10) * 60 + parseInt(parts.minute, 10);
+})();
+
+let modalMode = "add"; // "add" | "origin"
+
+/* ---------------- Rendering ---------------- */
+
+function currentOriginDateStr() {
+  // "Today" as a calendar date, expressed in the origin zone, right now (real date).
+  return new Intl.DateTimeFormat("en-CA", { timeZone: state.originZoneId }).format(new Date());
+}
+
+function sliderMinutesToTimeStr(minutes) {
+  const hh = String(Math.floor(minutes / 60)).padStart(2, "0");
+  const mm = String(minutes % 60).padStart(2, "0");
+  return `${hh}:${mm}`;
+}
+
+function computeUtcInstant() {
+  const dateStr = currentOriginDateStr();
+  const timeStr = sliderMinutesToTimeStr(state.sliderMinutes);
+  return zonedWallTimeToUtc(dateStr, timeStr, state.originZoneId);
+}
+
+function dayLabel(diff) {
+  if (diff === 0) return "Today";
+  if (diff === 1) return "Tomorrow";
+  if (diff === -1) return "Yesterday";
+  return diff > 0 ? `+${diff} days` : `${diff} days`;
+}
+
+function renderOrigin(utcInstant) {
+  const entry = findZoneEntry(ZONE_DIRECTORY, state.originZoneId);
+  const title = document.getElementById("origin-title");
+  const subtitle = document.getElementById("origin-subtitle");
+  const dateEl = document.getElementById("origin-date");
+  const mainTime = document.getElementById("main-time-display");
+
+  if (title && entry) title.textContent = `${entry.cityLabel}, ${entry.countryName}`;
+  if (subtitle) subtitle.textContent = `${getZoneName(utcInstant, state.originZoneId, "long")} (${formatOffset(utcInstant, state.originZoneId)})`;
+  if (dateEl) {
+    dateEl.textContent = new Intl.DateTimeFormat("en-US", {
+      timeZone: state.originZoneId, month: "short", day: "numeric", year: "numeric",
+    }).format(utcInstant);
+  }
+  if (mainTime) mainTime.textContent = formatHM(utcInstant, state.originZoneId, state.use12Hour);
+}
+
+function destinationCardHTML(zoneId, utcInstant) {
+  const entry = findZoneEntry(ZONE_DIRECTORY, zoneId);
+  if (!entry) return "";
+  const timeStr = formatHM(utcInstant, zoneId, state.use12Hour);
+  const diffLabel = relativeOffsetLabel(utcInstant, state.originZoneId, zoneId);
+  const diffMin = getTimeZoneOffsetMinutes(utcInstant, zoneId) - getTimeZoneOffsetMinutes(utcInstant, state.originZoneId);
+  const diffColor = diffMin === 0 ? "text-on-surface-variant" : diffMin > 0 ? "text-tertiary" : "text-secondary";
+  const day = dayLabel(dayDifference(utcInstant, state.originZoneId, zoneId));
+  const zoneName = getZoneName(utcInstant, zoneId, "short");
+
+  return `
+    <div class="bg-surface-container-high hover:bg-surface-container-highest transition-all duration-300 rounded-xl p-6 cursor-pointer group relative" data-zone-id="${zoneId}">
+      <button class="js-remove-destination absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity text-outline hover:text-error material-symbols-outlined text-base" data-zone-id="${zoneId}" title="Remove">close</button>
+      <div class="flex justify-between items-center mb-4">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg overflow-hidden bg-surface-variant flex items-center justify-center">
+            <span class="material-symbols-outlined text-sm text-secondary">location_on</span>
+          </div>
+          <div>
+            <h4 class="font-body font-bold text-base leading-none">${entry.cityLabel}</h4>
+            <p class="font-label text-[10px] text-outline uppercase tracking-wider mt-1">${zoneName} (${formatOffset(utcInstant, zoneId)})</p>
+          </div>
+        </div>
+        <span class="font-label text-[11px] ${diffColor} font-bold">${diffLabel}</span>
+      </div>
+      <div class="flex items-baseline justify-between">
+        <span class="font-display text-4xl font-semibold">${timeStr}</span>
+        <span class="font-label text-xs text-on-surface-variant">${day}</span>
+      </div>
+    </div>`;
+}
+
+function renderDestinations(utcInstant) {
+  const container = document.getElementById("destinations-list");
+  if (!container) return;
+  container.innerHTML = state.destinations.map((z) => destinationCardHTML(z, utcInstant)).join("");
+  container.querySelectorAll(".js-remove-destination").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const zoneId = btn.dataset.zoneId;
+      state.destinations = state.destinations.filter((z) => z !== zoneId);
+      render();
+    });
+  });
+}
+
+function renderInsight(utcInstant) {
+  const textEl = document.getElementById("insight-text");
+  const subEl = document.getElementById("insight-sub");
+  if (!textEl || !subEl) return;
+
+  const inBusinessHours = state.destinations.filter((zoneId) => {
+    const hour = parseInt(formatHM(utcInstant, zoneId).split(":")[0], 10);
+    return hour >= 9 && hour < 18;
+  });
+
+  const entries = inBusinessHours.map((z) => findZoneEntry(ZONE_DIRECTORY, z)?.cityLabel).filter(Boolean);
+
+  if (entries.length === 0) {
+    textEl.textContent = "Outside typical business hours (9–18) everywhere right now.";
+    subEl.textContent = "Drag the slider to find an overlap.";
+  } else {
+    textEl.textContent = `Good time to reach: ${entries.join(", ")}.`;
+    subEl.textContent = "Within 9:00–18:00 local business hours.";
+  }
+}
+
+function updateFormatToggleUI() {
+  const el24 = document.getElementById("formatToggle24");
+  const el12 = document.getElementById("formatToggle12");
+  if (!el24 || !el12) return;
+  const active = "text-[10px] font-label font-bold px-2 py-1 rounded-full bg-primary text-on-primary transition-colors";
+  const inactive = "text-[10px] font-label font-bold px-2 py-1 rounded-full text-outline transition-colors";
+  el24.className = state.use12Hour ? inactive : active;
+  el12.className = state.use12Hour ? active : inactive;
+}
+
+function render() {
+  const utcInstant = computeUtcInstant();
+  renderOrigin(utcInstant);
+  renderDestinations(utcInstant);
+  renderInsight(utcInstant);
+  updateFormatToggleUI();
+}
+
+/* ---------------- Modal (search + select zone) ---------------- */
+
+function openModal(mode) {
+  modalMode = mode;
+  const modal = document.getElementById("tzModal");
+  const title = document.getElementById("tzModalTitle");
+  const input = document.getElementById("tzSearchInput");
+  if (title) title.textContent = mode === "origin" ? "Change origin" : "Add destination";
+  if (modal) modal.classList.remove("hidden");
+  if (input) { input.value = ""; input.focus(); }
+  renderSearchResults("");
+}
+
+function closeModal() {
+  const modal = document.getElementById("tzModal");
+  if (modal) modal.classList.add("hidden");
+}
+
+function renderSearchResults(query) {
+  const resultsEl = document.getElementById("tzSearchResults");
+  if (!resultsEl) return;
+  const q = query.trim().toLowerCase();
+  const matches = (q === "" ? ZONE_DIRECTORY : ZONE_DIRECTORY.filter((z) => z.searchText.includes(q))).slice(0, 40);
+
+  resultsEl.innerHTML = matches.map((z) => `
+    <button class="js-tz-result text-left px-3 py-2 rounded-lg hover:bg-surface-container-highest transition-colors flex justify-between items-center" data-zone-id="${z.id}">
+      <span class="font-body text-sm">${z.cityLabel}</span>
+      <span class="font-label text-[10px] text-outline">${z.countryName}</span>
+    </button>`).join("");
+
+  resultsEl.querySelectorAll(".js-tz-result").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const zoneId = btn.dataset.zoneId;
+      if (modalMode === "origin") {
+        state.originZoneId = zoneId;
+      } else {
+        if (!state.destinations.includes(zoneId) && zoneId !== state.originZoneId) {
+          state.destinations.push(zoneId);
+        }
+      }
+      closeModal();
+      render();
+    });
+  });
+}
+
+/* ---------------- Wiring ---------------- */
+
+function supportsRequiredIntl() {
+  try {
+    new Intl.DateTimeFormat("en-US", { timeZone: "Asia/Dubai", timeZoneName: "short" }).format(new Date());
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function initChronos() {
+  if (!supportsRequiredIntl()) {
+    document.body.innerHTML = '<div style="padding:40px;text-align:center;font-family:sans-serif;color:#f5f2fd;background:#0d0e15;min-height:100vh;">This browser does not support the timezone features Chronos needs. Please update your browser or try Chrome, Firefox, Safari, or Edge.</div>';
+    return;
+  }
+
+  const slider = document.getElementById("global-time-slider");
+  if (slider) {
+    slider.value = String(state.sliderMinutes);
+    slider.addEventListener("input", () => {
+      state.sliderMinutes = parseInt(slider.value, 10);
+      render();
+    });
+  }
+
+  document.querySelectorAll(".js-add-destination").forEach((btn) => {
+    btn.addEventListener("click", () => openModal("add"));
+  });
+  const originSelector = document.getElementById("origin-selector");
+  if (originSelector) {
+    originSelector.addEventListener("click", () => openModal("origin"));
+    originSelector.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openModal("origin"); }
+    });
+  }
+
+  const modalClose = document.getElementById("tzModalClose");
+  if (modalClose) modalClose.addEventListener("click", closeModal);
+  const modal = document.getElementById("tzModal");
+  if (modal) {
+    modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !modal.classList.contains("hidden")) closeModal();
+    });
+  }
+
+  const searchInput = document.getElementById("tzSearchInput");
+  if (searchInput) searchInput.addEventListener("input", () => renderSearchResults(searchInput.value));
+
+  const formatToggle = document.getElementById("formatToggle");
+  if (formatToggle) {
+    formatToggle.addEventListener("click", () => {
+      state.use12Hour = !state.use12Hour;
+      render();
+    });
+    formatToggle.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        state.use12Hour = !state.use12Hour;
+        render();
+      }
+    });
+  }
+
+  render();
+}
+
+document.addEventListener("DOMContentLoaded", initChronos);
+
+</script>
+</body></html>
