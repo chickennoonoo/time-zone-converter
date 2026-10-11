@@ -3,11 +3,11 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Time Zone Converter – Offset Clock</title>
-<meta name="description" content="Free time zone converter: pick a time and see it instantly in any city or country. Type an exact time or use the slider. Handles daylight saving, no sign-up."/>
+<meta name="description" content="Free time zone converter for cities, countries and time zones like PST, EST and GMT. Type an exact time or use the slider. Handles daylight saving, no sign-up."/>
 <meta name="theme-color" content="#0d0e15"/>
 <link rel="canonical" href="https://offsetclock.com/"/>
 <meta property="og:title" content="Time Zone Converter – Offset Clock"/>
-<meta property="og:description" content="Free time zone converter: pick a time and see it instantly in any city or country. Type an exact time or use the slider. Handles daylight saving, no sign-up."/>
+<meta property="og:description" content="Free time zone converter for cities, countries and time zones like PST, EST and GMT. Type an exact time or use the slider. Handles daylight saving, no sign-up."/>
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://offsetclock.com/"/>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%230d0e15' stroke='%239aa8ff' stroke-width='6'/%3E%3Cline x1='50' y1='50' x2='50' y2='25' stroke='%239aa8ff' stroke-width='6' stroke-linecap='round'/%3E%3Cline x1='50' y1='50' x2='68' y2='60' stroke='%239aa8ff' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E"/>
@@ -48,6 +48,7 @@
 <span class="font-label text-tertiary text-xs tracking-[0.2em] uppercase mb-2 block">Converting from <span class="material-symbols-outlined text-[12px] align-middle opacity-0 group-hover/origin:opacity-100 transition-opacity">edit</span></span>
 <h2 class="font-display text-4xl font-bold tracking-tight" id="origin-title">London, UK</h2>
 <p class="font-body text-on-surface-variant text-sm mt-1" id="origin-subtitle">British Summer Time (GMT+1)</p>
+<p id="origin-hint" class="hidden font-body text-xs text-tertiary mt-2 max-w-md leading-snug"></p>
 </div>
 <div class="text-right">
 <span class="font-label text-on-surface-variant text-xs tracking-widest uppercase block mb-1">Date</span>
@@ -80,7 +81,7 @@
 <div class="flex justify-center mt-10">
 <button class="js-add-destination editorial-gradient text-on-primary font-body font-bold px-8 py-3 rounded-full flex items-center gap-2 transition-transform active:scale-95 shadow-lg shadow-primary/20">
 <span class="material-symbols-outlined">add_location</span>
-                            Add another place
+                            Add a place or time zone
                         </button>
 </div>
 </div>
@@ -107,7 +108,7 @@
 <!-- Add Location Placeholder Card -->
 <div class="js-add-destination border-2 border-dashed border-outline-variant rounded-xl p-6 flex flex-col items-center justify-center gap-2 text-outline hover:text-on-surface hover:border-primary transition-all cursor-pointer group">
 <span class="material-symbols-outlined text-3xl group-hover:scale-110 transition-transform">add_circle</span>
-<span class="font-label text-xs uppercase tracking-widest font-bold">Add another place</span>
+<span class="font-label text-xs uppercase tracking-widest font-bold">Add a place or time zone</span>
 </div>
 </aside>
 </main>
@@ -116,8 +117,9 @@
   <p>Offset Clock is a free time zone converter. Pick the place and time you are converting from, and every place under "Converting to" shows the matching local time, including the day difference and daylight saving changes.</p>
   <ul class="list-disc pl-6 space-y-2">
     <li><strong class="text-on-surface">Set the time:</strong> drag the slider, or click the big time (or the box under it) to type an exact time.</li>
-    <li><strong class="text-on-surface">Change where you're converting from:</strong> click the city name at the top to choose any country or city.</li>
-    <li><strong class="text-on-surface">Add places to compare:</strong> use the Add another place button to compare as many places as you need, and remove the ones you don't.</li>
+    <li><strong class="text-on-surface">Change where you're converting from:</strong> click the name at the top to choose any country, city or time zone.</li>
+    <li><strong class="text-on-surface">Add places to compare:</strong> use the Add a place or time zone button to compare as many places as you need, and remove the ones you don't.</li>
+    <li><strong class="text-on-surface">Convert time zones, not just cities:</strong> search for PST, EST, GMT, CET and other time zone names. Pick "PT" or "ET" for Pacific or Eastern time as it is observed right now, including daylight saving, or "PST" or "EDT" for the exact fixed offset.</li>
     <li><strong class="text-on-surface">12-hour or 24-hour:</strong> switch the format with the 12H / 24H toggle at the top.</li>
   </ul>
 </section>
@@ -130,10 +132,10 @@
 <div id="tzModal" class="hidden fixed inset-0 z-[60] flex items-start justify-center pt-24 bg-black/60 backdrop-blur-sm px-4">
 <div class="bg-surface-container-high rounded-xl w-full max-w-md p-4 max-h-[70vh] flex flex-col">
 <div class="flex items-center justify-between mb-3">
-<h3 id="tzModalTitle" class="font-display text-lg font-bold">Choose a place to add</h3>
+<h3 id="tzModalTitle" class="font-display text-lg font-bold">Add a place or time zone</h3>
 <button id="tzModalClose" class="material-symbols-outlined text-outline hover:text-on-surface">close</button>
 </div>
-<input id="tzSearchInput" type="text" placeholder="Search city or country…" aria-label="Search for a city or country" class="bg-surface-variant rounded-lg px-4 py-2 text-sm outline-none mb-3 focus:ring-2 focus:ring-primary text-on-surface"/>
+<input id="tzSearchInput" type="text" placeholder="Search a city, country or time zone (PST, GMT, CET…)" aria-label="Search for a city, country or time zone" class="bg-surface-variant rounded-lg px-4 py-2 text-sm outline-none mb-3 focus:ring-2 focus:ring-primary text-on-surface"/>
 <div id="tzSearchResults" class="overflow-y-auto flex-1 flex flex-col gap-1 hide-scrollbar"></div>
 </div>
 </div>
@@ -429,6 +431,62 @@ if (typeof module !== "undefined" && module.exports) {
 }
 
 
+/* ---------------- Standard times (PST, EST, GMT, CET ...) ----------------
+ * Regional entries ("PT", "ET", "UK" ...) follow daylight saving like the real
+ * region does. Fixed entries ("PST", "PDT", "EST" ...) stay at one UTC offset
+ * all year, exactly as the abbreviation says. `zone` is the IANA zone used for
+ * the maths; Etc/GMT+8 means UTC-8 (the sign is inverted in IANA names).
+ */
+const STANDARD_TIMES = [
+  // Regional times that switch between standard and daylight time
+  { id: "std:PT",  label: "PT",  name: "Pacific Time",  zone: "America/Los_Angeles", std: "PST", dst: "PDT", kw: "pacific los angeles california seattle vancouver" },
+  { id: "std:MT",  label: "MT",  name: "Mountain Time", zone: "America/Denver",      std: "MST", dst: "MDT", kw: "mountain denver colorado utah" },
+  { id: "std:CT",  label: "CT",  name: "Central Time",  zone: "America/Chicago",     std: "CST", dst: "CDT", kw: "central chicago texas" },
+  { id: "std:ET",  label: "ET",  name: "Eastern Time",  zone: "America/New_York",    std: "EST", dst: "EDT", kw: "eastern new york toronto" },
+  { id: "std:UK",  label: "UK time", name: "UK Time",   zone: "Europe/London",       std: "GMT", dst: "BST", kw: "uk britain england london gmt bst" },
+  { id: "std:CET-R", label: "CET/CEST", name: "Central European Time", zone: "Europe/Berlin", std: "CET", dst: "CEST", kw: "central european europe berlin paris cet cest" },
+  { id: "std:EET-R", label: "EET/EEST", name: "Eastern European Time", zone: "Europe/Athens", std: "EET", dst: "EEST", kw: "eastern european europe athens eet eest" },
+  { id: "std:AET", label: "AEST/AEDT", name: "Australian Eastern Time", zone: "Australia/Sydney", std: "AEST", dst: "AEDT", kw: "australia sydney melbourne aet aest aedt" },
+  { id: "std:NZT", label: "NZST/NZDT", name: "New Zealand Time", zone: "Pacific/Auckland", std: "NZST", dst: "NZDT", kw: "new zealand auckland nzt nzst nzdt" },
+  // Fixed-offset standard times
+  { id: "std:GMT", label: "GMT", name: "Greenwich Mean Time", zone: "Etc/GMT", fixed: true, region: "std:UK", kw: "greenwich" },
+  { id: "std:PST", label: "PST", name: "Pacific Standard Time", zone: "Etc/GMT+8", fixed: true, region: "std:PT", kw: "pacific" },
+  { id: "std:PDT", label: "PDT", name: "Pacific Daylight Time", zone: "Etc/GMT+7", fixed: true, region: "std:PT", kw: "pacific" },
+  { id: "std:MST", label: "MST", name: "Mountain Standard Time", zone: "Etc/GMT+7", fixed: true, region: "std:MT", kw: "mountain" },
+  { id: "std:MDT", label: "MDT", name: "Mountain Daylight Time", zone: "Etc/GMT+6", fixed: true, region: "std:MT", kw: "mountain" },
+  { id: "std:CST", label: "CST (US)", name: "Central Standard Time", zone: "Etc/GMT+6", fixed: true, region: "std:CT", kw: "cst central" },
+  { id: "std:CDT", label: "CDT", name: "Central Daylight Time", zone: "Etc/GMT+5", fixed: true, region: "std:CT", kw: "central" },
+  { id: "std:EST", label: "EST", name: "Eastern Standard Time", zone: "Etc/GMT+5", fixed: true, region: "std:ET", kw: "eastern" },
+  { id: "std:EDT", label: "EDT", name: "Eastern Daylight Time", zone: "Etc/GMT+4", fixed: true, region: "std:ET", kw: "eastern" },
+  { id: "std:AKST", label: "AKST", name: "Alaska Standard Time", zone: "Etc/GMT+9", fixed: true, kw: "alaska" },
+  { id: "std:AKDT", label: "AKDT", name: "Alaska Daylight Time", zone: "Etc/GMT+8", fixed: true, kw: "alaska" },
+  { id: "std:HST", label: "HST", name: "Hawaii Standard Time", zone: "Pacific/Honolulu", fixed: true, kw: "hawaii" },
+  { id: "std:BST", label: "BST (UK)", name: "British Summer Time", zone: "Etc/GMT-1", fixed: true, region: "std:UK", kw: "bst british" },
+  { id: "std:CET", label: "CET", name: "Central European Time", zone: "Etc/GMT-1", fixed: true, region: "std:CET-R", kw: "central european" },
+  { id: "std:CEST", label: "CEST", name: "Central European Summer Time", zone: "Etc/GMT-2", fixed: true, region: "std:CET-R", kw: "central european" },
+  { id: "std:EET", label: "EET", name: "Eastern European Time", zone: "Etc/GMT-2", fixed: true, region: "std:EET-R", kw: "eastern european egypt" },
+  { id: "std:EEST", label: "EEST", name: "Eastern European Summer Time", zone: "Etc/GMT-3", fixed: true, region: "std:EET-R", kw: "eastern european" },
+  { id: "std:MSK", label: "MSK", name: "Moscow Standard Time", zone: "Europe/Moscow", fixed: true, kw: "moscow russia" },
+  { id: "std:GST", label: "GST (Gulf)", name: "Gulf Standard Time", zone: "Asia/Dubai", fixed: true, kw: "gst gulf uae dubai" },
+  { id: "std:AST", label: "AST (Arabia)", name: "Arabia Standard Time", zone: "Asia/Riyadh", fixed: true, kw: "ast arabia saudi riyadh" },
+  { id: "std:IST", label: "IST (India)", name: "India Standard Time", zone: "Asia/Kolkata", fixed: true, kw: "ist india" },
+  { id: "std:PKT", label: "PKT", name: "Pakistan Standard Time", zone: "Asia/Karachi", fixed: true, kw: "pakistan" },
+  { id: "std:SGT", label: "SGT", name: "Singapore Time", zone: "Asia/Singapore", fixed: true, kw: "singapore" },
+  { id: "std:HKT", label: "HKT", name: "Hong Kong Time", zone: "Asia/Hong_Kong", fixed: true, kw: "hong kong" },
+  { id: "std:CSTC", label: "CST (China)", name: "China Standard Time", zone: "Asia/Shanghai", fixed: true, kw: "cst china beijing" },
+  { id: "std:JST", label: "JST", name: "Japan Standard Time", zone: "Asia/Tokyo", fixed: true, kw: "japan tokyo" },
+  { id: "std:KST", label: "KST", name: "Korea Standard Time", zone: "Asia/Seoul", fixed: true, kw: "korea seoul" },
+  { id: "std:AEST", label: "AEST", name: "Australian Eastern Standard Time", zone: "Etc/GMT-10", fixed: true, region: "std:AET", kw: "australia" },
+  { id: "std:AEDT", label: "AEDT", name: "Australian Eastern Daylight Time", zone: "Etc/GMT-11", fixed: true, region: "std:AET", kw: "australia" },
+  { id: "std:NZST", label: "NZST", name: "New Zealand Standard Time", zone: "Etc/GMT-12", fixed: true, region: "std:NZT", kw: "new zealand" },
+  { id: "std:NZDT", label: "NZDT", name: "New Zealand Daylight Time", zone: "Etc/GMT-13", fixed: true, region: "std:NZT", kw: "new zealand" },
+  { id: "std:SAST", label: "SAST", name: "South Africa Standard Time", zone: "Africa/Johannesburg", fixed: true, kw: "south africa" },
+  { id: "std:EAT", label: "EAT", name: "East Africa Time", zone: "Africa/Nairobi", fixed: true, kw: "east africa kenya" },
+];
+const STD_BY_ID = Object.fromEntries(STANDARD_TIMES.map((s) => [s.id, s]));
+// Resolve a directory id to the IANA zone used for calculations.
+function tzOf(id) { return STD_BY_ID[id] ? STD_BY_ID[id].zone : id; }
+
 /* Chronos — App Logic
  * Load order: chronos-timezones.js, then this file.
  * Reuses the same Intl-based conversion math from the dropdown demo,
@@ -439,7 +497,7 @@ if (typeof module !== "undefined" && module.exports) {
 
 function getTimeZoneOffsetMinutes(date, timeZone) {
   const dtf = new Intl.DateTimeFormat("en-US", {
-    timeZone, hourCycle: "h23",
+    timeZone: tzOf(timeZone), hourCycle: "h23",
     year: "numeric", month: "2-digit", day: "2-digit",
     hour: "2-digit", minute: "2-digit", second: "2-digit",
   });
@@ -478,22 +536,22 @@ function relativeOffsetLabel(utcDate, fromZone, toZone) {
 }
 
 function dayDifference(utcInstant, fromZone, toZone) {
-  const fromDateStr = new Intl.DateTimeFormat("en-CA", { timeZone: fromZone }).format(utcInstant);
-  const toDateStr = new Intl.DateTimeFormat("en-CA", { timeZone: toZone }).format(utcInstant);
+  const fromDateStr = new Intl.DateTimeFormat("en-CA", { timeZone: tzOf(fromZone) }).format(utcInstant);
+  const toDateStr = new Intl.DateTimeFormat("en-CA", { timeZone: tzOf(toZone) }).format(utcInstant);
   const fromDate = new Date(fromDateStr + "T00:00:00Z");
   const toDate = new Date(toDateStr + "T00:00:00Z");
   return Math.round((toDate - fromDate) / 86400000);
 }
 
 function getZoneName(utcDate, zoneId, style) {
-  const parts = new Intl.DateTimeFormat("en-US", { timeZone: zoneId, timeZoneName: style }).formatToParts(utcDate);
+  const parts = new Intl.DateTimeFormat("en-US", { timeZone: tzOf(zoneId), timeZoneName: style }).formatToParts(utcDate);
   const tzPart = parts.find((p) => p.type === "timeZoneName");
   return tzPart ? tzPart.value : zoneId;
 }
 
 function formatHM(utcDate, zoneId, use12) {
   return new Intl.DateTimeFormat(use12 ? "en-US" : "en-GB", {
-    timeZone: zoneId,
+    timeZone: tzOf(zoneId),
     hour: use12 ? "numeric" : "2-digit",
     minute: "2-digit",
     hour12: !!use12,
@@ -508,6 +566,17 @@ function detectUserTimeZone() {
 
 function buildZoneDirectory() {
   const list = [];
+  STANDARD_TIMES.forEach((s) => {
+    list.push({
+      id: s.id,
+      isStandard: true,
+      cityLabel: s.label,
+      fullName: s.name,
+      countryName: s.name + (s.fixed ? " · fixed" : " · follows daylight saving"),
+      searchText: `${s.label} ${s.name} ${s.std || ""} ${s.dst || ""} ${s.kw || ""}`.toLowerCase(),
+      abbrs: [s.label, s.std, s.dst, s.id.replace("std:", "").replace("-R", "")].filter(Boolean).map((x) => x.toLowerCase()),
+    });
+  });
   CHRONOS_COUNTRIES.forEach((country) => {
     country.zones.forEach((zone) => {
       list.push({
@@ -579,7 +648,7 @@ const state = {
   // the origin zone actually is (works correctly regardless of which zone
   // that ends up being).
   const parts = new Intl.DateTimeFormat("en-US", {
-    timeZone: state.originZoneId, hourCycle: "h23", hour: "2-digit", minute: "2-digit",
+    timeZone: tzOf(state.originZoneId), hourCycle: "h23", hour: "2-digit", minute: "2-digit",
   }).formatToParts(new Date()).reduce((acc, p) => { acc[p.type] = p.value; return acc; }, {});
   state.sliderMinutes = parseInt(parts.hour, 10) * 60 + parseInt(parts.minute, 10);
 })();
@@ -590,7 +659,7 @@ let modalMode = "add"; // "add" | "origin"
 
 function nowMinutesInOrigin() {
   const parts = new Intl.DateTimeFormat("en-US", {
-    timeZone: state.originZoneId, hourCycle: "h23", hour: "2-digit", minute: "2-digit",
+    timeZone: tzOf(state.originZoneId), hourCycle: "h23", hour: "2-digit", minute: "2-digit",
   }).formatToParts(new Date()).reduce((acc, p) => { acc[p.type] = p.value; return acc; }, {});
   return parseInt(parts.hour, 10) * 60 + parseInt(parts.minute, 10);
 }
@@ -611,7 +680,7 @@ function updateNowButton() {
 
 function currentOriginDateStr() {
   // "Today" as a calendar date, expressed in the origin zone, right now (real date).
-  return new Intl.DateTimeFormat("en-CA", { timeZone: state.originZoneId }).format(new Date());
+  return new Intl.DateTimeFormat("en-CA", { timeZone: tzOf(state.originZoneId) }).format(new Date());
 }
 
 function sliderMinutesToTimeStr(minutes) {
@@ -640,14 +709,60 @@ function renderOrigin(utcInstant) {
   const dateEl = document.getElementById("origin-date");
   const mainTime = document.getElementById("main-time-display");
 
-  if (title && entry) title.textContent = `${entry.cityLabel}, ${entry.countryName}`;
-  if (subtitle) subtitle.textContent = `${getZoneName(utcInstant, state.originZoneId, "long")} (${formatOffset(utcInstant, state.originZoneId)})`;
+  if (title && entry) title.textContent = entry.isStandard ? entry.cityLabel : `${entry.cityLabel}, ${entry.countryName}`;
+  if (subtitle) subtitle.textContent = entry && entry.isStandard
+    ? standardNote(entry, utcInstant)
+    : `${getZoneName(utcInstant, state.originZoneId, "long")} (${formatOffset(utcInstant, state.originZoneId)})`;
+  const hint = document.getElementById("origin-hint");
+  if (hint) {
+    const msg = entry && entry.isStandard ? standardHint(entry, utcInstant) : "";
+    hint.textContent = msg;
+    hint.classList.toggle("hidden", !msg);
+  }
   if (dateEl) {
     dateEl.textContent = new Intl.DateTimeFormat("en-US", {
-      timeZone: state.originZoneId, month: "short", day: "numeric", year: "numeric",
+      timeZone: tzOf(state.originZoneId), month: "short", day: "numeric", year: "numeric",
     }).format(utcInstant);
   }
   if (mainTime) mainTime.textContent = formatHM(utcInstant, state.originZoneId, state.use12Hour);
+}
+
+
+/* Standard offset (minutes) of a zone for the year of utcInstant = its smaller offset of Jan vs Jul. */
+function baseOffsetMinutes(zone, utcInstant) {
+  const y = new Date(utcInstant).getUTCFullYear();
+  return Math.min(
+    getTimeZoneOffsetMinutes(new Date(Date.UTC(y, 0, 1)), zone),
+    getTimeZoneOffsetMinutes(new Date(Date.UTC(y, 6, 1)), zone)
+  );
+}
+
+function utcLabel(utcInstant, id) {
+  return formatOffset(utcInstant, id).replace("GMT", "UTC");
+}
+
+/* Short label for what a standard-time entry means at a given moment. */
+function standardNote(entry, utcInstant) {
+  const s = STD_BY_ID[entry.id];
+  const off = utcLabel(utcInstant, entry.id);
+  if (!s.fixed) {
+    const cur = getTimeZoneOffsetMinutes(utcInstant, s.zone);
+    return `${s.name}: currently ${cur === baseOffsetMinutes(s.zone, utcInstant) ? s.std : s.dst} (${off})`;
+  }
+  return `${s.name} (${off}), fixed all year`;
+}
+
+/* Warn when a fixed abbreviation (e.g. PST) differs from what its region uses right now. */
+function standardHint(entry, utcInstant) {
+  const s = STD_BY_ID[entry.id];
+  if (!s || !s.fixed || !s.region) return "";
+  const r = STD_BY_ID[s.region];
+  const mine = getTimeZoneOffsetMinutes(utcInstant, s.zone);
+  const theirs = getTimeZoneOffsetMinutes(utcInstant, r.zone);
+  if (mine === theirs) return "";
+  const nowAbbr = theirs === baseOffsetMinutes(r.zone, utcInstant) ? r.std : r.dst;
+  const label = s.label.replace(/ \(.*\)/, "");
+  return `Heads-up: ${label} is fixed at ${utcLabel(utcInstant, entry.id)} all year, but ${r.name} is on ${nowAbbr} right now (${utcLabel(utcInstant, s.region)}). If the announcement just means "${r.name}", pick ${r.label} instead.`;
 }
 
 function destinationCardHTML(zoneId, utcInstant) {
@@ -658,7 +773,7 @@ function destinationCardHTML(zoneId, utcInstant) {
   const diffMin = getTimeZoneOffsetMinutes(utcInstant, zoneId) - getTimeZoneOffsetMinutes(utcInstant, state.originZoneId);
   const diffColor = diffMin === 0 ? "text-on-surface-variant" : diffMin > 0 ? "text-tertiary" : "text-secondary";
   const day = dayLabel(dayDifference(utcInstant, state.originZoneId, zoneId));
-  const zoneName = getZoneName(utcInstant, zoneId, "short");
+  const zoneName = entry.isStandard ? standardNote(entry, utcInstant) : getZoneName(utcInstant, zoneId, "short");
 
   return `
     <div class="bg-surface-container-high hover:bg-surface-container-highest transition-all duration-300 rounded-xl p-6 cursor-pointer group relative" data-zone-id="${zoneId}">
@@ -670,7 +785,7 @@ function destinationCardHTML(zoneId, utcInstant) {
           </div>
           <div>
             <h4 class="font-body font-bold text-base leading-none">${entry.cityLabel}</h4>
-            <p class="font-label text-[10px] text-outline uppercase tracking-wider mt-1">${zoneName} (${formatOffset(utcInstant, zoneId)})</p>
+            <p class="font-label text-[10px] text-outline uppercase tracking-wider mt-1">${entry.isStandard || zoneName === formatOffset(utcInstant, zoneId) ? zoneName : `${zoneName} (${formatOffset(utcInstant, zoneId)})`}</p>
           </div>
         </div>
         <span class="font-label text-[11px] ${diffColor} font-bold">${diffLabel}</span>
@@ -769,7 +884,7 @@ function openModal(mode) {
   const modal = document.getElementById("tzModal");
   const title = document.getElementById("tzModalTitle");
   const input = document.getElementById("tzSearchInput");
-  if (title) title.textContent = mode === "origin" ? "Choose where you're converting from" : "Choose a place to add";
+  if (title) title.textContent = mode === "origin" ? "Convert from a place or time zone" : "Add a place or time zone";
   if (modal) modal.classList.remove("hidden");
   if (input) { input.value = ""; input.focus(); }
   renderSearchResults("");
@@ -784,11 +899,13 @@ function renderSearchResults(query) {
   const resultsEl = document.getElementById("tzSearchResults");
   if (!resultsEl) return;
   const q = query.trim().toLowerCase();
-  const matches = (q === "" ? ZONE_DIRECTORY : ZONE_DIRECTORY.filter((z) => z.searchText.includes(q))).slice(0, 40);
+  const rank = (z) => (z.abbrs && z.abbrs.includes(q) ? 0 : z.isStandard && z.searchText.startsWith(q) ? 1 : z.isStandard ? 2 : 3);
+  const matches = (q === "" ? ZONE_DIRECTORY : ZONE_DIRECTORY.filter((z) => z.searchText.includes(q))
+    .map((z, i) => ({ z, i })).sort((a, b) => rank(a.z) - rank(b.z) || a.i - b.i).map((x) => x.z)).slice(0, 40);
 
   resultsEl.innerHTML = matches.map((z) => `
     <button class="js-tz-result text-left px-3 py-2 rounded-lg hover:bg-surface-container-highest transition-colors flex justify-between items-center" data-zone-id="${z.id}">
-      <span class="font-body text-sm">${z.cityLabel}</span>
+      <span class="font-body text-sm">${z.cityLabel}${z.isStandard ? '<span class="ml-2 font-label text-[9px] uppercase tracking-wider text-tertiary">time zone</span>' : ""}</span>
       <span class="font-label text-[10px] text-outline">${z.countryName}</span>
     </button>`).join("");
 
