@@ -31,8 +31,8 @@
 </div>
 <div class="flex items-center gap-4">
 <div id="formatToggle" class="flex items-center gap-1 bg-surface-container-high rounded-full p-1 cursor-pointer select-none" role="button" tabindex="0" title="Toggle 12h / 24h time format" aria-label="Toggle 12 hour or 24 hour time format">
-<span id="formatToggle24" class="text-[10px] font-label font-bold px-2 py-1 rounded-full bg-primary text-on-primary transition-colors">24H</span>
-<span id="formatToggle12" class="text-[10px] font-label font-bold px-2 py-1 rounded-full text-outline transition-colors">12H</span>
+<span id="formatToggle12" class="text-[10px] font-label font-bold px-2 py-1 rounded-full bg-primary text-on-primary transition-colors">12H</span>
+<span id="formatToggle24" class="text-[10px] font-label font-bold px-2 py-1 rounded-full text-outline transition-colors">24H</span>
 </div>
 </div>
 </div>
@@ -52,7 +52,7 @@
 </div>
 <div class="text-right">
 <span class="font-label text-on-surface-variant text-xs tracking-widest uppercase block mb-1">Date</span>
-<p class="font-body text-on-surface font-medium" id="origin-date">—</p>
+<input id="date-input" type="date" aria-label="Pick a date" title="Pick a date" class="bg-transparent text-on-surface font-body font-medium text-right rounded-lg px-1 outline-none cursor-pointer focus:ring-2 focus:ring-primary [color-scheme:dark]"/>
 </div>
 </div>
 <div class="flex flex-col items-center justify-center py-12">
@@ -626,14 +626,17 @@ const state = {
   sliderMinutes: 0,
   use12Hour: true,
   live: true, // follows the real clock until the user picks a time
+  dateStr: null, // YYYY-MM-DD picked by the user (in the origin zone); null = today
+  expanded: new Set(), // destination cards showing their detail line
 };
 
 (() => {
   const detected = detectUserTimeZone();
   const detectedIsKnown = !!findZoneEntry(ZONE_DIRECTORY, detected);
   const seed = detectedIsKnown && detected !== "UTC" ? [detected] : [];
-  const rest = MAJOR_ZONES.filter((z) => z !== "UTC" && !seed.includes(z));
-  state.destinations = [...seed, ...rest];
+  // Keep the default list short so the "Add a place or time zone" card stays in view.
+  const rest = ["std:PT", "std:ET", "std:UK"].filter((z) => tzOf(z) !== detected);
+  state.destinations = [...seed, ...rest].slice(0, 3);
 
   // Generated landing pages (e.g. /cairo-to-dubai/) preset the source and
   // destination zones via window.OFFSET_PRESET.
@@ -690,7 +693,7 @@ function sliderMinutesToTimeStr(minutes) {
 }
 
 function computeUtcInstant() {
-  const dateStr = currentOriginDateStr();
+  const dateStr = state.dateStr || currentOriginDateStr();
   const timeStr = sliderMinutesToTimeStr(state.sliderMinutes);
   return zonedWallTimeToUtc(dateStr, timeStr, state.originZoneId);
 }
@@ -765,6 +768,20 @@ function standardHint(entry, utcInstant) {
   return `Heads-up: ${label} is fixed at ${utcLabel(utcInstant, entry.id)} all year, but ${r.name} is on ${nowAbbr} right now (${utcLabel(utcInstant, s.region)}). If the announcement just means "${r.name}", pick ${r.label} instead.`;
 }
 
+
+const DATE_FMT_OPTS = { weekday: "short", month: "short", day: "numeric", year: "numeric" };
+
+function cardDetailText(utcInstant, originEntry, entry, zoneId) {
+  const dateOf = (id) => new Intl.DateTimeFormat("en-US", { ...DATE_FMT_OPTS, timeZone: tzOf(id) }).format(utcInstant);
+  const from = originEntry ? originEntry.cityLabel : state.originZoneId;
+  const to = entry.cityLabel;
+  const diffMin = getTimeZoneOffsetMinutes(utcInstant, zoneId) - getTimeZoneOffsetMinutes(utcInstant, state.originZoneId);
+  const abs = Math.abs(diffMin), h = Math.floor(abs / 60), m = abs % 60;
+  const gap = diffMin === 0 ? `${to} is on the same time as ${from}.`
+    : `${to} is ${h ? h + (h === 1 ? " hour" : " hours") : ""}${h && m ? " " : ""}${m ? m + " minutes" : ""} ${diffMin > 0 ? "ahead of" : "behind"} ${from}.`;
+  return `${formatHM(utcInstant, state.originZoneId, state.use12Hour)} on ${dateOf(state.originZoneId)} in ${from} is ${formatHM(utcInstant, zoneId, state.use12Hour)} on ${dateOf(zoneId)} in ${to}. ${gap}`;
+}
+
 function destinationCardHTML(zoneId, utcInstant) {
   const entry = findZoneEntry(ZONE_DIRECTORY, zoneId);
   if (!entry) return "";
@@ -776,7 +793,7 @@ function destinationCardHTML(zoneId, utcInstant) {
   const zoneName = entry.isStandard ? standardNote(entry, utcInstant) : getZoneName(utcInstant, zoneId, "short");
 
   return `
-    <div class="bg-surface-container-high hover:bg-surface-container-highest transition-all duration-300 rounded-xl p-6 cursor-pointer group relative" data-zone-id="${zoneId}">
+    <div class="bg-surface-container-high hover:bg-surface-container-highest transition-all duration-300 rounded-xl p-6 cursor-pointer group relative" data-zone-id="${zoneId}" tabindex="0" role="button" aria-expanded="${state.expanded.has(zoneId)}" title="Click for details">
       <button class="js-remove-destination absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity text-outline hover:text-error material-symbols-outlined text-base" data-zone-id="${zoneId}" title="Remove">close</button>
       <div class="flex justify-between items-center mb-4">
         <div class="flex items-center gap-3">
@@ -792,8 +809,9 @@ function destinationCardHTML(zoneId, utcInstant) {
       </div>
       <div class="flex items-baseline justify-between">
         <span class="font-display text-4xl font-semibold">${timeStr}</span>
-        <span class="font-label text-xs text-on-surface-variant">${day}</span>
+        <span class="font-label text-xs text-on-surface-variant flex items-center gap-1">${day}<span class="material-symbols-outlined text-base transition-transform ${state.expanded.has(zoneId) ? "rotate-180" : ""}">expand_more</span></span>
       </div>
+      ${state.expanded.has(zoneId) ? `<p class="mt-4 pt-4 border-t border-outline-variant/30 font-body text-sm text-on-surface-variant leading-relaxed">${cardDetailText(utcInstant, findZoneEntry(ZONE_DIRECTORY, state.originZoneId), entry, zoneId)}</p>` : ""}
     </div>`;
 }
 
@@ -806,7 +824,19 @@ function renderDestinations(utcInstant) {
       e.stopPropagation();
       const zoneId = btn.dataset.zoneId;
       state.destinations = state.destinations.filter((z) => z !== zoneId);
+      state.expanded.delete(zoneId);
       render();
+    });
+  });
+  container.querySelectorAll(":scope > div[data-zone-id]").forEach((card) => {
+    const toggle = () => {
+      const id = card.dataset.zoneId;
+      if (state.expanded.has(id)) state.expanded.delete(id); else state.expanded.add(id);
+      render();
+    };
+    card.addEventListener("click", toggle);
+    card.addEventListener("keydown", (e) => {
+      if ((e.key === "Enter" || e.key === " ") && e.target === card) { e.preventDefault(); toggle(); }
     });
   });
 }
@@ -843,7 +873,7 @@ function updateFormatToggleUI() {
 }
 
 function render() {
-  if (state.live) state.sliderMinutes = nowMinutesInOrigin();
+  if (state.live) { state.sliderMinutes = nowMinutesInOrigin(); state.dateStr = null; }
   const utcInstant = computeUtcInstant();
   renderOrigin(utcInstant);
   renderDestinations(utcInstant);
@@ -875,6 +905,8 @@ function syncTimeInput() {
   const slider = document.getElementById("global-time-slider");
   if (slider) slider.value = String(state.sliderMinutes);
   if (input && document.activeElement !== input) input.value = sliderMinutesToTimeStr(state.sliderMinutes);
+  const dateInput = document.getElementById("date-input");
+  if (dateInput) dateInput.value = state.dateStr || currentOriginDateStr();
 }
 
 /* ---------------- Modal (search + select zone) ---------------- */
@@ -993,8 +1025,18 @@ function initChronos() {
     mainTimeEl.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); focusTime(); } });
   }
 
+  const dateInput = document.getElementById("date-input");
+  if (dateInput) {
+    dateInput.addEventListener("change", () => {
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(dateInput.value)) return;
+      state.dateStr = dateInput.value;
+      state.live = false;
+      render();
+    });
+  }
+
   const nowBtn = document.getElementById("now-button");
-  if (nowBtn) nowBtn.addEventListener("click", () => { state.live = true; render(); });
+  if (nowBtn) nowBtn.addEventListener("click", () => { state.live = true; state.dateStr = null; render(); });
 
   // Keep the clock moving while in live mode (checks once a second, re-renders on minute change).
   const liveTick = () => { if (state.live && nowMinutesInOrigin() !== state.sliderMinutes) render(); };
