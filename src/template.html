@@ -45,7 +45,7 @@
 <div class="relative z-10">
 <div class="flex justify-between items-start mb-8">
 <div id="origin-selector" class="cursor-pointer group/origin" role="button" tabindex="0" aria-label="Change source timezone">
-<span class="font-label text-tertiary text-xs tracking-[0.2em] uppercase mb-2 block">Primary Origin <span class="material-symbols-outlined text-[12px] align-middle opacity-0 group-hover/origin:opacity-100 transition-opacity">edit</span></span>
+<span class="font-label text-tertiary text-xs tracking-[0.2em] uppercase mb-2 block">Converting from <span class="material-symbols-outlined text-[12px] align-middle opacity-0 group-hover/origin:opacity-100 transition-opacity">edit</span></span>
 <h2 class="font-display text-4xl font-bold tracking-tight" id="origin-title">London, UK</h2>
 <p class="font-body text-on-surface-variant text-sm mt-1" id="origin-subtitle">British Summer Time (GMT+1)</p>
 </div>
@@ -62,6 +62,7 @@
 <span>Type an exact time</span>
 <input id="time-input" type="time" step="60" aria-label="Type an exact time" class="bg-surface-container-high text-on-surface font-body text-base rounded-full px-4 py-2 outline-none focus:ring-2 focus:ring-primary [color-scheme:dark]"/>
 </label>
+<button id="now-button" type="button" class="mt-3 inline-flex items-center gap-2 rounded-full px-4 py-1.5 font-label text-xs tracking-widest uppercase transition-colors"></button>
 </div>
 <!-- 24-Hour Slider -->
 <div class="mt-8">
@@ -79,7 +80,7 @@
 <div class="flex justify-center mt-10">
 <button class="js-add-destination editorial-gradient text-on-primary font-body font-bold px-8 py-3 rounded-full flex items-center gap-2 transition-transform active:scale-95 shadow-lg shadow-primary/20">
 <span class="material-symbols-outlined">add_location</span>
-                            Add Destination
+                            Add another place
                         </button>
 </div>
 </div>
@@ -100,23 +101,26 @@
 <!-- Sidebar / Grid: Destinations -->
 <aside class="lg:col-span-4 flex flex-col gap-4">
 <h3 class="font-display text-xl font-bold px-2 flex items-center justify-between">
-<span>Destinations</span>
+<span>Converting to</span>
 </h3>
 <div id="destinations-list" class="flex flex-col gap-4"></div>
 <!-- Add Location Placeholder Card -->
 <div class="js-add-destination border-2 border-dashed border-outline-variant rounded-xl p-6 flex flex-col items-center justify-center gap-2 text-outline hover:text-on-surface hover:border-primary transition-all cursor-pointer group">
 <span class="material-symbols-outlined text-3xl group-hover:scale-110 transition-transform">add_circle</span>
-<span class="font-label text-xs uppercase tracking-widest font-bold">New Connection</span>
+<span class="font-label text-xs uppercase tracking-widest font-bold">Add another place</span>
 </div>
 </aside>
 </main>
 {{CONTENT}}
+<button id="scroll-hint" type="button" aria-label="Scroll down for more information" title="More information below" class="fixed bottom-6 left-0 right-0 mx-auto z-40 w-12 h-12 rounded-full bg-primary text-on-primary shadow-lg shadow-primary/30 flex items-center justify-center transition-opacity duration-300 animate-bounce motion-reduce:animate-none">
+<span class="material-symbols-outlined">keyboard_arrow_down</span>
+</button>
 
 <!-- Search Modal (add destination / change origin) -->
 <div id="tzModal" class="hidden fixed inset-0 z-[60] flex items-start justify-center pt-24 bg-black/60 backdrop-blur-sm px-4">
 <div class="bg-surface-container-high rounded-xl w-full max-w-md p-4 max-h-[70vh] flex flex-col">
 <div class="flex items-center justify-between mb-3">
-<h3 id="tzModalTitle" class="font-display text-lg font-bold">Add destination</h3>
+<h3 id="tzModalTitle" class="font-display text-lg font-bold">Choose a place to add</h3>
 <button id="tzModalClose" class="material-symbols-outlined text-outline hover:text-on-surface">close</button>
 </div>
 <input id="tzSearchInput" type="text" placeholder="Search city or country…" aria-label="Search for a city or country" class="bg-surface-variant rounded-lg px-4 py-2 text-sm outline-none mb-3 focus:ring-2 focus:ring-primary text-on-surface"/>
@@ -542,6 +546,7 @@ const state = {
   destinations: [],
   sliderMinutes: 0,
   use12Hour: true,
+  live: true, // follows the real clock until the user picks a time
 };
 
 (() => {
@@ -572,6 +577,27 @@ const state = {
 let modalMode = "add"; // "add" | "origin"
 
 /* ---------------- Rendering ---------------- */
+
+function nowMinutesInOrigin() {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: state.originZoneId, hourCycle: "h23", hour: "2-digit", minute: "2-digit",
+  }).formatToParts(new Date()).reduce((acc, p) => { acc[p.type] = p.value; return acc; }, {});
+  return parseInt(parts.hour, 10) * 60 + parseInt(parts.minute, 10);
+}
+
+function updateNowButton() {
+  const el = document.getElementById("now-button");
+  if (!el) return;
+  if (state.live) {
+    el.disabled = true;
+    el.className = "mt-3 inline-flex items-center gap-2 rounded-full px-4 py-1.5 font-label text-xs tracking-widest uppercase bg-surface-container-high text-tertiary cursor-default";
+    el.innerHTML = '<span class="inline-block w-2 h-2 rounded-full bg-tertiary animate-pulse"></span> Live: showing the current time';
+  } else {
+    el.disabled = false;
+    el.className = "mt-3 inline-flex items-center gap-2 rounded-full px-4 py-1.5 font-label text-xs tracking-widest uppercase bg-primary text-on-primary hover:opacity-90 cursor-pointer";
+    el.innerHTML = '<span class="material-symbols-outlined text-[16px]">schedule</span> Back to current time';
+  }
+}
 
 function currentOriginDateStr() {
   // "Today" as a calendar date, expressed in the origin zone, right now (real date).
@@ -692,6 +718,7 @@ function updateFormatToggleUI() {
 }
 
 function render() {
+  if (state.live) state.sliderMinutes = nowMinutesInOrigin();
   const utcInstant = computeUtcInstant();
   renderOrigin(utcInstant);
   renderDestinations(utcInstant);
@@ -699,6 +726,7 @@ function render() {
   updateFormatToggleUI();
   renderTicks();
   syncTimeInput();
+  updateNowButton();
 }
 
 /* ---------------- Slider tick labels + typed time input ---------------- */
@@ -731,7 +759,7 @@ function openModal(mode) {
   const modal = document.getElementById("tzModal");
   const title = document.getElementById("tzModalTitle");
   const input = document.getElementById("tzSearchInput");
-  if (title) title.textContent = mode === "origin" ? "Change origin" : "Add destination";
+  if (title) title.textContent = mode === "origin" ? "Choose where you're converting from" : "Choose a place to add";
   if (modal) modal.classList.remove("hidden");
   if (input) { input.value = ""; input.focus(); }
   renderSearchResults("");
@@ -791,6 +819,7 @@ function initChronos() {
   if (slider) {
     slider.value = String(state.sliderMinutes);
     slider.addEventListener("input", () => {
+      state.live = false;
       state.sliderMinutes = parseInt(slider.value, 10);
       render();
     });
@@ -825,6 +854,7 @@ function initChronos() {
     timeInput.addEventListener("input", () => {
       const m = /^(\d{2}):(\d{2})$/.exec(timeInput.value);
       if (!m) return;
+      state.live = false;
       state.sliderMinutes = parseInt(m[1], 10) * 60 + parseInt(m[2], 10);
       render();
     });
@@ -834,6 +864,30 @@ function initChronos() {
     const focusTime = () => { timeInput.focus(); try { timeInput.showPicker && timeInput.showPicker(); } catch (e) {} };
     mainTimeEl.addEventListener("click", focusTime);
     mainTimeEl.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); focusTime(); } });
+  }
+
+  const nowBtn = document.getElementById("now-button");
+  if (nowBtn) nowBtn.addEventListener("click", () => { state.live = true; render(); });
+
+  // Keep the clock moving while in live mode (checks once a second, re-renders on minute change).
+  const liveTick = () => { if (state.live && nowMinutesInOrigin() !== state.sliderMinutes) render(); };
+  setInterval(liveTick, 1000);
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) liveTick(); });
+
+  const hint = document.getElementById("scroll-hint");
+  const more = document.getElementById("more-info");
+  if (hint && more) {
+    const update = () => {
+      const hide = more.getBoundingClientRect().top < window.innerHeight * 0.7;
+      hint.classList.toggle("opacity-0", hide);
+      hint.classList.toggle("pointer-events-none", hide);
+    };
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    hint.addEventListener("click", () => more.scrollIntoView({ behavior: "smooth", block: "start" }));
+    update();
+  } else if (hint) {
+    hint.remove();
   }
 
   const formatToggle = document.getElementById("formatToggle");
