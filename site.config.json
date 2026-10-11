@@ -2,5 +2,5 @@
   "name": "Offset Clock",
   "siteUrl": "https://offsetclock.com",
   "title": "Time Zone Converter – {{SITE_NAME}}",
-  "description": "Free time zone converter: pick a source time, see it instantly in any city or country. Slider-based, handles daylight saving, no sign-up."
+  "description": "Free time zone converter: pick a time and see it instantly in any city or country. Type an exact time or use the slider. Handles daylight saving, no sign-up."
 }

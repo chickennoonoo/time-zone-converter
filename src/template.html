@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="/style.css"/>
 </head>
 <body class="bg-background text-on-background min-h-screen">
-<h1 class="sr-only">Time zone converter: convert any time between world time zones</h1>
+{{SR_H1}}
 <noscript>
 <div style="padding:24px;text-align:center;font-family:sans-serif;">{{SITE_NAME}} needs JavaScript enabled to convert timezones. Please enable it and reload the page.</div>
 </noscript>
@@ -55,13 +55,17 @@
 </div>
 </div>
 <div class="flex flex-col items-center justify-center py-12">
-<div class="font-display text-[8rem] md:text-[10rem] font-bold leading-none tracking-tighter text-primary" id="main-time-display">
+<div class="font-display text-[8rem] md:text-[10rem] font-bold leading-none tracking-tighter text-primary cursor-pointer" id="main-time-display" role="button" tabindex="0" title="Click to type an exact time" aria-label="Click to type an exact time">
                             14:00
                         </div>
+<label class="mt-4 flex items-center gap-3 font-label text-xs tracking-widest uppercase text-on-surface-variant">
+<span>Type an exact time</span>
+<input id="time-input" type="time" step="60" aria-label="Type an exact time" class="bg-surface-container-high text-on-surface font-body text-base rounded-full px-4 py-2 outline-none focus:ring-2 focus:ring-primary [color-scheme:dark]"/>
+</label>
 </div>
 <!-- 24-Hour Slider -->
 <div class="mt-8">
-<div class="flex justify-between font-label text-[10px] text-outline mb-4 px-1">
+<div id="slider-ticks" class="flex justify-between font-label text-[10px] text-outline mb-4 px-1">
 <span>00:00</span>
 <span>04:00</span>
 <span>08:00</span>
@@ -106,6 +110,7 @@
 </div>
 </aside>
 </main>
+{{CONTENT}}
 
 <!-- Search Modal (add destination / change origin) -->
 <div id="tzModal" class="hidden fixed inset-0 z-[60] flex items-start justify-center pt-24 bg-black/60 backdrop-blur-sm px-4">
@@ -120,6 +125,7 @@
 </div>
 
 
+{{PRESET}}
 <script>
 /* Chronos — Timezone Dataset
  * Each country maps to one or more IANA zones. Multi-zone countries list
@@ -535,7 +541,7 @@ const state = {
   originZoneId: "UTC",
   destinations: [],
   sliderMinutes: 0,
-  use12Hour: false,
+  use12Hour: true,
 };
 
 (() => {
@@ -544,6 +550,15 @@ const state = {
   const seed = detectedIsKnown && detected !== "UTC" ? [detected] : [];
   const rest = MAJOR_ZONES.filter((z) => z !== "UTC" && !seed.includes(z));
   state.destinations = [...seed, ...rest];
+
+  // Generated landing pages (e.g. /cairo-to-dubai/) preset the source and
+  // destination zones via window.OFFSET_PRESET.
+  const preset = typeof window !== "undefined" ? window.OFFSET_PRESET : null;
+  if (preset && findZoneEntry(ZONE_DIRECTORY, preset.origin)) {
+    state.originZoneId = preset.origin;
+    const dests = (preset.destinations || []).filter((z) => z !== preset.origin && findZoneEntry(ZONE_DIRECTORY, z));
+    if (dests.length) state.destinations = dests;
+  }
 
   // Initialize the slider to "now", expressed as wall-clock time in whatever
   // the origin zone actually is (works correctly regardless of which zone
@@ -682,6 +697,31 @@ function render() {
   renderDestinations(utcInstant);
   renderInsight(utcInstant);
   updateFormatToggleUI();
+  renderTicks();
+  syncTimeInput();
+}
+
+/* ---------------- Slider tick labels + typed time input ---------------- */
+
+function tickLabel(minutes) {
+  const h = Math.floor(minutes / 60), m = minutes % 60;
+  if (!state.use12Hour) return String(h).padStart(2, "0") + ":" + String(m).padStart(2, "0");
+  const suffix = h >= 12 ? "PM" : "AM";
+  const h12 = h % 12 === 0 ? 12 : h % 12;
+  return m ? `${h12}:${String(m).padStart(2, "0")} ${suffix}` : `${h12} ${suffix}`;
+}
+
+function renderTicks() {
+  const el = document.getElementById("slider-ticks");
+  if (!el) return;
+  el.innerHTML = [0, 240, 480, 720, 960, 1200, 1439].map((m) => `<span>${tickLabel(m)}</span>`).join("");
+}
+
+function syncTimeInput() {
+  const input = document.getElementById("time-input");
+  const slider = document.getElementById("global-time-slider");
+  if (slider) slider.value = String(state.sliderMinutes);
+  if (input && document.activeElement !== input) input.value = sliderMinutesToTimeStr(state.sliderMinutes);
 }
 
 /* ---------------- Modal (search + select zone) ---------------- */
@@ -779,6 +819,22 @@ function initChronos() {
 
   const searchInput = document.getElementById("tzSearchInput");
   if (searchInput) searchInput.addEventListener("input", () => renderSearchResults(searchInput.value));
+
+  const timeInput = document.getElementById("time-input");
+  if (timeInput) {
+    timeInput.addEventListener("input", () => {
+      const m = /^(\d{2}):(\d{2})$/.exec(timeInput.value);
+      if (!m) return;
+      state.sliderMinutes = parseInt(m[1], 10) * 60 + parseInt(m[2], 10);
+      render();
+    });
+  }
+  const mainTimeEl = document.getElementById("main-time-display");
+  if (mainTimeEl && timeInput) {
+    const focusTime = () => { timeInput.focus(); try { timeInput.showPicker && timeInput.showPicker(); } catch (e) {} };
+    mainTimeEl.addEventListener("click", focusTime);
+    mainTimeEl.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); focusTime(); } });
+  }
 
   const formatToggle = document.getElementById("formatToggle");
   if (formatToggle) {

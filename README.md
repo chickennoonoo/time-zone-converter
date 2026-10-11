@@ -16,3 +16,10 @@ Edit `site.config.json`:
 ## Deploy
 
 Cloudflare Workers static assets serves the `public/` folder (see `wrangler.jsonc`). Commit `public/` after each build.
+
+## City-pair pages
+
+- `data/places.json`: the places (slug, label, country, IANA zone).
+- `data/pairs.json`: which pairs get a landing page, e.g. `["cairo","dubai"]` builds `/cairo-to-dubai/`.
+- `lib/pages.js`: generates each page's text (offsets, daylight-saving dates, conversion table, call overlap) from real time zone data at build time.
+Add a place and a pair, run `npm run build`, commit. The sitemap updates automatically.

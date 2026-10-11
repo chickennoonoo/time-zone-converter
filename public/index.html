@@ -2,14 +2,14 @@
 <html class="dark" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Time Zone Converter – Chronos</title>
-<meta name="description" content="Free time zone converter: pick a source time, see it instantly in any city or country. Slider-based, handles daylight saving, no sign-up."/>
+<title>Time Zone Converter – Offset Clock</title>
+<meta name="description" content="Free time zone converter: pick a time and see it instantly in any city or country. Type an exact time or use the slider. Handles daylight saving, no sign-up."/>
 <meta name="theme-color" content="#0d0e15"/>
-
-<meta property="og:title" content="Time Zone Converter – Chronos"/>
-<meta property="og:description" content="Free time zone converter: pick a source time, see it instantly in any city or country. Slider-based, handles daylight saving, no sign-up."/>
+<link rel="canonical" href="https://offsetclock.com/"/>
+<meta property="og:title" content="Time Zone Converter – Offset Clock"/>
+<meta property="og:description" content="Free time zone converter: pick a time and see it instantly in any city or country. Type an exact time or use the slider. Handles daylight saving, no sign-up."/>
 <meta property="og:type" content="website"/>
-
+<meta property="og:url" content="https://offsetclock.com/"/>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%230d0e15' stroke='%239aa8ff' stroke-width='6'/%3E%3Cline x1='50' y1='50' x2='50' y2='25' stroke='%239aa8ff' stroke-width='6' stroke-linecap='round'/%3E%3Cline x1='50' y1='50' x2='68' y2='60' stroke='%239aa8ff' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -20,14 +20,14 @@
 <body class="bg-background text-on-background min-h-screen">
 <h1 class="sr-only">Time zone converter: convert any time between world time zones</h1>
 <noscript>
-<div style="padding:24px;text-align:center;font-family:sans-serif;">Chronos needs JavaScript enabled to convert timezones. Please enable it and reload the page.</div>
+<div style="padding:24px;text-align:center;font-family:sans-serif;">Offset Clock needs JavaScript enabled to convert timezones. Please enable it and reload the page.</div>
 </noscript>
 <!-- TopAppBar -->
 <header class="bg-[#12131b] docked full-width top-0 z-50 fixed w-full">
 <div class="flex items-center justify-between px-6 py-4 w-full">
 <div class="flex items-center gap-3">
 <span class="material-symbols-outlined text-[#9aa8ff] text-2xl">public</span>
-<p class="font-['Space_Grotesk'] font-bold text-2xl tracking-tight text-[#9aa8ff]">Chronos</p>
+<p class="font-['Space_Grotesk'] font-bold text-2xl tracking-tight text-[#9aa8ff]">Offset Clock</p>
 </div>
 <div class="flex items-center gap-4">
 <div id="formatToggle" class="flex items-center gap-1 bg-surface-container-high rounded-full p-1 cursor-pointer select-none" role="button" tabindex="0" title="Toggle 12h / 24h time format" aria-label="Toggle 12 hour or 24 hour time format">
@@ -55,13 +55,17 @@
 </div>
 </div>
 <div class="flex flex-col items-center justify-center py-12">
-<div class="font-display text-[8rem] md:text-[10rem] font-bold leading-none tracking-tighter text-primary" id="main-time-display">
+<div class="font-display text-[8rem] md:text-[10rem] font-bold leading-none tracking-tighter text-primary cursor-pointer" id="main-time-display" role="button" tabindex="0" title="Click to type an exact time" aria-label="Click to type an exact time">
                             14:00
                         </div>
+<label class="mt-4 flex items-center gap-3 font-label text-xs tracking-widest uppercase text-on-surface-variant">
+<span>Type an exact time</span>
+<input id="time-input" type="time" step="60" aria-label="Type an exact time" class="bg-surface-container-high text-on-surface font-body text-base rounded-full px-4 py-2 outline-none focus:ring-2 focus:ring-primary [color-scheme:dark]"/>
+</label>
 </div>
 <!-- 24-Hour Slider -->
 <div class="mt-8">
-<div class="flex justify-between font-label text-[10px] text-outline mb-4 px-1">
+<div id="slider-ticks" class="flex justify-between font-label text-[10px] text-outline mb-4 px-1">
 <span>00:00</span>
 <span>04:00</span>
 <span>08:00</span>
@@ -106,6 +110,17 @@
 </div>
 </aside>
 </main>
+<section class="px-6 max-w-3xl mx-auto pb-24 font-body text-on-surface-variant leading-relaxed space-y-4">
+  <h2 class="font-display text-2xl font-bold text-on-surface">How Offset Clock works</h2>
+  <p>Offset Clock is a free time zone converter. Pick the place and time you are starting from, and every destination below it shows the matching local time, including the day difference and daylight saving changes.</p>
+  <ul class="list-disc pl-6 space-y-2">
+    <li><strong class="text-on-surface">Set the time:</strong> drag the slider, or click the big time (or the box under it) to type an exact time.</li>
+    <li><strong class="text-on-surface">Change the starting place:</strong> click the city name at the top to choose any country or city.</li>
+    <li><strong class="text-on-surface">Add destinations:</strong> use the Add Destination button to compare as many places as you need, and remove the ones you don't.</li>
+    <li><strong class="text-on-surface">12-hour or 24-hour:</strong> switch the format with the 12H / 24H toggle at the top.</li>
+  </ul>
+</section>
+
 
 <!-- Search Modal (add destination / change origin) -->
 <div id="tzModal" class="hidden fixed inset-0 z-[60] flex items-start justify-center pt-24 bg-black/60 backdrop-blur-sm px-4">
@@ -118,6 +133,7 @@
 <div id="tzSearchResults" class="overflow-y-auto flex-1 flex flex-col gap-1 hide-scrollbar"></div>
 </div>
 </div>
+
 
 
 <script>
@@ -535,7 +551,7 @@ const state = {
   originZoneId: "UTC",
   destinations: [],
   sliderMinutes: 0,
-  use12Hour: false,
+  use12Hour: true,
 };
 
 (() => {
@@ -544,6 +560,15 @@ const state = {
   const seed = detectedIsKnown && detected !== "UTC" ? [detected] : [];
   const rest = MAJOR_ZONES.filter((z) => z !== "UTC" && !seed.includes(z));
   state.destinations = [...seed, ...rest];
+
+  // Generated landing pages (e.g. /cairo-to-dubai/) preset the source and
+  // destination zones via window.OFFSET_PRESET.
+  const preset = typeof window !== "undefined" ? window.OFFSET_PRESET : null;
+  if (preset && findZoneEntry(ZONE_DIRECTORY, preset.origin)) {
+    state.originZoneId = preset.origin;
+    const dests = (preset.destinations || []).filter((z) => z !== preset.origin && findZoneEntry(ZONE_DIRECTORY, z));
+    if (dests.length) state.destinations = dests;
+  }
 
   // Initialize the slider to "now", expressed as wall-clock time in whatever
   // the origin zone actually is (works correctly regardless of which zone
@@ -682,6 +707,31 @@ function render() {
   renderDestinations(utcInstant);
   renderInsight(utcInstant);
   updateFormatToggleUI();
+  renderTicks();
+  syncTimeInput();
+}
+
+/* ---------------- Slider tick labels + typed time input ---------------- */
+
+function tickLabel(minutes) {
+  const h = Math.floor(minutes / 60), m = minutes % 60;
+  if (!state.use12Hour) return String(h).padStart(2, "0") + ":" + String(m).padStart(2, "0");
+  const suffix = h >= 12 ? "PM" : "AM";
+  const h12 = h % 12 === 0 ? 12 : h % 12;
+  return m ? `${h12}:${String(m).padStart(2, "0")} ${suffix}` : `${h12} ${suffix}`;
+}
+
+function renderTicks() {
+  const el = document.getElementById("slider-ticks");
+  if (!el) return;
+  el.innerHTML = [0, 240, 480, 720, 960, 1200, 1439].map((m) => `<span>${tickLabel(m)}</span>`).join("");
+}
+
+function syncTimeInput() {
+  const input = document.getElementById("time-input");
+  const slider = document.getElementById("global-time-slider");
+  if (slider) slider.value = String(state.sliderMinutes);
+  if (input && document.activeElement !== input) input.value = sliderMinutesToTimeStr(state.sliderMinutes);
 }
 
 /* ---------------- Modal (search + select zone) ---------------- */
@@ -743,7 +793,7 @@ function supportsRequiredIntl() {
 
 function initChronos() {
   if (!supportsRequiredIntl()) {
-    document.body.innerHTML = '<div style="padding:40px;text-align:center;font-family:sans-serif;color:#f5f2fd;background:#0d0e15;min-height:100vh;">This browser does not support the timezone features Chronos needs. Please update your browser or try Chrome, Firefox, Safari, or Edge.</div>';
+    document.body.innerHTML = '<div style="padding:40px;text-align:center;font-family:sans-serif;color:#f5f2fd;background:#0d0e15;min-height:100vh;">This browser does not support the timezone features Offset Clock needs. Please update your browser or try Chrome, Firefox, Safari, or Edge.</div>';
     return;
   }
 
@@ -779,6 +829,22 @@ function initChronos() {
 
   const searchInput = document.getElementById("tzSearchInput");
   if (searchInput) searchInput.addEventListener("input", () => renderSearchResults(searchInput.value));
+
+  const timeInput = document.getElementById("time-input");
+  if (timeInput) {
+    timeInput.addEventListener("input", () => {
+      const m = /^(\d{2}):(\d{2})$/.exec(timeInput.value);
+      if (!m) return;
+      state.sliderMinutes = parseInt(m[1], 10) * 60 + parseInt(m[2], 10);
+      render();
+    });
+  }
+  const mainTimeEl = document.getElementById("main-time-display");
+  if (mainTimeEl && timeInput) {
+    const focusTime = () => { timeInput.focus(); try { timeInput.showPicker && timeInput.showPicker(); } catch (e) {} };
+    mainTimeEl.addEventListener("click", focusTime);
+    mainTimeEl.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); focusTime(); } });
+  }
 
   const formatToggle = document.getElementById("formatToggle");
   if (formatToggle) {
