@@ -27,3 +27,9 @@ Add a place and a pair, run `npm run build`, commit. The sitemap updates automat
 ## Country pages
 
 `data/countries.json` lists every country with its zones and a `main` zone (the one the page starts from). `lib/countries.js` builds `/time-in-<country>/` and the `/time-zones/` index. Cards in the app link to these pages.
+
+## Static pages and site settings
+
+- `src/pages/about.html`, `privacy.html`, `contact.html` become `/about/`, `/privacy/`, `/contact/`.
+- `site.config.json` also holds `contactEmail`, `githubUrl`, `authorName` and `analyticsToken`. Paste the Cloudflare Web Analytics token into `analyticsToken` to switch the analytics snippet on; the Privacy page then describes it automatically.
+- Update the "Last updated" date in `src/pages/privacy.html` whenever the policy changes.

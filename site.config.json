@@ -1,6 +1,10 @@
 {
   "name": "Offset Clock",
   "siteUrl": "https://offsetclock.com",
-  "title": "Time Zone Converter – {{SITE_NAME}}",
-  "description": "Free time zone converter for cities, countries and time zones like PST, EST and GMT. Type an exact time or use the slider. Handles daylight saving, no sign-up."
+  "title": "Time Zone Converter \u2013 {{SITE_NAME}}",
+  "description": "Free time zone converter for cities, countries and time zones like PST, EST and GMT. Type an exact time or use the slider. Handles daylight saving, no sign-up.",
+  "contactEmail": "contact@offsetclock.com",
+  "githubUrl": "https://github.com/chickennoonoo/time-zone-converter",
+  "authorName": "Tariq",
+  "analyticsToken": ""
 }

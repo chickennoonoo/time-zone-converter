@@ -25,10 +25,10 @@
 <!-- TopAppBar -->
 <header class="bg-[#12131b] docked full-width top-0 z-50 fixed w-full">
 <div class="flex items-center justify-between px-6 py-4 w-full">
-<div class="flex items-center gap-3">
+<a href="/" class="flex items-center gap-3" aria-label="{{SITE_NAME}} home" title="Go to the {{SITE_NAME}} home page">
 <span class="material-symbols-outlined text-[#9aa8ff] text-2xl">public</span>
 <p class="font-['Space_Grotesk'] font-bold text-2xl tracking-tight text-[#9aa8ff]">{{SITE_NAME}}</p>
-</div>
+</a>
 <div class="flex items-center gap-4">
 <div id="formatToggle" class="flex items-center gap-1 bg-surface-container-high rounded-full p-1 cursor-pointer select-none" role="button" tabindex="0" title="Toggle 12h / 24h time format" aria-label="Toggle 12 hour or 24 hour time format">
 <span id="formatToggle12" class="text-[10px] font-label font-bold px-2 py-1 rounded-full bg-primary text-on-primary transition-colors">12H</span>
@@ -113,6 +113,7 @@
 </aside>
 </main>
 {{CONTENT}}
+{{FOOTER}}
 <button id="scroll-hint" type="button" aria-label="Scroll down for more information" title="More information below" class="fixed bottom-6 left-0 right-0 mx-auto z-40 w-12 h-12 rounded-full bg-primary text-on-primary shadow-lg shadow-primary/30 flex items-center justify-center transition-opacity duration-300 animate-bounce motion-reduce:animate-none">
 <span class="material-symbols-outlined">keyboard_arrow_down</span>
 </button>
@@ -811,4 +812,5 @@ function initChronos() {
 document.addEventListener("DOMContentLoaded", initChronos);
 
 </script>
+{{ANALYTICS}}
 </body></html>
