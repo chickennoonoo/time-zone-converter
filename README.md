@@ -5,7 +5,7 @@ Single-page time zone converter. Vanilla JS + the browser's `Intl` API (IANA tim
 ## Build
 
     npm install
-    npm run build      # writes public/ (index.html, style.css, robots.txt, sitemap.xml if siteUrl is set)
+    npm run build      # generates the whole site into public/ (homepage, city pages, country pages, sitemap)
 
 ## Configure
 
@@ -15,7 +15,7 @@ Edit `site.config.json`:
 
 ## Deploy
 
-Cloudflare Workers static assets serves the `public/` folder (see `wrangler.jsonc`). Commit `public/` after each build.
+Cloudflare runs `npm run build` on every commit, then serves the generated `public/` folder (see `wrangler.jsonc`). `public/` is generated, so it is not committed.
 
 ## City-pair pages
 
@@ -23,3 +23,7 @@ Cloudflare Workers static assets serves the `public/` folder (see `wrangler.json
 - `data/pairs.json`: which pairs get a landing page, e.g. `["cairo","dubai"]` builds `/cairo-to-dubai/`.
 - `lib/pages.js`: generates each page's text (offsets, daylight-saving dates, conversion table, call overlap) from real time zone data at build time.
 Add a place and a pair, run `npm run build`, commit. The sitemap updates automatically.
+
+## Country pages
+
+`data/countries.json` lists every country with its zones and a `main` zone (the one the page starts from). `lib/countries.js` builds `/time-in-<country>/` and the `/time-zones/` index. Cards in the app link to these pages.

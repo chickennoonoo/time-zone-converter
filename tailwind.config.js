@@ -1,6 +1,6 @@
         module.exports = {
             darkMode: "class",
-  content: ["./src/template.html", "./src/home-content.html", "./lib/pages.js"],
+  content: ["./src/template.html", "./src/home-content.html", "./lib/pages.js", "./lib/countries.js"],
   plugins: [require("@tailwindcss/forms"), require("@tailwindcss/container-queries")],
             theme: {
                 extend: {

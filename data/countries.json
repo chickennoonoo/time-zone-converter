@@ -1,0 +1,2534 @@
+[
+ {
+  "code": "AD",
+  "name": "Andorra",
+  "slug": "andorra",
+  "main": "Europe/Andorra",
+  "zones": [
+   {
+    "id": "Europe/Andorra",
+    "label": "Andorra la Vella"
+   }
+  ]
+ },
+ {
+  "code": "AE",
+  "name": "United Arab Emirates",
+  "slug": "united-arab-emirates",
+  "main": "Asia/Dubai",
+  "zones": [
+   {
+    "id": "Asia/Dubai",
+    "label": "Dubai / Abu Dhabi"
+   }
+  ]
+ },
+ {
+  "code": "AF",
+  "name": "Afghanistan",
+  "slug": "afghanistan",
+  "main": "Asia/Kabul",
+  "zones": [
+   {
+    "id": "Asia/Kabul",
+    "label": "Kabul"
+   }
+  ]
+ },
+ {
+  "code": "AG",
+  "name": "Antigua and Barbuda",
+  "slug": "antigua-and-barbuda",
+  "main": "America/Antigua",
+  "zones": [
+   {
+    "id": "America/Antigua",
+    "label": "St. John's"
+   }
+  ]
+ },
+ {
+  "code": "AL",
+  "name": "Albania",
+  "slug": "albania",
+  "main": "Europe/Tirane",
+  "zones": [
+   {
+    "id": "Europe/Tirane",
+    "label": "Tirana"
+   }
+  ]
+ },
+ {
+  "code": "AM",
+  "name": "Armenia",
+  "slug": "armenia",
+  "main": "Asia/Yerevan",
+  "zones": [
+   {
+    "id": "Asia/Yerevan",
+    "label": "Yerevan"
+   }
+  ]
+ },
+ {
+  "code": "AO",
+  "name": "Angola",
+  "slug": "angola",
+  "main": "Africa/Luanda",
+  "zones": [
+   {
+    "id": "Africa/Luanda",
+    "label": "Luanda"
+   }
+  ]
+ },
+ {
+  "code": "AR",
+  "name": "Argentina",
+  "slug": "argentina",
+  "main": "America/Argentina/Buenos_Aires",
+  "zones": [
+   {
+    "id": "America/Argentina/Buenos_Aires",
+    "label": "Buenos Aires"
+   }
+  ]
+ },
+ {
+  "code": "AT",
+  "name": "Austria",
+  "slug": "austria",
+  "main": "Europe/Vienna",
+  "zones": [
+   {
+    "id": "Europe/Vienna",
+    "label": "Vienna"
+   }
+  ]
+ },
+ {
+  "code": "AU",
+  "name": "Australia",
+  "slug": "australia",
+  "main": "Australia/Sydney",
+  "zones": [
+   {
+    "id": "Australia/Sydney",
+    "label": "Sydney / Melbourne / Canberra"
+   },
+   {
+    "id": "Australia/Brisbane",
+    "label": "Brisbane"
+   },
+   {
+    "id": "Australia/Adelaide",
+    "label": "Adelaide"
+   },
+   {
+    "id": "Australia/Darwin",
+    "label": "Darwin"
+   },
+   {
+    "id": "Australia/Perth",
+    "label": "Perth"
+   }
+  ]
+ },
+ {
+  "code": "AZ",
+  "name": "Azerbaijan",
+  "slug": "azerbaijan",
+  "main": "Asia/Baku",
+  "zones": [
+   {
+    "id": "Asia/Baku",
+    "label": "Baku"
+   }
+  ]
+ },
+ {
+  "code": "BA",
+  "name": "Bosnia and Herzegovina",
+  "slug": "bosnia-and-herzegovina",
+  "main": "Europe/Sarajevo",
+  "zones": [
+   {
+    "id": "Europe/Sarajevo",
+    "label": "Sarajevo"
+   }
+  ]
+ },
+ {
+  "code": "BB",
+  "name": "Barbados",
+  "slug": "barbados",
+  "main": "America/Barbados",
+  "zones": [
+   {
+    "id": "America/Barbados",
+    "label": "Bridgetown"
+   }
+  ]
+ },
+ {
+  "code": "BD",
+  "name": "Bangladesh",
+  "slug": "bangladesh",
+  "main": "Asia/Dhaka",
+  "zones": [
+   {
+    "id": "Asia/Dhaka",
+    "label": "Dhaka"
+   }
+  ]
+ },
+ {
+  "code": "BE",
+  "name": "Belgium",
+  "slug": "belgium",
+  "main": "Europe/Brussels",
+  "zones": [
+   {
+    "id": "Europe/Brussels",
+    "label": "Brussels"
+   }
+  ]
+ },
+ {
+  "code": "BF",
+  "name": "Burkina Faso",
+  "slug": "burkina-faso",
+  "main": "Africa/Ouagadougou",
+  "zones": [
+   {
+    "id": "Africa/Ouagadougou",
+    "label": "Ouagadougou"
+   }
+  ]
+ },
+ {
+  "code": "BG",
+  "name": "Bulgaria",
+  "slug": "bulgaria",
+  "main": "Europe/Sofia",
+  "zones": [
+   {
+    "id": "Europe/Sofia",
+    "label": "Sofia"
+   }
+  ]
+ },
+ {
+  "code": "BH",
+  "name": "Bahrain",
+  "slug": "bahrain",
+  "main": "Asia/Bahrain",
+  "zones": [
+   {
+    "id": "Asia/Bahrain",
+    "label": "Manama"
+   }
+  ]
+ },
+ {
+  "code": "BI",
+  "name": "Burundi",
+  "slug": "burundi",
+  "main": "Africa/Bujumbura",
+  "zones": [
+   {
+    "id": "Africa/Bujumbura",
+    "label": "Bujumbura"
+   }
+  ]
+ },
+ {
+  "code": "BJ",
+  "name": "Benin",
+  "slug": "benin",
+  "main": "Africa/Porto-Novo",
+  "zones": [
+   {
+    "id": "Africa/Porto-Novo",
+    "label": "Porto-Novo"
+   }
+  ]
+ },
+ {
+  "code": "BN",
+  "name": "Brunei",
+  "slug": "brunei",
+  "main": "Asia/Brunei",
+  "zones": [
+   {
+    "id": "Asia/Brunei",
+    "label": "Bandar Seri Begawan"
+   }
+  ]
+ },
+ {
+  "code": "BO",
+  "name": "Bolivia",
+  "slug": "bolivia",
+  "main": "America/La_Paz",
+  "zones": [
+   {
+    "id": "America/La_Paz",
+    "label": "La Paz"
+   }
+  ]
+ },
+ {
+  "code": "BR",
+  "name": "Brazil",
+  "slug": "brazil",
+  "main": "America/Sao_Paulo",
+  "zones": [
+   {
+    "id": "America/Sao_Paulo",
+    "label": "São Paulo / Rio de Janeiro / Brasília"
+   },
+   {
+    "id": "America/Manaus",
+    "label": "Manaus"
+   },
+   {
+    "id": "America/Rio_Branco",
+    "label": "Rio Branco"
+   }
+  ]
+ },
+ {
+  "code": "BS",
+  "name": "Bahamas",
+  "slug": "bahamas",
+  "main": "America/Nassau",
+  "zones": [
+   {
+    "id": "America/Nassau",
+    "label": "Nassau"
+   }
+  ]
+ },
+ {
+  "code": "BT",
+  "name": "Bhutan",
+  "slug": "bhutan",
+  "main": "Asia/Thimphu",
+  "zones": [
+   {
+    "id": "Asia/Thimphu",
+    "label": "Thimphu"
+   }
+  ]
+ },
+ {
+  "code": "BW",
+  "name": "Botswana",
+  "slug": "botswana",
+  "main": "Africa/Gaborone",
+  "zones": [
+   {
+    "id": "Africa/Gaborone",
+    "label": "Gaborone"
+   }
+  ]
+ },
+ {
+  "code": "BY",
+  "name": "Belarus",
+  "slug": "belarus",
+  "main": "Europe/Minsk",
+  "zones": [
+   {
+    "id": "Europe/Minsk",
+    "label": "Minsk"
+   }
+  ]
+ },
+ {
+  "code": "BZ",
+  "name": "Belize",
+  "slug": "belize",
+  "main": "America/Belize",
+  "zones": [
+   {
+    "id": "America/Belize",
+    "label": "Belize City"
+   }
+  ]
+ },
+ {
+  "code": "CA",
+  "name": "Canada",
+  "slug": "canada",
+  "main": "America/Toronto",
+  "zones": [
+   {
+    "id": "America/St_Johns",
+    "label": "Newfoundland"
+   },
+   {
+    "id": "America/Halifax",
+    "label": "Atlantic (Halifax)"
+   },
+   {
+    "id": "America/Toronto",
+    "label": "Eastern (Toronto / Ottawa)"
+   },
+   {
+    "id": "America/Winnipeg",
+    "label": "Central (Winnipeg)"
+   },
+   {
+    "id": "America/Edmonton",
+    "label": "Mountain (Edmonton / Calgary)"
+   },
+   {
+    "id": "America/Vancouver",
+    "label": "Pacific (Vancouver)"
+   }
+  ]
+ },
+ {
+  "code": "CD",
+  "name": "DR Congo",
+  "slug": "dr-congo",
+  "main": "Africa/Kinshasa",
+  "zones": [
+   {
+    "id": "Africa/Kinshasa",
+    "label": "Kinshasa (West)"
+   },
+   {
+    "id": "Africa/Lubumbashi",
+    "label": "Lubumbashi (East)"
+   }
+  ]
+ },
+ {
+  "code": "CF",
+  "name": "Central African Republic",
+  "slug": "central-african-republic",
+  "main": "Africa/Bangui",
+  "zones": [
+   {
+    "id": "Africa/Bangui",
+    "label": "Bangui"
+   }
+  ]
+ },
+ {
+  "code": "CG",
+  "name": "Congo Republic",
+  "slug": "congo-republic",
+  "main": "Africa/Brazzaville",
+  "zones": [
+   {
+    "id": "Africa/Brazzaville",
+    "label": "Brazzaville"
+   }
+  ]
+ },
+ {
+  "code": "CH",
+  "name": "Switzerland",
+  "slug": "switzerland",
+  "main": "Europe/Zurich",
+  "zones": [
+   {
+    "id": "Europe/Zurich",
+    "label": "Zurich"
+   }
+  ]
+ },
+ {
+  "code": "CI",
+  "name": "Ivory Coast",
+  "slug": "ivory-coast",
+  "main": "Africa/Abidjan",
+  "zones": [
+   {
+    "id": "Africa/Abidjan",
+    "label": "Abidjan"
+   }
+  ]
+ },
+ {
+  "code": "CL",
+  "name": "Chile",
+  "slug": "chile",
+  "main": "America/Santiago",
+  "zones": [
+   {
+    "id": "America/Santiago",
+    "label": "Santiago"
+   },
+   {
+    "id": "Pacific/Easter",
+    "label": "Easter Island"
+   }
+  ]
+ },
+ {
+  "code": "CM",
+  "name": "Cameroon",
+  "slug": "cameroon",
+  "main": "Africa/Douala",
+  "zones": [
+   {
+    "id": "Africa/Douala",
+    "label": "Douala"
+   }
+  ]
+ },
+ {
+  "code": "CN",
+  "name": "China",
+  "slug": "china",
+  "main": "Asia/Shanghai",
+  "zones": [
+   {
+    "id": "Asia/Shanghai",
+    "label": "Beijing / Shanghai"
+   }
+  ]
+ },
+ {
+  "code": "CO",
+  "name": "Colombia",
+  "slug": "colombia",
+  "main": "America/Bogota",
+  "zones": [
+   {
+    "id": "America/Bogota",
+    "label": "Bogotá"
+   }
+  ]
+ },
+ {
+  "code": "CR",
+  "name": "Costa Rica",
+  "slug": "costa-rica",
+  "main": "America/Costa_Rica",
+  "zones": [
+   {
+    "id": "America/Costa_Rica",
+    "label": "San José"
+   }
+  ]
+ },
+ {
+  "code": "CU",
+  "name": "Cuba",
+  "slug": "cuba",
+  "main": "America/Havana",
+  "zones": [
+   {
+    "id": "America/Havana",
+    "label": "Havana"
+   }
+  ]
+ },
+ {
+  "code": "CV",
+  "name": "Cape Verde",
+  "slug": "cape-verde",
+  "main": "Atlantic/Cape_Verde",
+  "zones": [
+   {
+    "id": "Atlantic/Cape_Verde",
+    "label": "Praia"
+   }
+  ]
+ },
+ {
+  "code": "CY",
+  "name": "Cyprus",
+  "slug": "cyprus",
+  "main": "Asia/Nicosia",
+  "zones": [
+   {
+    "id": "Asia/Nicosia",
+    "label": "Nicosia"
+   }
+  ]
+ },
+ {
+  "code": "CZ",
+  "name": "Czechia",
+  "slug": "czechia",
+  "main": "Europe/Prague",
+  "zones": [
+   {
+    "id": "Europe/Prague",
+    "label": "Prague"
+   }
+  ]
+ },
+ {
+  "code": "DE",
+  "name": "Germany",
+  "slug": "germany",
+  "main": "Europe/Berlin",
+  "zones": [
+   {
+    "id": "Europe/Berlin",
+    "label": "Berlin"
+   }
+  ]
+ },
+ {
+  "code": "DJ",
+  "name": "Djibouti",
+  "slug": "djibouti",
+  "main": "Africa/Djibouti",
+  "zones": [
+   {
+    "id": "Africa/Djibouti",
+    "label": "Djibouti City"
+   }
+  ]
+ },
+ {
+  "code": "DK",
+  "name": "Denmark",
+  "slug": "denmark",
+  "main": "Europe/Copenhagen",
+  "zones": [
+   {
+    "id": "Europe/Copenhagen",
+    "label": "Copenhagen"
+   }
+  ]
+ },
+ {
+  "code": "DM",
+  "name": "Dominica",
+  "slug": "dominica",
+  "main": "America/Dominica",
+  "zones": [
+   {
+    "id": "America/Dominica",
+    "label": "Roseau"
+   }
+  ]
+ },
+ {
+  "code": "DO",
+  "name": "Dominican Republic",
+  "slug": "dominican-republic",
+  "main": "America/Santo_Domingo",
+  "zones": [
+   {
+    "id": "America/Santo_Domingo",
+    "label": "Santo Domingo"
+   }
+  ]
+ },
+ {
+  "code": "DZ",
+  "name": "Algeria",
+  "slug": "algeria",
+  "main": "Africa/Algiers",
+  "zones": [
+   {
+    "id": "Africa/Algiers",
+    "label": "Algiers"
+   }
+  ]
+ },
+ {
+  "code": "EC",
+  "name": "Ecuador",
+  "slug": "ecuador",
+  "main": "America/Guayaquil",
+  "zones": [
+   {
+    "id": "America/Guayaquil",
+    "label": "Guayaquil / Quito"
+   },
+   {
+    "id": "Pacific/Galapagos",
+    "label": "Galápagos"
+   }
+  ]
+ },
+ {
+  "code": "EE",
+  "name": "Estonia",
+  "slug": "estonia",
+  "main": "Europe/Tallinn",
+  "zones": [
+   {
+    "id": "Europe/Tallinn",
+    "label": "Tallinn"
+   }
+  ]
+ },
+ {
+  "code": "EG",
+  "name": "Egypt",
+  "slug": "egypt",
+  "main": "Africa/Cairo",
+  "zones": [
+   {
+    "id": "Africa/Cairo",
+    "label": "Cairo"
+   }
+  ]
+ },
+ {
+  "code": "ER",
+  "name": "Eritrea",
+  "slug": "eritrea",
+  "main": "Africa/Asmara",
+  "zones": [
+   {
+    "id": "Africa/Asmara",
+    "label": "Asmara"
+   }
+  ]
+ },
+ {
+  "code": "ES",
+  "name": "Spain",
+  "slug": "spain",
+  "main": "Europe/Madrid",
+  "zones": [
+   {
+    "id": "Europe/Madrid",
+    "label": "Madrid (mainland)"
+   },
+   {
+    "id": "Atlantic/Canary",
+    "label": "Canary Islands"
+   }
+  ]
+ },
+ {
+  "code": "ET",
+  "name": "Ethiopia",
+  "slug": "ethiopia",
+  "main": "Africa/Addis_Ababa",
+  "zones": [
+   {
+    "id": "Africa/Addis_Ababa",
+    "label": "Addis Ababa"
+   }
+  ]
+ },
+ {
+  "code": "FI",
+  "name": "Finland",
+  "slug": "finland",
+  "main": "Europe/Helsinki",
+  "zones": [
+   {
+    "id": "Europe/Helsinki",
+    "label": "Helsinki"
+   }
+  ]
+ },
+ {
+  "code": "FJ",
+  "name": "Fiji",
+  "slug": "fiji",
+  "main": "Pacific/Fiji",
+  "zones": [
+   {
+    "id": "Pacific/Fiji",
+    "label": "Suva"
+   }
+  ]
+ },
+ {
+  "code": "FM",
+  "name": "Micronesia",
+  "slug": "micronesia",
+  "main": "Pacific/Pohnpei",
+  "zones": [
+   {
+    "id": "Pacific/Chuuk",
+    "label": "Chuuk"
+   },
+   {
+    "id": "Pacific/Pohnpei",
+    "label": "Pohnpei"
+   }
+  ]
+ },
+ {
+  "code": "FR",
+  "name": "France",
+  "slug": "france",
+  "main": "Europe/Paris",
+  "zones": [
+   {
+    "id": "Europe/Paris",
+    "label": "Paris (mainland)"
+   },
+   {
+    "id": "Indian/Reunion",
+    "label": "Réunion"
+   },
+   {
+    "id": "America/Guadeloupe",
+    "label": "Guadeloupe"
+   }
+  ]
+ },
+ {
+  "code": "GA",
+  "name": "Gabon",
+  "slug": "gabon",
+  "main": "Africa/Libreville",
+  "zones": [
+   {
+    "id": "Africa/Libreville",
+    "label": "Libreville"
+   }
+  ]
+ },
+ {
+  "code": "GB",
+  "name": "United Kingdom",
+  "slug": "united-kingdom",
+  "main": "Europe/London",
+  "zones": [
+   {
+    "id": "Europe/London",
+    "label": "London"
+   }
+  ]
+ },
+ {
+  "code": "GD",
+  "name": "Grenada",
+  "slug": "grenada",
+  "main": "America/Grenada",
+  "zones": [
+   {
+    "id": "America/Grenada",
+    "label": "St. George's"
+   }
+  ]
+ },
+ {
+  "code": "GE",
+  "name": "Georgia",
+  "slug": "georgia",
+  "main": "Asia/Tbilisi",
+  "zones": [
+   {
+    "id": "Asia/Tbilisi",
+    "label": "Tbilisi"
+   }
+  ]
+ },
+ {
+  "code": "GH",
+  "name": "Ghana",
+  "slug": "ghana",
+  "main": "Africa/Accra",
+  "zones": [
+   {
+    "id": "Africa/Accra",
+    "label": "Accra"
+   }
+  ]
+ },
+ {
+  "code": "GM",
+  "name": "Gambia",
+  "slug": "gambia",
+  "main": "Africa/Banjul",
+  "zones": [
+   {
+    "id": "Africa/Banjul",
+    "label": "Banjul"
+   }
+  ]
+ },
+ {
+  "code": "GN",
+  "name": "Guinea",
+  "slug": "guinea",
+  "main": "Africa/Conakry",
+  "zones": [
+   {
+    "id": "Africa/Conakry",
+    "label": "Conakry"
+   }
+  ]
+ },
+ {
+  "code": "GQ",
+  "name": "Equatorial Guinea",
+  "slug": "equatorial-guinea",
+  "main": "Africa/Malabo",
+  "zones": [
+   {
+    "id": "Africa/Malabo",
+    "label": "Malabo"
+   }
+  ]
+ },
+ {
+  "code": "GR",
+  "name": "Greece",
+  "slug": "greece",
+  "main": "Europe/Athens",
+  "zones": [
+   {
+    "id": "Europe/Athens",
+    "label": "Athens"
+   }
+  ]
+ },
+ {
+  "code": "GT",
+  "name": "Guatemala",
+  "slug": "guatemala",
+  "main": "America/Guatemala",
+  "zones": [
+   {
+    "id": "America/Guatemala",
+    "label": "Guatemala City"
+   }
+  ]
+ },
+ {
+  "code": "GW",
+  "name": "Guinea-Bissau",
+  "slug": "guinea-bissau",
+  "main": "Africa/Bissau",
+  "zones": [
+   {
+    "id": "Africa/Bissau",
+    "label": "Bissau"
+   }
+  ]
+ },
+ {
+  "code": "GY",
+  "name": "Guyana",
+  "slug": "guyana",
+  "main": "America/Guyana",
+  "zones": [
+   {
+    "id": "America/Guyana",
+    "label": "Georgetown"
+   }
+  ]
+ },
+ {
+  "code": "HK",
+  "name": "Hong Kong",
+  "slug": "hong-kong",
+  "main": "Asia/Hong_Kong",
+  "zones": [
+   {
+    "id": "Asia/Hong_Kong",
+    "label": "Hong Kong"
+   }
+  ]
+ },
+ {
+  "code": "HN",
+  "name": "Honduras",
+  "slug": "honduras",
+  "main": "America/Tegucigalpa",
+  "zones": [
+   {
+    "id": "America/Tegucigalpa",
+    "label": "Tegucigalpa"
+   }
+  ]
+ },
+ {
+  "code": "HR",
+  "name": "Croatia",
+  "slug": "croatia",
+  "main": "Europe/Zagreb",
+  "zones": [
+   {
+    "id": "Europe/Zagreb",
+    "label": "Zagreb"
+   }
+  ]
+ },
+ {
+  "code": "HT",
+  "name": "Haiti",
+  "slug": "haiti",
+  "main": "America/Port-au-Prince",
+  "zones": [
+   {
+    "id": "America/Port-au-Prince",
+    "label": "Port-au-Prince"
+   }
+  ]
+ },
+ {
+  "code": "HU",
+  "name": "Hungary",
+  "slug": "hungary",
+  "main": "Europe/Budapest",
+  "zones": [
+   {
+    "id": "Europe/Budapest",
+    "label": "Budapest"
+   }
+  ]
+ },
+ {
+  "code": "ID",
+  "name": "Indonesia",
+  "slug": "indonesia",
+  "main": "Asia/Jakarta",
+  "zones": [
+   {
+    "id": "Asia/Jakarta",
+    "label": "Jakarta (Western)"
+   },
+   {
+    "id": "Asia/Makassar",
+    "label": "Makassar (Central)"
+   },
+   {
+    "id": "Asia/Jayapura",
+    "label": "Jayapura (Eastern)"
+   }
+  ]
+ },
+ {
+  "code": "IE",
+  "name": "Ireland",
+  "slug": "ireland",
+  "main": "Europe/Dublin",
+  "zones": [
+   {
+    "id": "Europe/Dublin",
+    "label": "Dublin"
+   }
+  ]
+ },
+ {
+  "code": "IL",
+  "name": "Israel",
+  "slug": "israel",
+  "main": "Asia/Jerusalem",
+  "zones": [
+   {
+    "id": "Asia/Jerusalem",
+    "label": "Jerusalem"
+   }
+  ]
+ },
+ {
+  "code": "IN",
+  "name": "India",
+  "slug": "india",
+  "main": "Asia/Kolkata",
+  "zones": [
+   {
+    "id": "Asia/Kolkata",
+    "label": "New Delhi / Mumbai / Kolkata"
+   }
+  ]
+ },
+ {
+  "code": "IQ",
+  "name": "Iraq",
+  "slug": "iraq",
+  "main": "Asia/Baghdad",
+  "zones": [
+   {
+    "id": "Asia/Baghdad",
+    "label": "Baghdad"
+   }
+  ]
+ },
+ {
+  "code": "IR",
+  "name": "Iran",
+  "slug": "iran",
+  "main": "Asia/Tehran",
+  "zones": [
+   {
+    "id": "Asia/Tehran",
+    "label": "Tehran"
+   }
+  ]
+ },
+ {
+  "code": "IS",
+  "name": "Iceland",
+  "slug": "iceland",
+  "main": "Atlantic/Reykjavik",
+  "zones": [
+   {
+    "id": "Atlantic/Reykjavik",
+    "label": "Reykjavik"
+   }
+  ]
+ },
+ {
+  "code": "IT",
+  "name": "Italy",
+  "slug": "italy",
+  "main": "Europe/Rome",
+  "zones": [
+   {
+    "id": "Europe/Rome",
+    "label": "Rome"
+   }
+  ]
+ },
+ {
+  "code": "JM",
+  "name": "Jamaica",
+  "slug": "jamaica",
+  "main": "America/Jamaica",
+  "zones": [
+   {
+    "id": "America/Jamaica",
+    "label": "Kingston"
+   }
+  ]
+ },
+ {
+  "code": "JO",
+  "name": "Jordan",
+  "slug": "jordan",
+  "main": "Asia/Amman",
+  "zones": [
+   {
+    "id": "Asia/Amman",
+    "label": "Amman"
+   }
+  ]
+ },
+ {
+  "code": "JP",
+  "name": "Japan",
+  "slug": "japan",
+  "main": "Asia/Tokyo",
+  "zones": [
+   {
+    "id": "Asia/Tokyo",
+    "label": "Tokyo"
+   }
+  ]
+ },
+ {
+  "code": "KE",
+  "name": "Kenya",
+  "slug": "kenya",
+  "main": "Africa/Nairobi",
+  "zones": [
+   {
+    "id": "Africa/Nairobi",
+    "label": "Nairobi"
+   }
+  ]
+ },
+ {
+  "code": "KG",
+  "name": "Kyrgyzstan",
+  "slug": "kyrgyzstan",
+  "main": "Asia/Bishkek",
+  "zones": [
+   {
+    "id": "Asia/Bishkek",
+    "label": "Bishkek"
+   }
+  ]
+ },
+ {
+  "code": "KH",
+  "name": "Cambodia",
+  "slug": "cambodia",
+  "main": "Asia/Phnom_Penh",
+  "zones": [
+   {
+    "id": "Asia/Phnom_Penh",
+    "label": "Phnom Penh"
+   }
+  ]
+ },
+ {
+  "code": "KI",
+  "name": "Kiribati",
+  "slug": "kiribati",
+  "main": "Pacific/Tarawa",
+  "zones": [
+   {
+    "id": "Pacific/Tarawa",
+    "label": "Tarawa"
+   },
+   {
+    "id": "Pacific/Kiritimati",
+    "label": "Kiritimati"
+   }
+  ]
+ },
+ {
+  "code": "KM",
+  "name": "Comoros",
+  "slug": "comoros",
+  "main": "Indian/Comoro",
+  "zones": [
+   {
+    "id": "Indian/Comoro",
+    "label": "Moroni"
+   }
+  ]
+ },
+ {
+  "code": "KN",
+  "name": "Saint Kitts and Nevis",
+  "slug": "saint-kitts-and-nevis",
+  "main": "America/St_Kitts",
+  "zones": [
+   {
+    "id": "America/St_Kitts",
+    "label": "Basseterre"
+   }
+  ]
+ },
+ {
+  "code": "KP",
+  "name": "North Korea",
+  "slug": "north-korea",
+  "main": "Asia/Pyongyang",
+  "zones": [
+   {
+    "id": "Asia/Pyongyang",
+    "label": "Pyongyang"
+   }
+  ]
+ },
+ {
+  "code": "KR",
+  "name": "South Korea",
+  "slug": "south-korea",
+  "main": "Asia/Seoul",
+  "zones": [
+   {
+    "id": "Asia/Seoul",
+    "label": "Seoul"
+   }
+  ]
+ },
+ {
+  "code": "KW",
+  "name": "Kuwait",
+  "slug": "kuwait",
+  "main": "Asia/Kuwait",
+  "zones": [
+   {
+    "id": "Asia/Kuwait",
+    "label": "Kuwait City"
+   }
+  ]
+ },
+ {
+  "code": "KZ",
+  "name": "Kazakhstan",
+  "slug": "kazakhstan",
+  "main": "Asia/Almaty",
+  "zones": [
+   {
+    "id": "Asia/Almaty",
+    "label": "Almaty"
+   },
+   {
+    "id": "Asia/Aqtobe",
+    "label": "Aqtobe"
+   }
+  ]
+ },
+ {
+  "code": "LA",
+  "name": "Laos",
+  "slug": "laos",
+  "main": "Asia/Vientiane",
+  "zones": [
+   {
+    "id": "Asia/Vientiane",
+    "label": "Vientiane"
+   }
+  ]
+ },
+ {
+  "code": "LB",
+  "name": "Lebanon",
+  "slug": "lebanon",
+  "main": "Asia/Beirut",
+  "zones": [
+   {
+    "id": "Asia/Beirut",
+    "label": "Beirut"
+   }
+  ]
+ },
+ {
+  "code": "LC",
+  "name": "Saint Lucia",
+  "slug": "saint-lucia",
+  "main": "America/St_Lucia",
+  "zones": [
+   {
+    "id": "America/St_Lucia",
+    "label": "Castries"
+   }
+  ]
+ },
+ {
+  "code": "LI",
+  "name": "Liechtenstein",
+  "slug": "liechtenstein",
+  "main": "Europe/Vaduz",
+  "zones": [
+   {
+    "id": "Europe/Vaduz",
+    "label": "Vaduz"
+   }
+  ]
+ },
+ {
+  "code": "LK",
+  "name": "Sri Lanka",
+  "slug": "sri-lanka",
+  "main": "Asia/Colombo",
+  "zones": [
+   {
+    "id": "Asia/Colombo",
+    "label": "Colombo"
+   }
+  ]
+ },
+ {
+  "code": "LR",
+  "name": "Liberia",
+  "slug": "liberia",
+  "main": "Africa/Monrovia",
+  "zones": [
+   {
+    "id": "Africa/Monrovia",
+    "label": "Monrovia"
+   }
+  ]
+ },
+ {
+  "code": "LS",
+  "name": "Lesotho",
+  "slug": "lesotho",
+  "main": "Africa/Maseru",
+  "zones": [
+   {
+    "id": "Africa/Maseru",
+    "label": "Maseru"
+   }
+  ]
+ },
+ {
+  "code": "LT",
+  "name": "Lithuania",
+  "slug": "lithuania",
+  "main": "Europe/Vilnius",
+  "zones": [
+   {
+    "id": "Europe/Vilnius",
+    "label": "Vilnius"
+   }
+  ]
+ },
+ {
+  "code": "LU",
+  "name": "Luxembourg",
+  "slug": "luxembourg",
+  "main": "Europe/Luxembourg",
+  "zones": [
+   {
+    "id": "Europe/Luxembourg",
+    "label": "Luxembourg City"
+   }
+  ]
+ },
+ {
+  "code": "LV",
+  "name": "Latvia",
+  "slug": "latvia",
+  "main": "Europe/Riga",
+  "zones": [
+   {
+    "id": "Europe/Riga",
+    "label": "Riga"
+   }
+  ]
+ },
+ {
+  "code": "LY",
+  "name": "Libya",
+  "slug": "libya",
+  "main": "Africa/Tripoli",
+  "zones": [
+   {
+    "id": "Africa/Tripoli",
+    "label": "Tripoli"
+   }
+  ]
+ },
+ {
+  "code": "MA",
+  "name": "Morocco",
+  "slug": "morocco",
+  "main": "Africa/Casablanca",
+  "zones": [
+   {
+    "id": "Africa/Casablanca",
+    "label": "Casablanca"
+   }
+  ]
+ },
+ {
+  "code": "MC",
+  "name": "Monaco",
+  "slug": "monaco",
+  "main": "Europe/Monaco",
+  "zones": [
+   {
+    "id": "Europe/Monaco",
+    "label": "Monaco"
+   }
+  ]
+ },
+ {
+  "code": "MD",
+  "name": "Moldova",
+  "slug": "moldova",
+  "main": "Europe/Chisinau",
+  "zones": [
+   {
+    "id": "Europe/Chisinau",
+    "label": "Chișinău"
+   }
+  ]
+ },
+ {
+  "code": "ME",
+  "name": "Montenegro",
+  "slug": "montenegro",
+  "main": "Europe/Podgorica",
+  "zones": [
+   {
+    "id": "Europe/Podgorica",
+    "label": "Podgorica"
+   }
+  ]
+ },
+ {
+  "code": "MG",
+  "name": "Madagascar",
+  "slug": "madagascar",
+  "main": "Indian/Antananarivo",
+  "zones": [
+   {
+    "id": "Indian/Antananarivo",
+    "label": "Antananarivo"
+   }
+  ]
+ },
+ {
+  "code": "MH",
+  "name": "Marshall Islands",
+  "slug": "marshall-islands",
+  "main": "Pacific/Majuro",
+  "zones": [
+   {
+    "id": "Pacific/Majuro",
+    "label": "Majuro"
+   }
+  ]
+ },
+ {
+  "code": "MK",
+  "name": "North Macedonia",
+  "slug": "north-macedonia",
+  "main": "Europe/Skopje",
+  "zones": [
+   {
+    "id": "Europe/Skopje",
+    "label": "Skopje"
+   }
+  ]
+ },
+ {
+  "code": "ML",
+  "name": "Mali",
+  "slug": "mali",
+  "main": "Africa/Bamako",
+  "zones": [
+   {
+    "id": "Africa/Bamako",
+    "label": "Bamako"
+   }
+  ]
+ },
+ {
+  "code": "MM",
+  "name": "Myanmar",
+  "slug": "myanmar",
+  "main": "Asia/Yangon",
+  "zones": [
+   {
+    "id": "Asia/Yangon",
+    "label": "Yangon"
+   }
+  ]
+ },
+ {
+  "code": "MN",
+  "name": "Mongolia",
+  "slug": "mongolia",
+  "main": "Asia/Ulaanbaatar",
+  "zones": [
+   {
+    "id": "Asia/Ulaanbaatar",
+    "label": "Ulaanbaatar"
+   },
+   {
+    "id": "Asia/Hovd",
+    "label": "Hovd"
+   }
+  ]
+ },
+ {
+  "code": "MR",
+  "name": "Mauritania",
+  "slug": "mauritania",
+  "main": "Africa/Nouakchott",
+  "zones": [
+   {
+    "id": "Africa/Nouakchott",
+    "label": "Nouakchott"
+   }
+  ]
+ },
+ {
+  "code": "MT",
+  "name": "Malta",
+  "slug": "malta",
+  "main": "Europe/Malta",
+  "zones": [
+   {
+    "id": "Europe/Malta",
+    "label": "Valletta"
+   }
+  ]
+ },
+ {
+  "code": "MU",
+  "name": "Mauritius",
+  "slug": "mauritius",
+  "main": "Indian/Mauritius",
+  "zones": [
+   {
+    "id": "Indian/Mauritius",
+    "label": "Port Louis"
+   }
+  ]
+ },
+ {
+  "code": "MV",
+  "name": "Maldives",
+  "slug": "maldives",
+  "main": "Indian/Maldives",
+  "zones": [
+   {
+    "id": "Indian/Maldives",
+    "label": "Malé"
+   }
+  ]
+ },
+ {
+  "code": "MW",
+  "name": "Malawi",
+  "slug": "malawi",
+  "main": "Africa/Blantyre",
+  "zones": [
+   {
+    "id": "Africa/Blantyre",
+    "label": "Lilongwe"
+   }
+  ]
+ },
+ {
+  "code": "MX",
+  "name": "Mexico",
+  "slug": "mexico",
+  "main": "America/Mexico_City",
+  "zones": [
+   {
+    "id": "America/Mexico_City",
+    "label": "Mexico City (Central)"
+   },
+   {
+    "id": "America/Tijuana",
+    "label": "Tijuana (Pacific)"
+   },
+   {
+    "id": "America/Cancun",
+    "label": "Cancún (Eastern)"
+   }
+  ]
+ },
+ {
+  "code": "MY",
+  "name": "Malaysia",
+  "slug": "malaysia",
+  "main": "Asia/Kuala_Lumpur",
+  "zones": [
+   {
+    "id": "Asia/Kuala_Lumpur",
+    "label": "Kuala Lumpur"
+   }
+  ]
+ },
+ {
+  "code": "MZ",
+  "name": "Mozambique",
+  "slug": "mozambique",
+  "main": "Africa/Maputo",
+  "zones": [
+   {
+    "id": "Africa/Maputo",
+    "label": "Maputo"
+   }
+  ]
+ },
+ {
+  "code": "NA",
+  "name": "Namibia",
+  "slug": "namibia",
+  "main": "Africa/Windhoek",
+  "zones": [
+   {
+    "id": "Africa/Windhoek",
+    "label": "Windhoek"
+   }
+  ]
+ },
+ {
+  "code": "NE",
+  "name": "Niger",
+  "slug": "niger",
+  "main": "Africa/Niamey",
+  "zones": [
+   {
+    "id": "Africa/Niamey",
+    "label": "Niamey"
+   }
+  ]
+ },
+ {
+  "code": "NG",
+  "name": "Nigeria",
+  "slug": "nigeria",
+  "main": "Africa/Lagos",
+  "zones": [
+   {
+    "id": "Africa/Lagos",
+    "label": "Lagos"
+   }
+  ]
+ },
+ {
+  "code": "NI",
+  "name": "Nicaragua",
+  "slug": "nicaragua",
+  "main": "America/Managua",
+  "zones": [
+   {
+    "id": "America/Managua",
+    "label": "Managua"
+   }
+  ]
+ },
+ {
+  "code": "NL",
+  "name": "Netherlands",
+  "slug": "netherlands",
+  "main": "Europe/Amsterdam",
+  "zones": [
+   {
+    "id": "Europe/Amsterdam",
+    "label": "Amsterdam"
+   }
+  ]
+ },
+ {
+  "code": "NO",
+  "name": "Norway",
+  "slug": "norway",
+  "main": "Europe/Oslo",
+  "zones": [
+   {
+    "id": "Europe/Oslo",
+    "label": "Oslo"
+   }
+  ]
+ },
+ {
+  "code": "NP",
+  "name": "Nepal",
+  "slug": "nepal",
+  "main": "Asia/Kathmandu",
+  "zones": [
+   {
+    "id": "Asia/Kathmandu",
+    "label": "Kathmandu"
+   }
+  ]
+ },
+ {
+  "code": "NR",
+  "name": "Nauru",
+  "slug": "nauru",
+  "main": "Pacific/Nauru",
+  "zones": [
+   {
+    "id": "Pacific/Nauru",
+    "label": "Yaren"
+   }
+  ]
+ },
+ {
+  "code": "NZ",
+  "name": "New Zealand",
+  "slug": "new-zealand",
+  "main": "Pacific/Auckland",
+  "zones": [
+   {
+    "id": "Pacific/Auckland",
+    "label": "Auckland"
+   }
+  ]
+ },
+ {
+  "code": "OM",
+  "name": "Oman",
+  "slug": "oman",
+  "main": "Asia/Muscat",
+  "zones": [
+   {
+    "id": "Asia/Muscat",
+    "label": "Muscat"
+   }
+  ]
+ },
+ {
+  "code": "PA",
+  "name": "Panama",
+  "slug": "panama",
+  "main": "America/Panama",
+  "zones": [
+   {
+    "id": "America/Panama",
+    "label": "Panama City"
+   }
+  ]
+ },
+ {
+  "code": "PE",
+  "name": "Peru",
+  "slug": "peru",
+  "main": "America/Lima",
+  "zones": [
+   {
+    "id": "America/Lima",
+    "label": "Lima"
+   }
+  ]
+ },
+ {
+  "code": "PG",
+  "name": "Papua New Guinea",
+  "slug": "papua-new-guinea",
+  "main": "Pacific/Port_Moresby",
+  "zones": [
+   {
+    "id": "Pacific/Port_Moresby",
+    "label": "Port Moresby"
+   }
+  ]
+ },
+ {
+  "code": "PH",
+  "name": "Philippines",
+  "slug": "philippines",
+  "main": "Asia/Manila",
+  "zones": [
+   {
+    "id": "Asia/Manila",
+    "label": "Manila"
+   }
+  ]
+ },
+ {
+  "code": "PK",
+  "name": "Pakistan",
+  "slug": "pakistan",
+  "main": "Asia/Karachi",
+  "zones": [
+   {
+    "id": "Asia/Karachi",
+    "label": "Karachi / Islamabad"
+   }
+  ]
+ },
+ {
+  "code": "PL",
+  "name": "Poland",
+  "slug": "poland",
+  "main": "Europe/Warsaw",
+  "zones": [
+   {
+    "id": "Europe/Warsaw",
+    "label": "Warsaw"
+   }
+  ]
+ },
+ {
+  "code": "PS",
+  "name": "Palestine",
+  "slug": "palestine",
+  "main": "Asia/Gaza",
+  "zones": [
+   {
+    "id": "Asia/Gaza",
+    "label": "Gaza / Ramallah"
+   }
+  ]
+ },
+ {
+  "code": "PT",
+  "name": "Portugal",
+  "slug": "portugal",
+  "main": "Europe/Lisbon",
+  "zones": [
+   {
+    "id": "Europe/Lisbon",
+    "label": "Lisbon (mainland)"
+   },
+   {
+    "id": "Atlantic/Madeira",
+    "label": "Madeira"
+   },
+   {
+    "id": "Atlantic/Azores",
+    "label": "Azores"
+   }
+  ]
+ },
+ {
+  "code": "PW",
+  "name": "Palau",
+  "slug": "palau",
+  "main": "Pacific/Palau",
+  "zones": [
+   {
+    "id": "Pacific/Palau",
+    "label": "Ngerulmud"
+   }
+  ]
+ },
+ {
+  "code": "PY",
+  "name": "Paraguay",
+  "slug": "paraguay",
+  "main": "America/Asuncion",
+  "zones": [
+   {
+    "id": "America/Asuncion",
+    "label": "Asunción"
+   }
+  ]
+ },
+ {
+  "code": "QA",
+  "name": "Qatar",
+  "slug": "qatar",
+  "main": "Asia/Qatar",
+  "zones": [
+   {
+    "id": "Asia/Qatar",
+    "label": "Doha"
+   }
+  ]
+ },
+ {
+  "code": "RO",
+  "name": "Romania",
+  "slug": "romania",
+  "main": "Europe/Bucharest",
+  "zones": [
+   {
+    "id": "Europe/Bucharest",
+    "label": "Bucharest"
+   }
+  ]
+ },
+ {
+  "code": "RS",
+  "name": "Serbia",
+  "slug": "serbia",
+  "main": "Europe/Belgrade",
+  "zones": [
+   {
+    "id": "Europe/Belgrade",
+    "label": "Belgrade"
+   }
+  ]
+ },
+ {
+  "code": "RU",
+  "name": "Russia",
+  "slug": "russia",
+  "main": "Europe/Moscow",
+  "zones": [
+   {
+    "id": "Europe/Kaliningrad",
+    "label": "Kaliningrad"
+   },
+   {
+    "id": "Europe/Moscow",
+    "label": "Moscow / St. Petersburg"
+   },
+   {
+    "id": "Asia/Yekaterinburg",
+    "label": "Yekaterinburg"
+   },
+   {
+    "id": "Asia/Omsk",
+    "label": "Omsk"
+   },
+   {
+    "id": "Asia/Krasnoyarsk",
+    "label": "Krasnoyarsk"
+   },
+   {
+    "id": "Asia/Irkutsk",
+    "label": "Irkutsk"
+   },
+   {
+    "id": "Asia/Yakutsk",
+    "label": "Yakutsk"
+   },
+   {
+    "id": "Asia/Vladivostok",
+    "label": "Vladivostok"
+   },
+   {
+    "id": "Asia/Magadan",
+    "label": "Magadan"
+   },
+   {
+    "id": "Asia/Kamchatka",
+    "label": "Kamchatka"
+   }
+  ]
+ },
+ {
+  "code": "RW",
+  "name": "Rwanda",
+  "slug": "rwanda",
+  "main": "Africa/Kigali",
+  "zones": [
+   {
+    "id": "Africa/Kigali",
+    "label": "Kigali"
+   }
+  ]
+ },
+ {
+  "code": "SA",
+  "name": "Saudi Arabia",
+  "slug": "saudi-arabia",
+  "main": "Asia/Riyadh",
+  "zones": [
+   {
+    "id": "Asia/Riyadh",
+    "label": "Riyadh"
+   }
+  ]
+ },
+ {
+  "code": "SB",
+  "name": "Solomon Islands",
+  "slug": "solomon-islands",
+  "main": "Pacific/Guadalcanal",
+  "zones": [
+   {
+    "id": "Pacific/Guadalcanal",
+    "label": "Honiara"
+   }
+  ]
+ },
+ {
+  "code": "SC",
+  "name": "Seychelles",
+  "slug": "seychelles",
+  "main": "Indian/Mahe",
+  "zones": [
+   {
+    "id": "Indian/Mahe",
+    "label": "Victoria"
+   }
+  ]
+ },
+ {
+  "code": "SD",
+  "name": "Sudan",
+  "slug": "sudan",
+  "main": "Africa/Khartoum",
+  "zones": [
+   {
+    "id": "Africa/Khartoum",
+    "label": "Khartoum"
+   }
+  ]
+ },
+ {
+  "code": "SE",
+  "name": "Sweden",
+  "slug": "sweden",
+  "main": "Europe/Stockholm",
+  "zones": [
+   {
+    "id": "Europe/Stockholm",
+    "label": "Stockholm"
+   }
+  ]
+ },
+ {
+  "code": "SG",
+  "name": "Singapore",
+  "slug": "singapore",
+  "main": "Asia/Singapore",
+  "zones": [
+   {
+    "id": "Asia/Singapore",
+    "label": "Singapore"
+   }
+  ]
+ },
+ {
+  "code": "SI",
+  "name": "Slovenia",
+  "slug": "slovenia",
+  "main": "Europe/Ljubljana",
+  "zones": [
+   {
+    "id": "Europe/Ljubljana",
+    "label": "Ljubljana"
+   }
+  ]
+ },
+ {
+  "code": "SK",
+  "name": "Slovakia",
+  "slug": "slovakia",
+  "main": "Europe/Bratislava",
+  "zones": [
+   {
+    "id": "Europe/Bratislava",
+    "label": "Bratislava"
+   }
+  ]
+ },
+ {
+  "code": "SL",
+  "name": "Sierra Leone",
+  "slug": "sierra-leone",
+  "main": "Africa/Freetown",
+  "zones": [
+   {
+    "id": "Africa/Freetown",
+    "label": "Freetown"
+   }
+  ]
+ },
+ {
+  "code": "SM",
+  "name": "San Marino",
+  "slug": "san-marino",
+  "main": "Europe/San_Marino",
+  "zones": [
+   {
+    "id": "Europe/San_Marino",
+    "label": "San Marino"
+   }
+  ]
+ },
+ {
+  "code": "SN",
+  "name": "Senegal",
+  "slug": "senegal",
+  "main": "Africa/Dakar",
+  "zones": [
+   {
+    "id": "Africa/Dakar",
+    "label": "Dakar"
+   }
+  ]
+ },
+ {
+  "code": "SO",
+  "name": "Somalia",
+  "slug": "somalia",
+  "main": "Africa/Mogadishu",
+  "zones": [
+   {
+    "id": "Africa/Mogadishu",
+    "label": "Mogadishu"
+   }
+  ]
+ },
+ {
+  "code": "SR",
+  "name": "Suriname",
+  "slug": "suriname",
+  "main": "America/Paramaribo",
+  "zones": [
+   {
+    "id": "America/Paramaribo",
+    "label": "Paramaribo"
+   }
+  ]
+ },
+ {
+  "code": "SS",
+  "name": "South Sudan",
+  "slug": "south-sudan",
+  "main": "Africa/Juba",
+  "zones": [
+   {
+    "id": "Africa/Juba",
+    "label": "Juba"
+   }
+  ]
+ },
+ {
+  "code": "ST",
+  "name": "Sao Tome and Principe",
+  "slug": "sao-tome-and-principe",
+  "main": "Africa/Sao_Tome",
+  "zones": [
+   {
+    "id": "Africa/Sao_Tome",
+    "label": "São Tomé"
+   }
+  ]
+ },
+ {
+  "code": "SV",
+  "name": "El Salvador",
+  "slug": "el-salvador",
+  "main": "America/El_Salvador",
+  "zones": [
+   {
+    "id": "America/El_Salvador",
+    "label": "San Salvador"
+   }
+  ]
+ },
+ {
+  "code": "SY",
+  "name": "Syria",
+  "slug": "syria",
+  "main": "Asia/Damascus",
+  "zones": [
+   {
+    "id": "Asia/Damascus",
+    "label": "Damascus"
+   }
+  ]
+ },
+ {
+  "code": "SZ",
+  "name": "Eswatini",
+  "slug": "eswatini",
+  "main": "Africa/Mbabane",
+  "zones": [
+   {
+    "id": "Africa/Mbabane",
+    "label": "Mbabane"
+   }
+  ]
+ },
+ {
+  "code": "TD",
+  "name": "Chad",
+  "slug": "chad",
+  "main": "Africa/Ndjamena",
+  "zones": [
+   {
+    "id": "Africa/Ndjamena",
+    "label": "N'Djamena"
+   }
+  ]
+ },
+ {
+  "code": "TG",
+  "name": "Togo",
+  "slug": "togo",
+  "main": "Africa/Lome",
+  "zones": [
+   {
+    "id": "Africa/Lome",
+    "label": "Lomé"
+   }
+  ]
+ },
+ {
+  "code": "TH",
+  "name": "Thailand",
+  "slug": "thailand",
+  "main": "Asia/Bangkok",
+  "zones": [
+   {
+    "id": "Asia/Bangkok",
+    "label": "Bangkok"
+   }
+  ]
+ },
+ {
+  "code": "TJ",
+  "name": "Tajikistan",
+  "slug": "tajikistan",
+  "main": "Asia/Dushanbe",
+  "zones": [
+   {
+    "id": "Asia/Dushanbe",
+    "label": "Dushanbe"
+   }
+  ]
+ },
+ {
+  "code": "TL",
+  "name": "Timor-Leste",
+  "slug": "timor-leste",
+  "main": "Asia/Dili",
+  "zones": [
+   {
+    "id": "Asia/Dili",
+    "label": "Dili"
+   }
+  ]
+ },
+ {
+  "code": "TM",
+  "name": "Turkmenistan",
+  "slug": "turkmenistan",
+  "main": "Asia/Ashgabat",
+  "zones": [
+   {
+    "id": "Asia/Ashgabat",
+    "label": "Ashgabat"
+   }
+  ]
+ },
+ {
+  "code": "TN",
+  "name": "Tunisia",
+  "slug": "tunisia",
+  "main": "Africa/Tunis",
+  "zones": [
+   {
+    "id": "Africa/Tunis",
+    "label": "Tunis"
+   }
+  ]
+ },
+ {
+  "code": "TO",
+  "name": "Tonga",
+  "slug": "tonga",
+  "main": "Pacific/Tongatapu",
+  "zones": [
+   {
+    "id": "Pacific/Tongatapu",
+    "label": "Nuku'alofa"
+   }
+  ]
+ },
+ {
+  "code": "TR",
+  "name": "Turkey",
+  "slug": "turkey",
+  "main": "Europe/Istanbul",
+  "zones": [
+   {
+    "id": "Europe/Istanbul",
+    "label": "Istanbul"
+   }
+  ]
+ },
+ {
+  "code": "TT",
+  "name": "Trinidad and Tobago",
+  "slug": "trinidad-and-tobago",
+  "main": "America/Port_of_Spain",
+  "zones": [
+   {
+    "id": "America/Port_of_Spain",
+    "label": "Port of Spain"
+   }
+  ]
+ },
+ {
+  "code": "TV",
+  "name": "Tuvalu",
+  "slug": "tuvalu",
+  "main": "Pacific/Funafuti",
+  "zones": [
+   {
+    "id": "Pacific/Funafuti",
+    "label": "Funafuti"
+   }
+  ]
+ },
+ {
+  "code": "TW",
+  "name": "Taiwan",
+  "slug": "taiwan",
+  "main": "Asia/Taipei",
+  "zones": [
+   {
+    "id": "Asia/Taipei",
+    "label": "Taipei"
+   }
+  ]
+ },
+ {
+  "code": "TZ",
+  "name": "Tanzania",
+  "slug": "tanzania",
+  "main": "Africa/Dar_es_Salaam",
+  "zones": [
+   {
+    "id": "Africa/Dar_es_Salaam",
+    "label": "Dar es Salaam"
+   }
+  ]
+ },
+ {
+  "code": "UA",
+  "name": "Ukraine",
+  "slug": "ukraine",
+  "main": "Europe/Kyiv",
+  "zones": [
+   {
+    "id": "Europe/Kyiv",
+    "label": "Kyiv"
+   }
+  ]
+ },
+ {
+  "code": "UG",
+  "name": "Uganda",
+  "slug": "uganda",
+  "main": "Africa/Kampala",
+  "zones": [
+   {
+    "id": "Africa/Kampala",
+    "label": "Kampala"
+   }
+  ]
+ },
+ {
+  "code": "US",
+  "name": "United States",
+  "slug": "united-states",
+  "main": "America/New_York",
+  "zones": [
+   {
+    "id": "America/New_York",
+    "label": "Eastern (New York)"
+   },
+   {
+    "id": "America/Chicago",
+    "label": "Central (Chicago)"
+   },
+   {
+    "id": "America/Denver",
+    "label": "Mountain (Denver)"
+   },
+   {
+    "id": "America/Phoenix",
+    "label": "Arizona (no DST)"
+   },
+   {
+    "id": "America/Los_Angeles",
+    "label": "Pacific (Los Angeles)"
+   },
+   {
+    "id": "America/Anchorage",
+    "label": "Alaska"
+   },
+   {
+    "id": "Pacific/Honolulu",
+    "label": "Hawaii"
+   }
+  ]
+ },
+ {
+  "code": "UY",
+  "name": "Uruguay",
+  "slug": "uruguay",
+  "main": "America/Montevideo",
+  "zones": [
+   {
+    "id": "America/Montevideo",
+    "label": "Montevideo"
+   }
+  ]
+ },
+ {
+  "code": "UZ",
+  "name": "Uzbekistan",
+  "slug": "uzbekistan",
+  "main": "Asia/Tashkent",
+  "zones": [
+   {
+    "id": "Asia/Tashkent",
+    "label": "Tashkent"
+   }
+  ]
+ },
+ {
+  "code": "VA",
+  "name": "Vatican City",
+  "slug": "vatican-city",
+  "main": "Europe/Vatican",
+  "zones": [
+   {
+    "id": "Europe/Vatican",
+    "label": "Vatican City"
+   }
+  ]
+ },
+ {
+  "code": "VC",
+  "name": "Saint Vincent and the Grenadines",
+  "slug": "saint-vincent-and-the-grenadines",
+  "main": "America/St_Vincent",
+  "zones": [
+   {
+    "id": "America/St_Vincent",
+    "label": "Kingstown"
+   }
+  ]
+ },
+ {
+  "code": "VE",
+  "name": "Venezuela",
+  "slug": "venezuela",
+  "main": "America/Caracas",
+  "zones": [
+   {
+    "id": "America/Caracas",
+    "label": "Caracas"
+   }
+  ]
+ },
+ {
+  "code": "VN",
+  "name": "Vietnam",
+  "slug": "vietnam",
+  "main": "Asia/Ho_Chi_Minh",
+  "zones": [
+   {
+    "id": "Asia/Ho_Chi_Minh",
+    "label": "Ho Chi Minh City"
+   }
+  ]
+ },
+ {
+  "code": "VU",
+  "name": "Vanuatu",
+  "slug": "vanuatu",
+  "main": "Pacific/Efate",
+  "zones": [
+   {
+    "id": "Pacific/Efate",
+    "label": "Port Vila"
+   }
+  ]
+ },
+ {
+  "code": "WS",
+  "name": "Samoa",
+  "slug": "samoa",
+  "main": "Pacific/Apia",
+  "zones": [
+   {
+    "id": "Pacific/Apia",
+    "label": "Apia"
+   }
+  ]
+ },
+ {
+  "code": "YE",
+  "name": "Yemen",
+  "slug": "yemen",
+  "main": "Asia/Aden",
+  "zones": [
+   {
+    "id": "Asia/Aden",
+    "label": "Sana'a"
+   }
+  ]
+ },
+ {
+  "code": "ZA",
+  "name": "South Africa",
+  "slug": "south-africa",
+  "main": "Africa/Johannesburg",
+  "zones": [
+   {
+    "id": "Africa/Johannesburg",
+    "label": "Johannesburg"
+   }
+  ]
+ },
+ {
+  "code": "ZM",
+  "name": "Zambia",
+  "slug": "zambia",
+  "main": "Africa/Lusaka",
+  "zones": [
+   {
+    "id": "Africa/Lusaka",
+    "label": "Lusaka"
+   }
+  ]
+ },
+ {
+  "code": "ZW",
+  "name": "Zimbabwe",
+  "slug": "zimbabwe",
+  "main": "Africa/Harare",
+  "zones": [
+   {
+    "id": "Africa/Harare",
+    "label": "Harare"
+   }
+  ]
+ }
+]
