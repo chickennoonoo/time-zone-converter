@@ -1,0 +1,21 @@
+{
+  "tour.prompt.title": "New here?",
+  "tour.prompt.text": "Take a 20-second tour of what this converter can do.",
+  "tour.prompt.start": "Start tour",
+  "tour.prompt.dismiss": "No thanks",
+  "tour.stepOf": "Step {n} of {total}",
+  "tour.next": "Next",
+  "tour.back": "Back",
+  "tour.skip": "Skip tour",
+  "tour.done": "Done",
+  "tour.step1.title": "Converting from",
+  "tour.step1.text": "This is where you start. Click it to pick any country, city or time zone, like Cairo or PST.",
+  "tour.step2.title": "The time",
+  "tour.step2.text": "Drag the slider, or click the big time to type an exact time. It follows the current time until you change it.",
+  "tour.step3.title": "The date",
+  "tour.step3.text": "Pick a date to convert for that day. Daylight saving changes are applied for the date you choose.",
+  "tour.step4.title": "Converting to",
+  "tour.step4.text": "Each card shows the same moment somewhere else. Click a card for a plain explanation. On cities and countries, the small arrow opens that place's page.",
+  "tour.step5.title": "Add a place or time zone",
+  "tour.step5.text": "Compare as many places and time zones as you like, including PST, EST and GMT."
+}

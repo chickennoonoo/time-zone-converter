@@ -14,6 +14,7 @@ const fill = (s) => s.replace(/\{\{SITE_NAME\}\}/g, cfg.name);
 const places = Object.fromEntries(JSON.parse(fs.readFileSync("data/places.json", "utf8")).map((p) => [p.slug, p]));
 const pairs = JSON.parse(fs.readFileSync("data/pairs.json", "utf8"));
 const countries = JSON.parse(fs.readFileSync("data/countries.json", "utf8"));
+const strings = JSON.parse(fs.readFileSync("data/strings.en.json", "utf8"));
 
 fs.mkdirSync("public", { recursive: true });
 execSync("npx tailwindcss -i src/input.css -o public/style.css --minify", { stdio: "inherit" });
@@ -24,7 +25,7 @@ const rawTemplate = fs.readFileSync("src/template.html", "utf8");
 const scriptStart = rawTemplate.lastIndexOf("<script>");
 const scriptEnd = rawTemplate.indexOf("</script>", scriptStart);
 if (scriptStart < 0 || scriptEnd < 0) throw new Error("Could not find the app <script> in src/template.html");
-const appJs = fill(rawTemplate.slice(scriptStart + "<script>".length, scriptEnd)).replace("{{COUNTRIES_JSON}}", () => JSON.stringify(countries));
+const appJs = fill(rawTemplate.slice(scriptStart + "<script>".length, scriptEnd)).replace("{{COUNTRIES_JSON}}", () => JSON.stringify(countries)).replace("{{STRINGS_JSON}}", () => JSON.stringify(strings));
 fs.writeFileSync("public/app.js", appJs);
 const appHash = require("crypto").createHash("sha1").update(appJs).digest("hex").slice(0, 10);
 const template = rawTemplate.slice(0, scriptStart) + `<script src="/app.js?v=${appHash}" defer></script>` + rawTemplate.slice(scriptEnd + "</script>".length);

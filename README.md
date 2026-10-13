@@ -33,3 +33,7 @@ Add a place and a pair, run `npm run build`, commit. The sitemap updates automat
 - `src/pages/about.html`, `privacy.html`, `contact.html` become `/about/`, `/privacy/`, `/contact/`.
 - `site.config.json` also holds `contactEmail`, `githubUrl`, `authorName` and `analyticsToken`. Paste the Cloudflare Web Analytics token into `analyticsToken` to switch the analytics snippet on; the Privacy page then describes it automatically.
 - Update the "Last updated" date in `src/pages/privacy.html` whenever the policy changes.
+
+## Text strings
+
+`data/strings.en.json` holds the guided-tour text (injected into `app.js` at build). The rest of the interface text is still inline in `src/template.html` and will move here when a second language is added.

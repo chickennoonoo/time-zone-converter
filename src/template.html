@@ -30,6 +30,7 @@
 <p class="font-['Space_Grotesk'] font-bold text-2xl tracking-tight text-[#9aa8ff]">{{SITE_NAME}}</p>
 </a>
 <div class="flex items-center gap-4">
+<button id="tour-button" type="button" class="material-symbols-outlined text-[#9aa8ff] hover:text-primary text-2xl rounded-full w-9 h-9 flex items-center justify-center" aria-label="Take a quick tour" title="Take a quick tour">help</button>
 <div id="formatToggle" class="flex items-center gap-1 bg-surface-container-high rounded-full p-1 cursor-pointer select-none" role="button" tabindex="0" title="Toggle 12h / 24h time format" aria-label="Toggle 12 hour or 24 hour time format">
 <span id="formatToggle12" class="text-[10px] font-label font-bold px-2 py-1 rounded-full bg-primary text-on-primary transition-colors">12H</span>
 <span id="formatToggle24" class="text-[10px] font-label font-bold px-2 py-1 rounded-full text-outline transition-colors">24H</span>
@@ -55,7 +56,7 @@
 <input id="date-input" type="date" aria-label="Pick a date" title="Pick a date" class="w-44 max-w-full bg-surface-container-high border-0 text-on-surface font-body font-medium rounded-full px-4 py-2 outline-none cursor-pointer focus:ring-2 focus:ring-primary [color-scheme:dark]"/>
 </div>
 </div>
-<div class="flex flex-col items-center justify-center py-12">
+<div id="time-block" class="flex flex-col items-center justify-center py-12">
 <div class="font-display text-[5.5rem] sm:text-[8rem] md:text-[10rem] font-bold leading-none tracking-tighter text-primary cursor-pointer" id="main-time-display" role="button" tabindex="0" title="Click to type an exact time" aria-label="Click to type an exact time">
                             14:00
                         </div>
@@ -106,7 +107,7 @@
 </h3>
 <div id="destinations-list" class="flex flex-col gap-4"></div>
 <!-- Add Location Placeholder Card -->
-<div class="js-add-destination border-2 border-dashed border-outline-variant rounded-xl p-6 flex flex-col items-center justify-center gap-2 text-outline hover:text-on-surface hover:border-primary transition-all cursor-pointer group">
+<div id="add-card" class="js-add-destination border-2 border-dashed border-outline-variant rounded-xl p-6 flex flex-col items-center justify-center gap-2 text-outline hover:text-on-surface hover:border-primary transition-all cursor-pointer group">
 <span class="material-symbols-outlined text-3xl group-hover:scale-110 transition-transform">add_circle</span>
 <span class="font-label text-xs uppercase tracking-widest font-bold">Add a place or time zone</span>
 </div>
@@ -614,6 +615,7 @@ function render() {
   renderTicks();
   syncTimeInput();
   updateNowButton();
+  if (typeof tour !== "undefined" && tour.active) tourReposition();
 }
 
 /* ---------------- Slider tick labels + typed time input ---------------- */
@@ -811,6 +813,149 @@ function initChronos() {
 
 document.addEventListener("DOMContentLoaded", initChronos);
 
+
+/* ---------------- Guided tour ----------------
+ * Text lives in data/strings.en.json (injected at build time) so it can be translated later.
+ * The prompt shows once, on the homepage only; the "?" button replays the tour on any converter page.
+ */
+const STRINGS = {{STRINGS_JSON}};
+function t(key, vars) {
+  let s = STRINGS[key] || key;
+  if (vars) for (const k in vars) s = s.replace("{" + k + "}", vars[k]);
+  return s;
+}
+
+const TOUR_SEEN_KEY = "offsetclock.tourSeen";
+// If storage is unavailable we treat the tour as seen, so nobody gets nagged on every visit.
+function tourSeen() { try { return localStorage.getItem(TOUR_SEEN_KEY) === "1"; } catch (e) { return true; } }
+function markTourSeen() { try { localStorage.setItem(TOUR_SEEN_KEY, "1"); } catch (e) { /* ignore */ } }
+
+const TOUR_STEPS = [
+  { target: () => document.getElementById("origin-selector"), title: "tour.step1.title", text: "tour.step1.text" },
+  { target: () => document.getElementById("time-block"), title: "tour.step2.title", text: "tour.step2.text" },
+  { target: () => { const d = document.getElementById("date-input"); return d ? d.parentElement : null; }, title: "tour.step3.title", text: "tour.step3.text" },
+  { target: () => document.querySelector("#destinations-list > div[data-zone-id]"), title: "tour.step4.title", text: "tour.step4.text" },
+  { target: () => document.getElementById("add-card"), title: "tour.step5.title", text: "tour.step5.text" },
+];
+
+const tour = { active: false, index: 0, steps: [], spot: null, blocker: null, card: null, lastFocus: null };
+
+function hideTourPrompt() { const p = document.getElementById("tour-prompt"); if (p) p.remove(); }
+
+function showTourPrompt() {
+  if (document.getElementById("tour-prompt")) return;
+  const el = document.createElement("div");
+  el.id = "tour-prompt";
+  el.setAttribute("role", "region");
+  el.setAttribute("aria-label", t("tour.prompt.title"));
+  el.className = "fixed left-4 right-4 bottom-24 sm:left-6 sm:right-auto sm:bottom-6 sm:max-w-sm z-[60] bg-surface-container-high text-on-surface rounded-2xl p-5 shadow-2xl border border-outline-variant/40 font-body";
+  el.innerHTML = `<p class="font-display font-bold text-base">${t("tour.prompt.title")}</p>
+    <p class="text-sm text-on-surface-variant mt-1">${t("tour.prompt.text")}</p>
+    <div class="flex gap-3 mt-4">
+      <button type="button" id="tour-prompt-start" class="editorial-gradient text-on-primary font-bold text-sm px-5 py-2 rounded-full">${t("tour.prompt.start")}</button>
+      <button type="button" id="tour-prompt-dismiss" class="text-sm text-on-surface-variant hover:text-on-surface px-3 py-2">${t("tour.prompt.dismiss")}</button>
+    </div>`;
+  document.body.appendChild(el);
+  document.getElementById("tour-prompt-start").addEventListener("click", startTour);
+  document.getElementById("tour-prompt-dismiss").addEventListener("click", () => { markTourSeen(); hideTourPrompt(); });
+}
+
+function startTour() {
+  if (tour.active) return;
+  hideTourPrompt();
+  markTourSeen();
+  tour.steps = TOUR_STEPS.filter((s) => s.target());
+  if (!tour.steps.length) return;
+  tour.active = true;
+  tour.index = 0;
+  tour.lastFocus = document.activeElement;
+
+  tour.blocker = document.createElement("div");
+  tour.blocker.className = "fixed inset-0 z-[80]";
+  tour.spot = document.createElement("div");
+  tour.spot.className = "fixed z-[81] pointer-events-none";
+  tour.spot.style.cssText = "border-radius:16px;box-shadow:0 0 0 9999px rgba(8,9,14,0.78),0 0 0 2px #9aa8ff;transition:left .2s,top .2s,width .2s,height .2s;";
+  tour.card = document.createElement("div");
+  tour.card.setAttribute("role", "dialog");
+  tour.card.setAttribute("aria-modal", "true");
+  tour.card.className = "fixed z-[82] bg-surface-container-high text-on-surface rounded-2xl p-5 shadow-2xl border border-outline-variant/40 font-body";
+  tour.card.style.cssText = "width:min(92vw,340px);";
+  document.body.append(tour.blocker, tour.spot, tour.card);
+  window.addEventListener("resize", tourReposition);
+  window.addEventListener("scroll", tourReposition, { passive: true });
+  document.addEventListener("keydown", tourKeydown);
+  showTourStep(0);
+}
+
+function showTourStep(i) {
+  tour.index = i;
+  const step = tour.steps[i];
+  const last = i === tour.steps.length - 1;
+  tour.card.setAttribute("aria-label", t(step.title));
+  tour.card.innerHTML = `<p class="font-label text-[10px] uppercase tracking-widest text-outline">${t("tour.stepOf", { n: i + 1, total: tour.steps.length })}</p>
+    <p class="font-display font-bold text-lg mt-1">${t(step.title)}</p>
+    <p class="text-sm text-on-surface-variant mt-2 leading-relaxed">${t(step.text)}</p>
+    <div class="flex items-center justify-between mt-5">
+      <button type="button" id="tour-skip" class="text-xs text-on-surface-variant hover:text-on-surface">${t("tour.skip")}</button>
+      <div class="flex gap-2">
+        ${i > 0 ? `<button type="button" id="tour-back" class="text-sm px-4 py-2 rounded-full bg-surface-container-highest text-on-surface">${t("tour.back")}</button>` : ""}
+        <button type="button" id="tour-next" class="editorial-gradient text-on-primary font-bold text-sm px-5 py-2 rounded-full">${last ? t("tour.done") : t("tour.next")}</button>
+      </div>
+    </div>`;
+  document.getElementById("tour-skip").addEventListener("click", endTour);
+  const back = document.getElementById("tour-back");
+  if (back) back.addEventListener("click", () => showTourStep(tour.index - 1));
+  document.getElementById("tour-next").addEventListener("click", () => (last ? endTour() : showTourStep(tour.index + 1)));
+  const el = step.target();
+  if (el) el.scrollIntoView({ block: "center", behavior: "auto" });
+  tourReposition();
+  requestAnimationFrame(tourReposition);
+  document.getElementById("tour-next").focus({ preventScroll: true });
+}
+
+function tourReposition() {
+  if (!tour.active) return;
+  const step = tour.steps[tour.index];
+  const el = step && step.target();
+  if (!el) return;
+  const r = el.getBoundingClientRect();
+  const pad = 8;
+  const s = tour.spot.style;
+  s.left = r.left - pad + "px"; s.top = r.top - pad + "px";
+  s.width = r.width + pad * 2 + "px"; s.height = r.height + pad * 2 + "px";
+  const vw = window.innerWidth, vh = window.innerHeight;
+  const cw = tour.card.offsetWidth, ch = tour.card.offsetHeight;
+  let top = r.bottom + pad + 12;
+  if (top + ch > vh - 8) top = r.top - pad - 12 - ch;
+  if (top < 8) top = Math.max(8, vh - ch - 16);
+  let left = Math.min(Math.max(8, r.left), vw - cw - 8);
+  tour.card.style.top = top + "px";
+  tour.card.style.left = left + "px";
+}
+
+function endTour() {
+  if (!tour.active) return;
+  tour.active = false;
+  [tour.blocker, tour.spot, tour.card].forEach((e) => e && e.remove());
+  window.removeEventListener("resize", tourReposition);
+  window.removeEventListener("scroll", tourReposition);
+  document.removeEventListener("keydown", tourKeydown);
+  if (tour.lastFocus && tour.lastFocus.focus) tour.lastFocus.focus({ preventScroll: true });
+}
+
+function tourKeydown(e) {
+  if (e.key === "Escape") endTour();
+}
+
+function initTour() {
+  if (window.__tourInit) return;
+  window.__tourInit = true;
+  const btn = document.getElementById("tour-button");
+  if (btn) btn.addEventListener("click", startTour);
+  // Prompt only on the homepage, once, and after the page has had a moment to settle.
+  if (btn && window.location.pathname === "/" && !tourSeen()) setTimeout(() => { if (!tour.active) showTourPrompt(); }, 2000);
+}
+document.addEventListener("DOMContentLoaded", initTour);
 </script>
 {{ANALYTICS}}
 </body></html>
