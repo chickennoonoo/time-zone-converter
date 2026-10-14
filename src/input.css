@@ -44,3 +44,12 @@
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
         }
+
+/* ---- Arabic / right-to-left ---- */
+html[lang="ar"] body,
+html[lang="ar"] .font-display,
+html[lang="ar"] .font-body,
+html[lang="ar"] .font-label,
+html[lang="ar"] p[class*="Space_Grotesk"] { font-family: "Cairo", "Noto Sans Arabic", system-ui, sans-serif !important; }
+/* Arabic letters must stay joined: no letter-spacing and no forced upper-case. */
+html[lang="ar"] * { letter-spacing: 0 !important; text-transform: none !important; }

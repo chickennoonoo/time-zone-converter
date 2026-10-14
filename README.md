@@ -34,6 +34,14 @@ Add a place and a pair, run `npm run build`, commit. The sitemap updates automat
 - `site.config.json` also holds `contactEmail`, `githubUrl`, `authorName` and `analyticsToken`. Paste the Cloudflare Web Analytics token into `analyticsToken` to switch the analytics snippet on; the Privacy page then describes it automatically.
 - Update the "Last updated" date in `src/pages/privacy.html` whenever the policy changes.
 
-## Text strings
+## Languages
 
-`data/strings.en.json` holds the guided-tour text (injected into `app.js` at build). The rest of the interface text is still inline in `src/template.html` and will move here when a second language is added.
+`data/languages.json` lists the languages (English at `/`, Arabic at `/ar/`). For each language:
+
+- `data/lang/<code>.json`: all interface text, tour text and the sentence templates for generated pages (keys starting `gen.`).
+- `data/lang/cities.<code>.json`: city/region names by IANA zone id (falls back to English).
+- `data/lang/std.<code>.json`: names for time zone entries such as PST or CET.
+- `content/<code>/home.html`, `about.html`, `privacy.html`, `contact.html`: the long-form pages.
+- Country names come from the browser's built-in `Intl.DisplayNames`.
+
+To add a language, copy the English files, translate them and add a line to `languages.json`. Plural forms follow CLDR categories (`.one`, `.two`, `.few`, `.many`, `.other`). `BUILD_LANGS=en npm run build` builds English only.

@@ -1,0 +1,16 @@
+[
+  {
+    "code": "en",
+    "dir": "ltr",
+    "prefix": "",
+    "locale": "en-US",
+    "native": "English"
+  },
+  {
+    "code": "ar",
+    "dir": "rtl",
+    "prefix": "/ar",
+    "locale": "ar-EG-u-nu-latn",
+    "native": "العربية"
+  }
+]

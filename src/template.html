@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="dark" lang="en"><head>
+<html class="dark" {{LANG_ATTRS}}><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>{{TITLE}}</title>
@@ -15,25 +15,25 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="/style.css"/>
+<link rel="stylesheet" href="/style.css"/>{{EXTRA_HEAD}}
 </head>
 <body class="bg-background text-on-background min-h-screen">
 {{SR_H1}}
 <noscript>
-<div style="padding:24px;text-align:center;font-family:sans-serif;">{{SITE_NAME}} needs JavaScript enabled to convert timezones. Please enable it and reload the page.</div>
+<div style="padding:24px;text-align:center;font-family:sans-serif;">{{t:noscript}}</div>
 </noscript>
 <!-- TopAppBar -->
 <header class="bg-[#12131b] docked full-width top-0 z-50 fixed w-full">
-<div class="flex items-center justify-between px-6 py-4 w-full">
-<a href="/" class="flex items-center gap-3" aria-label="{{SITE_NAME}} home" title="Go to the {{SITE_NAME}} home page">
+<div class="flex items-center justify-between gap-3 px-4 sm:px-6 py-4 w-full">
+<a href="{{HOME_URL}}" class="flex items-center gap-2 sm:gap-3 min-w-0" aria-label="{{t:logo.aria}}" title="{{t:logo.title}}">
 <span class="material-symbols-outlined text-[#9aa8ff] text-2xl">public</span>
-<p class="font-['Space_Grotesk'] font-bold text-2xl tracking-tight text-[#9aa8ff]">{{SITE_NAME}}</p>
+<p class="font-['Space_Grotesk'] font-bold text-xl sm:text-2xl tracking-tight text-[#9aa8ff]">{{SITE_NAME}}</p>
 </a>
-<div class="flex items-center gap-4">
-<button id="tour-button" type="button" class="material-symbols-outlined text-[#9aa8ff] hover:text-primary text-2xl rounded-full w-9 h-9 flex items-center justify-center" aria-label="Take a quick tour" title="Take a quick tour">help</button>
-<div id="formatToggle" class="flex items-center gap-1 bg-surface-container-high rounded-full p-1 cursor-pointer select-none" role="button" tabindex="0" title="Toggle 12h / 24h time format" aria-label="Toggle 12 hour or 24 hour time format">
-<span id="formatToggle12" class="text-[10px] font-label font-bold px-2 py-1 rounded-full bg-primary text-on-primary transition-colors">12H</span>
-<span id="formatToggle24" class="text-[10px] font-label font-bold px-2 py-1 rounded-full text-outline transition-colors">24H</span>
+<div class="flex items-center gap-2 sm:gap-4">
+{{LANG_SWITCH}}<button id="tour-button" type="button" class="material-symbols-outlined text-[#9aa8ff] hover:text-primary text-2xl rounded-full w-9 h-9 flex items-center justify-center" aria-label="{{t:tour.button}}" title="{{t:tour.button}}">help</button>
+<div id="formatToggle" class="flex items-center gap-1 bg-surface-container-high rounded-full p-1 cursor-pointer select-none" role="button" tabindex="0" title="{{t:format.title}}" aria-label="{{t:format.aria}}">
+<span id="formatToggle12" class="text-[10px] font-label font-bold px-2 py-1 rounded-full bg-primary text-on-primary transition-colors">{{t:format.12}}</span>
+<span id="formatToggle24" class="text-[10px] font-label font-bold px-2 py-1 rounded-full text-outline transition-colors">{{t:format.24}}</span>
 </div>
 </div>
 </div>
@@ -45,24 +45,24 @@
 <div class="absolute inset-0 opacity-10 pointer-events-none"></div>
 <div class="relative z-10">
 <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4 mb-8">
-<div id="origin-selector" class="cursor-pointer group/origin min-w-0" role="button" tabindex="0" aria-label="Change source timezone">
-<span class="font-label text-tertiary text-xs tracking-[0.2em] uppercase mb-2 block">Converting from <span class="material-symbols-outlined text-[12px] align-middle opacity-0 group-hover/origin:opacity-100 transition-opacity">edit</span></span>
-<h2 class="font-display text-3xl sm:text-4xl font-bold tracking-tight break-words" id="origin-title">London, UK</h2>
-<p class="font-body text-on-surface-variant text-sm mt-1" id="origin-subtitle">British Summer Time (GMT+1)</p>
+<div id="origin-selector" class="cursor-pointer group/origin min-w-0" role="button" tabindex="0" aria-label="{{t:origin.aria}}">
+<span class="font-label text-tertiary text-xs tracking-[0.2em] uppercase mb-2 block">{{t:origin.label}} <span class="material-symbols-outlined text-[12px] align-middle opacity-0 group-hover/origin:opacity-100 transition-opacity">edit</span></span>
+<h2 class="font-display text-3xl sm:text-4xl font-bold tracking-tight break-words" id="origin-title">{{t:init.title}}</h2>
+<p class="font-body text-on-surface-variant text-sm mt-1" id="origin-subtitle">{{t:init.subtitle}}</p>
 <p id="origin-hint" class="hidden font-body text-xs text-tertiary mt-2 max-w-md leading-snug"></p>
 </div>
-<div class="text-left sm:text-right shrink-0">
-<span class="font-label text-on-surface-variant text-xs tracking-widest uppercase block mb-1">Date</span>
-<input id="date-input" type="date" aria-label="Pick a date" title="Pick a date" class="w-44 max-w-full bg-surface-container-high border-0 text-on-surface font-body font-medium rounded-full px-4 py-2 outline-none cursor-pointer focus:ring-2 focus:ring-primary [color-scheme:dark]"/>
+<div class="text-start sm:text-end shrink-0">
+<span class="font-label text-on-surface-variant text-xs tracking-widest uppercase block mb-1">{{t:date.label}}</span>
+<input id="date-input" type="date" aria-label="{{t:date.aria}}" title="{{t:date.aria}}" class="w-44 max-w-full bg-surface-container-high border-0 text-on-surface font-body font-medium rounded-full px-4 py-2 outline-none cursor-pointer focus:ring-2 focus:ring-primary [color-scheme:dark]"/>
 </div>
 </div>
 <div id="time-block" class="flex flex-col items-center justify-center py-12">
-<div class="font-display text-[5.5rem] sm:text-[8rem] md:text-[10rem] font-bold leading-none tracking-tighter text-primary cursor-pointer" id="main-time-display" role="button" tabindex="0" title="Click to type an exact time" aria-label="Click to type an exact time">
+<div class="font-display text-[5.5rem] sm:text-[8rem] md:text-[10rem] font-bold leading-none tracking-tighter text-primary cursor-pointer" id="main-time-display" role="button" tabindex="0" title="{{t:time.click}}" aria-label="{{t:time.click}}">
                             14:00
                         </div>
 <label class="mt-4 flex items-center gap-3 font-label text-xs tracking-widest uppercase text-on-surface-variant">
-<span>Type an exact time</span>
-<input id="time-input" type="time" step="60" aria-label="Type an exact time" class="bg-surface-container-high text-on-surface font-body text-base rounded-full px-4 py-2 outline-none focus:ring-2 focus:ring-primary [color-scheme:dark]"/>
+<span>{{t:time.type}}</span>
+<input id="time-input" type="time" step="60" aria-label="{{t:time.type}}" class="bg-surface-container-high text-on-surface font-body text-base rounded-full px-4 py-2 outline-none focus:ring-2 focus:ring-primary [color-scheme:dark]"/>
 </label>
 <button id="now-button" type="button" class="mt-3 inline-flex items-center gap-2 rounded-full px-4 py-1.5 font-label text-xs tracking-widest uppercase transition-colors"></button>
 </div>
@@ -77,12 +77,12 @@
 <span>20:00</span>
 <span>23:59</span>
 </div>
-<input aria-label="Origin time of day" class="time-slider w-full h-1 bg-surface-variant rounded-full appearance-none outline-none" id="global-time-slider" max="1439" min="0" type="range" value="840"/>
+<input aria-label="{{t:slider.aria}}" class="time-slider w-full h-1 bg-surface-variant rounded-full appearance-none outline-none" id="global-time-slider" max="1439" min="0" type="range" value="840"/>
 </div>
 <div class="flex justify-center mt-10">
 <button class="js-add-destination editorial-gradient text-on-primary font-body font-bold px-8 py-3 rounded-full flex items-center gap-2 transition-transform active:scale-95 shadow-lg shadow-primary/20">
 <span class="material-symbols-outlined">add_location</span>
-                            Add a place or time zone
+                            {{t:add.label}}
                         </button>
 </div>
 </div>
@@ -103,19 +103,19 @@
 <!-- Sidebar / Grid: Destinations -->
 <aside class="lg:col-span-4 flex flex-col gap-4">
 <h3 class="font-display text-xl font-bold px-2 flex items-center justify-between">
-<span>Converting to</span>
+<span>{{t:to.heading}}</span>
 </h3>
 <div id="destinations-list" class="flex flex-col gap-4"></div>
 <!-- Add Location Placeholder Card -->
 <div id="add-card" class="js-add-destination border-2 border-dashed border-outline-variant rounded-xl p-6 flex flex-col items-center justify-center gap-2 text-outline hover:text-on-surface hover:border-primary transition-all cursor-pointer group">
 <span class="material-symbols-outlined text-3xl group-hover:scale-110 transition-transform">add_circle</span>
-<span class="font-label text-xs uppercase tracking-widest font-bold">Add a place or time zone</span>
+<span class="font-label text-xs uppercase tracking-widest font-bold">{{t:add.label}}</span>
 </div>
 </aside>
 </main>
 {{CONTENT}}
 {{FOOTER}}
-<button id="scroll-hint" type="button" aria-label="Scroll down for more information" title="More information below" class="fixed bottom-6 left-0 right-0 mx-auto z-40 w-12 h-12 rounded-full bg-primary text-on-primary shadow-lg shadow-primary/30 flex items-center justify-center transition-opacity duration-300 animate-bounce motion-reduce:animate-none">
+<button id="scroll-hint" type="button" aria-label="{{t:scroll.aria}}" title="{{t:scroll.title}}" class="fixed bottom-6 left-0 right-0 mx-auto z-40 w-12 h-12 rounded-full bg-primary text-on-primary shadow-lg shadow-primary/30 flex items-center justify-center transition-opacity duration-300 animate-bounce motion-reduce:animate-none">
 <span class="material-symbols-outlined">keyboard_arrow_down</span>
 </button>
 
@@ -123,10 +123,10 @@
 <div id="tzModal" class="hidden fixed inset-0 z-[60] flex items-start justify-center pt-24 bg-black/60 backdrop-blur-sm px-4">
 <div class="bg-surface-container-high rounded-xl w-full max-w-md p-4 max-h-[70vh] flex flex-col">
 <div class="flex items-center justify-between mb-3">
-<h3 id="tzModalTitle" class="font-display text-lg font-bold">Add a place or time zone</h3>
+<h3 id="tzModalTitle" class="font-display text-lg font-bold">{{t:add.label}}</h3>
 <button id="tzModalClose" class="material-symbols-outlined text-outline hover:text-on-surface">close</button>
 </div>
-<input id="tzSearchInput" type="text" placeholder="Search a city, country or time zone (PST, GMT, CET…)" aria-label="Search for a city, country or time zone" class="bg-surface-variant rounded-lg px-4 py-2 text-sm outline-none mb-3 focus:ring-2 focus:ring-primary text-on-surface"/>
+<input id="tzSearchInput" type="text" placeholder="{{t:modal.placeholder}}" aria-label="{{t:modal.search.aria}}" class="bg-surface-variant rounded-lg px-4 py-2 text-sm outline-none mb-3 focus:ring-2 focus:ring-primary text-on-surface"/>
 <div id="tzSearchResults" class="overflow-y-auto flex-1 flex flex-col gap-1 hide-scrollbar"></div>
 </div>
 </div>
@@ -134,6 +134,22 @@
 
 {{PRESET}}
 <script>
+{{LANG_BOOT}}
+/* i18n helpers: t(key, vars) looks up the page language; pl() picks a CLDR plural form. */
+function t(key, vars) {
+  let s = STRINGS[key];
+  if (s === undefined) s = key;
+  if (vars) for (const k in vars) s = s.split("{" + k + "}").join(vars[k]);
+  return s;
+}
+const PLURALS = new Intl.PluralRules(LANG);
+function pl(base, n, vars) {
+  const cat = PLURALS.select(n);
+  const key = STRINGS[base + "." + cat] !== undefined ? base + "." + cat : base + ".other";
+  return t(key, Object.assign({ n }, vars || {}));
+}
+/* AM/PM strings come out of Intl in English; swap in the page language's. */
+function localizeClock(str) { return str.replace(/\bAM\b/, t("am")).replace(/\bPM\b/, t("pm")); }
 /* Chronos — Timezone Dataset
  * Each country maps to one or more IANA zones. Multi-zone countries list
  * each zone with a human label. Coverage: ~155 countries/territories.
@@ -201,6 +217,11 @@ const STANDARD_TIMES = [
   { id: "std:SAST", label: "SAST", name: "South Africa Standard Time", zone: "Africa/Johannesburg", fixed: true, kw: "south africa" },
   { id: "std:EAT", label: "EAT", name: "East Africa Time", zone: "Africa/Nairobi", fixed: true, kw: "east africa kenya" },
 ];
+// Per-language names/labels for the time zone entries (English keeps its defaults; English keywords always stay searchable).
+STANDARD_TIMES.forEach((s) => {
+  const o = STD_L10N[s.id];
+  if (o) { s.label = o.label || s.label; s.name = o.name || s.name; s.kw = (s.kw || "") + " " + (o.kw || ""); }
+});
 const STD_BY_ID = Object.fromEntries(STANDARD_TIMES.map((s) => [s.id, s]));
 // Resolve a directory id to the IANA zone used for calculations.
 function tzOf(id) { return STD_BY_ID[id] ? STD_BY_ID[id].zone : id; }
@@ -250,7 +271,7 @@ function relativeOffsetLabel(utcDate, fromZone, toZone) {
   const abs = Math.abs(diffMin);
   const hh = Math.floor(abs / 60);
   const mm = abs % 60;
-  return mm === 0 ? `${sign}${hh}h` : `${sign}${hh}h${mm}m`;
+  return t("ltr.mark") + (mm === 0 ? `${sign}${hh}${t("unit.h")}` : `${sign}${hh}${t("unit.h")}${mm}${t("unit.m")}`);
 }
 
 function dayDifference(utcInstant, fromZone, toZone) {
@@ -262,7 +283,7 @@ function dayDifference(utcInstant, fromZone, toZone) {
 }
 
 function getZoneName(utcDate, zoneId, style) {
-  const parts = new Intl.DateTimeFormat("en-US", { timeZone: tzOf(zoneId), timeZoneName: style }).formatToParts(utcDate);
+  const parts = new Intl.DateTimeFormat(style === "long" ? LOCALE : "en-US", { timeZone: tzOf(zoneId), timeZoneName: style }).formatToParts(utcDate);
   const tzPart = parts.find((p) => p.type === "timeZoneName");
   return tzPart ? tzPart.value : zoneId;
 }
@@ -282,6 +303,15 @@ function detectUserTimeZone() {
 
 /* ---------------- Timezone directory (search) ---------------- */
 
+let regionNames = null;
+function countryLabel(country) {
+  if (LANG === "en") return country.name;
+  try {
+    regionNames = regionNames || new Intl.DisplayNames([LANG], { type: "region" });
+    return regionNames.of(country.code) || country.name;
+  } catch (e) { return country.name; }
+}
+
 function buildZoneDirectory() {
   const list = [];
   STANDARD_TIMES.forEach((s) => {
@@ -290,23 +320,25 @@ function buildZoneDirectory() {
       isStandard: true,
       cityLabel: s.label,
       fullName: s.name,
-      countryName: s.name + (s.fixed ? " · fixed" : " · follows daylight saving"),
+      countryName: s.name + (s.fixed ? t("std.fixed") : t("std.follows")),
       searchText: `${s.label} ${s.name} ${s.std || ""} ${s.dst || ""} ${s.kw || ""}`.toLowerCase(),
       abbrs: [s.label, s.std, s.dst, s.id.replace("std:", "").replace("-R", "")].filter(Boolean).map((x) => x.toLowerCase()),
     });
   });
   CHRONOS_COUNTRIES.forEach((country) => {
     country.zones.forEach((zone) => {
+      const cityLabel = CITIES_L10N[zone.id] || zone.label;
+      const countryName = countryLabel(country);
       list.push({
         id: zone.id,
-        cityLabel: zone.label,
-        countryName: country.name,
-        searchText: `${zone.label} ${country.name}`.toLowerCase(),
-        pageUrl: `/time-in-${country.slug}/` + (zone.id === country.main ? "" : `?from=${encodeURIComponent(zone.id)}`),
+        cityLabel,
+        countryName,
+        searchText: [...new Set([cityLabel, zone.label, countryName, country.name])].join(" ").toLowerCase(),
+        pageUrl: `${LANG_PREFIX}/time-in-${country.slug}/` + (zone.id === country.main ? "" : `?from=${encodeURIComponent(zone.id)}`),
       });
     });
   });
-  list.push({ id: "UTC", cityLabel: "UTC", countryName: "Coordinated Universal Time", searchText: "utc" });
+  list.push({ id: "UTC", cityLabel: "UTC", countryName: t("utc.name"), searchText: LANG === "en" ? "utc" : "utc " + t("utc.name").toLowerCase() });
   return list;
 }
 
@@ -398,11 +430,11 @@ function updateNowButton() {
   if (state.live) {
     el.disabled = true;
     el.className = "mt-3 inline-flex items-center gap-2 rounded-full px-4 py-1.5 font-label text-xs tracking-widest uppercase bg-surface-container-high text-tertiary cursor-default";
-    el.innerHTML = '<span class="inline-block w-2 h-2 rounded-full bg-tertiary animate-pulse"></span> Live: showing the current time';
+    el.innerHTML = '<span class="inline-block w-2 h-2 rounded-full bg-tertiary animate-pulse"></span> ' + t("ui.live");
   } else {
     el.disabled = false;
     el.className = "mt-3 inline-flex items-center gap-2 rounded-full px-4 py-1.5 font-label text-xs tracking-widest uppercase bg-primary text-on-primary hover:opacity-90 cursor-pointer";
-    el.innerHTML = '<span class="material-symbols-outlined text-[16px]">schedule</span> Back to current time';
+    el.innerHTML = '<span class="material-symbols-outlined text-[16px]">schedule</span> ' + t("ui.backNow");
   }
 }
 
@@ -424,10 +456,11 @@ function computeUtcInstant() {
 }
 
 function dayLabel(diff) {
-  if (diff === 0) return "Today";
-  if (diff === 1) return "Tomorrow";
-  if (diff === -1) return "Yesterday";
-  return diff > 0 ? `+${diff} days` : `${diff} days`;
+  if (diff === 0) return t("day.today");
+  if (diff === 1) return t("day.tomorrow");
+  if (diff === -1) return t("day.yesterday");
+  const n = Math.abs(diff);
+  return t(diff > 0 ? "day.plus" : "day.minus", { n, unit: pl("day.unit", n) });
 }
 
 function renderOrigin(utcInstant) {
@@ -437,7 +470,7 @@ function renderOrigin(utcInstant) {
   const dateEl = document.getElementById("origin-date");
   const mainTime = document.getElementById("main-time-display");
 
-  if (title && entry) title.textContent = entry.isStandard || entry.cityLabel === "UTC" ? entry.cityLabel : `${entry.cityLabel}, ${entry.countryName}`;
+  if (title && entry) title.textContent = entry.isStandard || entry.cityLabel === "UTC" ? entry.cityLabel : t("origin.titleFmt", { city: entry.cityLabel, country: entry.countryName });
   if (subtitle) subtitle.textContent = entry && entry.isStandard
     ? standardNote(entry, utcInstant)
     : `${getZoneName(utcInstant, state.originZoneId, "long")} (${formatOffset(utcInstant, state.originZoneId)})`;
@@ -453,8 +486,8 @@ function renderOrigin(utcInstant) {
     }).format(utcInstant);
   }
   if (mainTime) {
-    const txt = formatHM(utcInstant, state.originZoneId, state.use12Hour);
-    const m = /^(.*?)\s*([AP]M)$/i.exec(txt);
+    const txt = localizeClock(formatHM(utcInstant, state.originZoneId, state.use12Hour));
+    const m = new RegExp("^(.*?)\\s*(" + t("am") + "|" + t("pm") + ")$").exec(txt);
     mainTime.innerHTML = m ? `${m[1]} <span class="text-[0.3em] tracking-normal font-semibold">${m[2]}</span>` : txt;
   }
 }
@@ -479,9 +512,9 @@ function standardNote(entry, utcInstant) {
   const off = utcLabel(utcInstant, entry.id);
   if (!s.fixed) {
     const cur = getTimeZoneOffsetMinutes(utcInstant, s.zone);
-    return `${s.name}: currently ${cur === baseOffsetMinutes(s.zone, utcInstant) ? s.std : s.dst} (${off})`;
+    return t("std.noteDst", { name: s.name, abbr: cur === baseOffsetMinutes(s.zone, utcInstant) ? s.std : s.dst, off });
   }
-  return `${s.name} (${off}), fixed all year`;
+  return t("std.noteFixed", { name: s.name, off });
 }
 
 /* Warn when a fixed abbreviation (e.g. PST) differs from what its region uses right now. */
@@ -494,30 +527,30 @@ function standardHint(entry, utcInstant) {
   if (mine === theirs) return "";
   const nowAbbr = theirs === baseOffsetMinutes(r.zone, utcInstant) ? r.std : r.dst;
   const label = s.label.replace(/ \(.*\)/, "");
-  return `Heads-up: ${label} is fixed at ${utcLabel(utcInstant, entry.id)} all year, but ${r.name} is on ${nowAbbr} right now (${utcLabel(utcInstant, s.region)}). If the announcement just means "${r.name}", pick ${r.label} instead.`;
+  return t("std.hint", { label, off: utcLabel(utcInstant, entry.id), region: r.name, abbr: nowAbbr, regionOff: utcLabel(utcInstant, s.region), regionLabel: r.label });
 }
 
 
 const DATE_FMT_OPTS = { weekday: "short", month: "short", day: "numeric", year: "numeric" };
 
 function cardDetailText(utcInstant, originEntry, entry, zoneId) {
-  const dateOf = (id) => new Intl.DateTimeFormat("en-US", { ...DATE_FMT_OPTS, timeZone: tzOf(id) }).format(utcInstant);
+  const dateOf = (id) => new Intl.DateTimeFormat(LOCALE, { ...DATE_FMT_OPTS, timeZone: tzOf(id) }).format(utcInstant);
   const from = originEntry ? originEntry.cityLabel : state.originZoneId;
   const to = entry.cityLabel;
   const diffMin = getTimeZoneOffsetMinutes(utcInstant, zoneId) - getTimeZoneOffsetMinutes(utcInstant, state.originZoneId);
   const abs = Math.abs(diffMin), h = Math.floor(abs / 60), m = abs % 60;
-  const gap = diffMin === 0 ? `${to} is on the same time as ${from}.`
-    : `${to} is ${h ? h + (h === 1 ? " hour" : " hours") : ""}${h && m ? " " : ""}${m ? m + " minutes" : ""} ${diffMin > 0 ? "ahead of" : "behind"} ${from}.`;
-  const time = (id) => `<span class="text-primary font-bold">${formatHM(utcInstant, id, state.use12Hour)}</span>`;
+  const dur = [h ? pl("dur.hour", h) : "", m ? pl("dur.minute", m) : ""].filter(Boolean).join(t("dur.join"));
+  const gap = diffMin === 0 ? t("gap.same", { to, from }) : t(diffMin > 0 ? "gap.ahead" : "gap.behind", { to, from, dur });
+  const time = (id) => `<span class="text-primary font-bold"><bdi>${localizeClock(formatHM(utcInstant, id, state.use12Hour))}</bdi></span>`;
   const date = (id) => `<span class="text-tertiary font-semibold">${dateOf(id)}</span>`;
-  const place = (name) => `<span class="text-on-surface font-semibold">${name}</span>`;
-  return `${time(state.originZoneId)} on ${date(state.originZoneId)} in ${place(from)} is ${time(zoneId)} on ${date(zoneId)} in ${place(to)}. ${gap}`;
+  const place = (name) => `<span class="text-on-surface font-semibold"><bdi>${name}</bdi></span>`;
+  return t("card.detail", { t1: time(state.originZoneId), d1: date(state.originZoneId), p1: place(from), t2: time(zoneId), d2: date(zoneId), p2: place(to), gap });
 }
 
 function destinationCardHTML(zoneId, utcInstant) {
   const entry = findZoneEntry(ZONE_DIRECTORY, zoneId);
   if (!entry) return "";
-  const timeStr = formatHM(utcInstant, zoneId, state.use12Hour);
+  const timeStr = localizeClock(formatHM(utcInstant, zoneId, state.use12Hour));
   const diffLabel = relativeOffsetLabel(utcInstant, state.originZoneId, zoneId);
   const diffMin = getTimeZoneOffsetMinutes(utcInstant, zoneId) - getTimeZoneOffsetMinutes(utcInstant, state.originZoneId);
   const diffColor = diffMin === 0 ? "text-on-surface-variant" : diffMin > 0 ? "text-tertiary" : "text-secondary";
@@ -525,15 +558,15 @@ function destinationCardHTML(zoneId, utcInstant) {
   const zoneName = entry.isStandard ? standardNote(entry, utcInstant) : getZoneName(utcInstant, zoneId, "short");
 
   return `
-    <div class="bg-surface-container-high hover:bg-surface-container-highest transition-all duration-300 rounded-xl p-6 cursor-pointer group relative" data-zone-id="${zoneId}" tabindex="0" role="button" aria-expanded="${state.expanded.has(zoneId)}" title="Click for details">
-      <button class="js-remove-destination absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity text-outline hover:text-error material-symbols-outlined text-base" data-zone-id="${zoneId}" title="Remove">close</button>
+    <div class="bg-surface-container-high hover:bg-surface-container-highest transition-all duration-300 rounded-xl p-6 cursor-pointer group relative" data-zone-id="${zoneId}" tabindex="0" role="button" aria-expanded="${state.expanded.has(zoneId)}" title="${t("card.details")}">
+      <button class="js-remove-destination absolute top-3 end-3 opacity-0 group-hover:opacity-100 transition-opacity text-outline hover:text-error material-symbols-outlined text-base" data-zone-id="${zoneId}" title="${t("card.remove")}">close</button>
       <div class="flex justify-between items-center mb-4">
         <div class="flex items-center gap-3">
           <div class="w-8 h-8 rounded-lg overflow-hidden bg-surface-variant flex items-center justify-center">
             <span class="material-symbols-outlined text-sm text-secondary">location_on</span>
           </div>
           <div>
-            <h4 class="font-body font-bold text-base leading-none flex items-center gap-1">${entry.cityLabel}${entry.pageUrl ? `<a href="${entry.pageUrl}" class="js-page-link material-symbols-outlined text-base text-outline hover:text-primary" aria-label="Open the ${entry.countryName} time page" title="Open the ${entry.countryName} time page">arrow_outward</a>` : ""}</h4>
+            <h4 class="font-body font-bold text-base leading-none flex items-center gap-1"><bdi>${entry.cityLabel}</bdi>${entry.pageUrl ? `<a href="${entry.pageUrl}" class="js-page-link material-symbols-outlined text-base text-outline hover:text-primary" aria-label="${t("card.openPage", { country: entry.countryName })}" title="${t("card.openPage", { country: entry.countryName })}">arrow_outward</a>` : ""}</h4>
             <p class="font-label text-[10px] text-outline uppercase tracking-wider mt-1">${entry.isStandard || zoneName === formatOffset(utcInstant, zoneId) ? zoneName : `${zoneName} (${formatOffset(utcInstant, zoneId)})`}</p>
           </div>
         </div>
@@ -587,11 +620,11 @@ function renderInsight(utcInstant) {
   const entries = inBusinessHours.map((z) => findZoneEntry(ZONE_DIRECTORY, z)?.cityLabel).filter(Boolean);
 
   if (entries.length === 0) {
-    textEl.textContent = "Outside typical business hours (9–18) everywhere right now.";
-    subEl.textContent = "Drag the slider to find an overlap.";
+    textEl.textContent = t("insight.none");
+    subEl.textContent = t("insight.none.sub");
   } else {
-    textEl.textContent = `Good time to reach: ${entries.join(", ")}.`;
-    subEl.textContent = "Within 9:00–18:00 local business hours.";
+    textEl.textContent = t("insight.good", { list: entries.join(t("sep.list")) });
+    subEl.textContent = t("insight.good.sub");
   }
 }
 
@@ -623,7 +656,7 @@ function render() {
 function tickLabel(minutes) {
   const h = Math.floor(minutes / 60), m = minutes % 60;
   if (!state.use12Hour) return String(h).padStart(2, "0") + ":" + String(m).padStart(2, "0");
-  const suffix = h >= 12 ? "PM" : "AM";
+  const suffix = h >= 12 ? t("pm") : t("am");
   const h12 = h % 12 === 0 ? 12 : h % 12;
   return m ? `${h12}:${String(m).padStart(2, "0")} ${suffix}` : `${h12} ${suffix}`;
 }
@@ -650,7 +683,7 @@ function openModal(mode) {
   const modal = document.getElementById("tzModal");
   const title = document.getElementById("tzModalTitle");
   const input = document.getElementById("tzSearchInput");
-  if (title) title.textContent = mode === "origin" ? "Convert from a place or time zone" : "Add a place or time zone";
+  if (title) title.textContent = mode === "origin" ? t("modal.origin") : t("modal.add");
   if (modal) modal.classList.remove("hidden");
   if (input) { input.value = ""; input.focus(); }
   renderSearchResults("");
@@ -665,13 +698,13 @@ function renderSearchResults(query) {
   const resultsEl = document.getElementById("tzSearchResults");
   if (!resultsEl) return;
   const q = query.trim().toLowerCase();
-  const rank = (z) => (z.abbrs && z.abbrs.includes(q) ? 0 : z.isStandard && z.searchText.startsWith(q) ? 1 : z.isStandard ? 2 : 3);
+  const rank = (z) => (z.abbrs && z.abbrs.includes(q) ? 0 : !z.isStandard && (z.cityLabel.toLowerCase() === q || z.countryName.toLowerCase() === q) ? 0 : z.isStandard && z.searchText.startsWith(q) ? 1 : z.isStandard ? 2 : 3);
   const matches = (q === "" ? ZONE_DIRECTORY : ZONE_DIRECTORY.filter((z) => z.searchText.includes(q))
     .map((z, i) => ({ z, i })).sort((a, b) => rank(a.z) - rank(b.z) || a.i - b.i).map((x) => x.z)).slice(0, 40);
 
   resultsEl.innerHTML = matches.map((z) => `
-    <button class="js-tz-result text-left px-3 py-2 rounded-lg hover:bg-surface-container-highest transition-colors flex justify-between items-center" data-zone-id="${z.id}">
-      <span class="font-body text-sm">${z.cityLabel}${z.isStandard ? '<span class="ml-2 font-label text-[9px] uppercase tracking-wider text-tertiary">time zone</span>' : ""}</span>
+    <button class="js-tz-result text-start px-3 py-2 rounded-lg hover:bg-surface-container-highest transition-colors flex justify-between items-center" data-zone-id="${z.id}">
+      <span class="font-body text-sm"><bdi>${z.cityLabel}</bdi>${z.isStandard ? `<span class="ms-2 font-label text-[9px] uppercase tracking-wider text-tertiary">${t("search.tag")}</span>` : ""}</span>
       <span class="font-label text-[10px] text-outline">${z.countryName}</span>
     </button>`).join("");
 
@@ -815,16 +848,9 @@ document.addEventListener("DOMContentLoaded", initChronos);
 
 
 /* ---------------- Guided tour ----------------
- * Text lives in data/strings.en.json (injected at build time) so it can be translated later.
+ * Text lives in data/lang/<language>.json (injected at build time).
  * The prompt shows once, on the homepage only; the "?" button replays the tour on any converter page.
  */
-const STRINGS = {{STRINGS_JSON}};
-function t(key, vars) {
-  let s = STRINGS[key] || key;
-  if (vars) for (const k in vars) s = s.replace("{" + k + "}", vars[k]);
-  return s;
-}
-
 const TOUR_SEEN_KEY = "offsetclock.tourSeen";
 // If storage is unavailable we treat the tour as seen, so nobody gets nagged on every visit.
 function tourSeen() { try { return localStorage.getItem(TOUR_SEEN_KEY) === "1"; } catch (e) { return true; } }
@@ -848,7 +874,7 @@ function showTourPrompt() {
   el.id = "tour-prompt";
   el.setAttribute("role", "region");
   el.setAttribute("aria-label", t("tour.prompt.title"));
-  el.className = "fixed left-4 right-4 bottom-24 sm:left-6 sm:right-auto sm:bottom-6 sm:max-w-sm z-[60] bg-surface-container-high text-on-surface rounded-2xl p-5 shadow-2xl border border-outline-variant/40 font-body";
+  el.className = "fixed left-4 right-4 bottom-24 sm:start-6 sm:end-auto sm:bottom-6 sm:max-w-sm z-[60] bg-surface-container-high text-on-surface rounded-2xl p-5 shadow-2xl border border-outline-variant/40 font-body";
   el.innerHTML = `<p class="font-display font-bold text-base">${t("tour.prompt.title")}</p>
     <p class="text-sm text-on-surface-variant mt-1">${t("tour.prompt.text")}</p>
     <div class="flex gap-3 mt-4">

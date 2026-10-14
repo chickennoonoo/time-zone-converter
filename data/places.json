@@ -1,4 +1,18 @@
 [
-  { "slug": "cairo", "label": "Cairo", "country": "Egypt", "zone": "Africa/Cairo" },
-  { "slug": "dubai", "label": "Dubai", "country": "United Arab Emirates", "zone": "Asia/Dubai" }
+  {
+    "slug": "cairo",
+    "label": "Cairo",
+    "country": "Egypt",
+    "zone": "Africa/Cairo",
+    "code": "EG",
+    "label_ar": "القاهرة"
+  },
+  {
+    "slug": "dubai",
+    "label": "Dubai",
+    "country": "United Arab Emirates",
+    "zone": "Asia/Dubai",
+    "code": "AE",
+    "label_ar": "دبي"
+  }
 ]
