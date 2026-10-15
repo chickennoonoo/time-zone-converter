@@ -22,7 +22,7 @@ Apps and games announce maintenance like "9 AM PST", and working out what that m
 - **English and Arabic**: full right-to-left layout, Arabic plural forms, translated city, country and time zone names
 - No accounts, no cookies; all conversions run in the browser
 
-![Mobile view](Docs/Screenshots/home-mobile.png)
+![Mobile view](Docs/Screenshots/home-mobile.jpeg)
 
 | Country page | Arabic (RTL) |
 |---|---|
