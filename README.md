@@ -1,47 +1,72 @@
-# Time zone converter
+# Offset Clock
 
-Single-page time zone converter. Vanilla JS + the browser's `Intl` API (IANA time zones, handles DST). Tailwind CSS is compiled at build time.
+A free time zone converter that understands **time zone names like PST, EST and GMT**, not just cities and countries. Available in **English and Arabic** (right-to-left).
 
-## Build
+**Live site: [offsetclock.com](https://offsetclock.com)**
 
-    npm install
-    npm run build      # generates the whole site into public/ (homepage, city pages, country pages, sitemap)
+![Offset Clock home page](docs/screenshots/home-desktop.png)
 
-## Configure
+## Why I built it
 
-Edit `site.config.json`:
-- `name`: the site name (used in the page title and header)
-- `siteUrl`: full URL with https, e.g. `https://example.com`. Leave empty until the domain is live; when set, canonical/og:url tags and a sitemap are generated.
+Apps and games announce maintenance like "9 AM PST", and working out what that means in your own time zone is surprisingly annoying. Most converters only handle cities. Offset Clock lets you start from the way the announcement is written, and it warns you about the classic trap: **PST is a fixed UTC-8, but "Pacific time" in summer is PDT (UTC-7)**.
 
-## Deploy
+## Features
 
-Cloudflare runs `npm run build` on every commit, then serves the generated `public/` folder (see `wrangler.jsonc`). `public/` is generated, so it is not committed.
+- Convert between cities, countries and **~40 named time zones** (PST, PDT, EST, GMT, CET, IST, JST and more)
+- **Date picker** with daylight saving applied for the chosen date, not just today
+- Live clock that follows the current time until you pick one; type an exact time or use the slider
+- Click any result for a plain-language explanation ("9:00 AM on Sat, Oct 31 in PST is 7:00 PM in Cairo")
+- Business-hours hint showing where it is a good time to reach people
+- Guided first-visit tour and 12/24-hour toggle
+- **~200 generated pages**: one per country (`/time-in-egypt/`) plus a city-pair page, each built from real time zone data (offsets, daylight saving dates, conversion tables)
+- **English and Arabic**: full right-to-left layout, Arabic plural forms, translated city, country and time zone names
+- No accounts, no cookies; all conversions run in the browser
 
-## City-pair pages
+![Mobile view](docs/screenshots/home-mobile.png)
 
-- `data/places.json`: the places (slug, label, country, IANA zone).
-- `data/pairs.json`: which pairs get a landing page, e.g. `["cairo","dubai"]` builds `/cairo-to-dubai/`.
-- `lib/pages.js`: generates each page's text (offsets, daylight-saving dates, conversion table, call overlap) from real time zone data at build time.
-Add a place and a pair, run `npm run build`, commit. The sitemap updates automatically.
+| Country page | Arabic (RTL) |
+|---|---|
+| ![Country page](docs/screenshots/country-page.png) | ![Arabic version](docs/screenshots/arabic.png) |
 
-## Country pages
+## How it works
 
-`data/countries.json` lists every country with its zones and a `main` zone (the one the page starts from). `lib/countries.js` builds `/time-in-<country>/` and the `/time-zones/` index. Cards in the app link to these pages.
+- **No framework and no JavaScript libraries.** Plain HTML, vanilla JavaScript and Tailwind CSS (compiled at build time).
+- **Time zone maths uses the browser's built-in `Intl` API** and the IANA time zone database, so daylight saving rules are not hand-coded.
+- **A Node build script** (`build.js`) generates the whole site (406 pages across two languages), the sitemap with `hreflang` alternates, and `robots.txt`. Page text is computed from time zone data at build time.
+- **Language files** (`data/lang/`) hold all interface text and sentence templates, so adding a language is mostly translation.
+- **Hosting:** Cloudflare (static assets), deployed automatically from this repository. Analytics use Cloudflare Web Analytics (cookie-free).
 
-## Static pages and site settings
+## Interesting problems
 
-- `src/pages/about.html`, `privacy.html`, `contact.html` become `/about/`, `/privacy/`, `/contact/`.
-- `site.config.json` also holds `contactEmail`, `githubUrl`, `authorName` and `analyticsToken`. Paste the Cloudflare Web Analytics token into `analyticsToken` to switch the analytics snippet on; the Privacy page then describes it automatically.
-- Update the "Last updated" date in `src/pages/privacy.html` whenever the policy changes.
+- **PST vs PDT.** The abbreviations are fixed offsets, but people use "PST" to mean "Pacific time". The app supports both and tells you when they differ for the selected date.
+- **Pages that are actually different.** The country pages are generated, so each one's numbers, daylight saving dates and "same time as" lists are computed from data rather than templated copy.
+- **Right-to-left and Arabic grammar.** Mirrored layout, Arabic digits and dates, and correct singular/dual/plural forms ("ساعة واحدة", "ساعتين", "3 ساعات").
+- **Hosting blocked in Egypt.** My first host was unreachable from Egypt without a VPN, so I moved the site to a host that loads reliably there.
 
-## Languages
+## How it was built
 
-`data/languages.json` lists the languages (English at `/`, Arabic at `/ar/`). For each language:
+This project was built with AI assistance (Claude). I defined the problem and requirements, made the product decisions, tested on real devices, found and reported bugs, set up the domain, hosting, analytics and search console, and reviewed the Arabic text. Most of the code was written with Claude under my direction.
 
-- `data/lang/<code>.json`: all interface text, tour text and the sentence templates for generated pages (keys starting `gen.`).
-- `data/lang/cities.<code>.json`: city/region names by IANA zone id (falls back to English).
-- `data/lang/std.<code>.json`: names for time zone entries such as PST or CET.
-- `content/<code>/home.html`, `about.html`, `privacy.html`, `contact.html`: the long-form pages.
-- Country names come from the browser's built-in `Intl.DisplayNames`.
+## Run it locally
 
-To add a language, copy the English files, translate them and add a line to `languages.json`. Plural forms follow CLDR categories (`.one`, `.two`, `.few`, `.many`, `.other`). `BUILD_LANGS=en npm run build` builds English only.
+```bash
+npm install
+npm run build        # generates the site into public/
+npx serve public     # then open the address it prints
+```
+
+`BUILD_LANGS=en npm run build` builds English only.
+
+## Project structure
+
+```
+build.js            generates every page, the sitemap and app scripts
+src/template.html   the converter page and its JavaScript
+content/<lang>/     long-form pages (home text, About, Privacy, Contact)
+data/               countries, places, language files and name translations
+lib/                time zone maths and page-text generators
+```
+
+## Adding a language
+
+Copy `data/lang/en.json` and the English files in `content/en/`, translate them, and add a line to `data/languages.json`. Plural forms follow the CLDR categories (`.one`, `.two`, `.few`, `.many`, `.other`).
