@@ -4,7 +4,7 @@ A free time zone converter that understands **time zone names like PST, EST and 
 
 **Live site: [offsetclock.com](https://offsetclock.com)**
 
-![Offset Clock home page](docs/screenshots/home-desktop.png)
+![Offset Clock home page](Docs/screenshots/home-desktop.png)
 
 ## Why I built it
 
@@ -22,11 +22,11 @@ Apps and games announce maintenance like "9 AM PST", and working out what that m
 - **English and Arabic**: full right-to-left layout, Arabic plural forms, translated city, country and time zone names
 - No accounts, no cookies; all conversions run in the browser
 
-![Mobile view](docs/screenshots/home-mobile.png)
+![Mobile view](Docs/screenshots/home-mobile.png)
 
 | Country page | Arabic (RTL) |
 |---|---|
-| ![Country page](docs/screenshots/country-page.png) | ![Arabic version](docs/screenshots/arabic.png) |
+| ![Country page](Docs/screenshots/country-page.png) | ![Arabic version](Docs/screenshots/arabic.png) |
 
 ## How it works
 
