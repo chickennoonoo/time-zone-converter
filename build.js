@@ -166,6 +166,7 @@ for (const L of langs) {
 }
 
 fs.writeFileSync("public/robots.txt", "User-agent: *\nAllow: /\n" + (siteUrl ? `Sitemap: ${siteUrl}/sitemap.xml\n` : ""));
+fs.writeFileSync("public/ads.txt", "google.com, pub-7344905952785869, DIRECT, f08c47fec0942fa0\n");
 if (siteUrl) {
   const body = [];
   for (const L of langs) {
